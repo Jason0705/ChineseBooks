@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		BD686139485F68B95151C0C5 /* Pods_ChineseBooks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C3B33EFBB4BEDC9F703EA5 /* Pods_ChineseBooks.framework */; };
 		D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13146DB211BB36400B7B465 /* AppDelegate.swift */; };
-		D13146DE211BB36400B7B465 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13146DD211BB36400B7B465 /* ViewController.swift */; };
+		D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13146DD211BB36400B7B465 /* StoreViewController.swift */; };
 		D13146E1211BB36400B7B465 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13146DF211BB36400B7B465 /* Main.storyboard */; };
 		D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D13146E2211BB36400B7B465 /* ChineseBooks.xcdatamodeld */; };
 		D13146E6211BB36500B7B465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13146E5211BB36500B7B465 /* Assets.xcassets */; };
 		D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13146E7211BB36500B7B465 /* LaunchScreen.storyboard */; };
+		D182F5BA211BF993000D9384 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5B9211BF993000D9384 /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,12 +22,13 @@
 		C094E99A3C006E41FD81C9DB /* Pods-ChineseBooks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.debug.xcconfig"; sourceTree = "<group>"; };
 		D13146D8211BB36400B7B465 /* ChineseBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChineseBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13146DB211BB36400B7B465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D13146DD211BB36400B7B465 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D13146DD211BB36400B7B465 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		D13146E0211BB36400B7B465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D13146E3211BB36400B7B465 /* ChineseBooks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ChineseBooks.xcdatamodel; sourceTree = "<group>"; };
 		D13146E5211BB36500B7B465 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13146E8211BB36500B7B465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13146EA211BB36500B7B465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D182F5B9211BF993000D9384 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F82CB08AA72C6D741E38A8ED /* Pods-ChineseBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,14 +83,39 @@
 			isa = PBXGroup;
 			children = (
 				D13146DB211BB36400B7B465 /* AppDelegate.swift */,
-				D13146DD211BB36400B7B465 /* ViewController.swift */,
-				D13146DF211BB36400B7B465 /* Main.storyboard */,
+				D13146F2211BC76D00B7B465 /* Model */,
+				D13146F1211BC76600B7B465 /* View */,
+				D13146F0211BC75C00B7B465 /* Controller */,
 				D13146E5211BB36500B7B465 /* Assets.xcassets */,
-				D13146E7211BB36500B7B465 /* LaunchScreen.storyboard */,
 				D13146EA211BB36500B7B465 /* Info.plist */,
 				D13146E2211BB36400B7B465 /* ChineseBooks.xcdatamodeld */,
 			);
 			path = ChineseBooks;
+			sourceTree = "<group>";
+		};
+		D13146F0211BC75C00B7B465 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				D13146DD211BB36400B7B465 /* StoreViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		D13146F1211BC76600B7B465 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				D13146DF211BB36400B7B465 /* Main.storyboard */,
+				D13146E7211BB36500B7B465 /* LaunchScreen.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		D13146F2211BC76D00B7B465 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				D182F5B9211BF993000D9384 /* Category.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -207,9 +234,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13146DE211BB36400B7B465 /* ViewController.swift in Sources */,
+				D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
 				D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */,
+				D182F5BA211BF993000D9384 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
