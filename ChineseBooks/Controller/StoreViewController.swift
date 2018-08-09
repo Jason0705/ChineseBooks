@@ -17,9 +17,20 @@ class StoreViewController: UIViewController {
     var categoryArray = [Category]()
     
     
+    @IBOutlet weak var maleCategoryCollectionView: UICollectionView!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getCategoryData(from: url)
+        
+        // Register CustomCategoryCell.xib
+        maleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
+        
+        // Style
+        cellStyle()
     }
 
 
@@ -55,9 +66,44 @@ class StoreViewController: UIViewController {
             categoryArray.append(newElement)
         }
         //print(categoryArray[0].categoryName)
+        maleCategoryCollectionView.reloadData()
     }
 
     
+    // CollectionView Cell Style
+    func cellStyle() {
+        //let itemSize = UIScreen.main.bounds.width/3 - 3
+        let cellSize = maleCategoryCollectionView.frame.size.width/3
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
+        layout.itemSize = CGSize(width: cellSize, height: cellSize)
+        layout.minimumInteritemSpacing = 8
+        layout.minimumLineSpacing = 8
+        
+        maleCategoryCollectionView.collectionViewLayout = layout
+    }
+    
+    
+}
+
+
+// MARK: - CollectionView Datasource Method
+
+extension StoreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    // Number of cells
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return categoryArray.count
+    }
+    
+    // Populate cells
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCategoryCell", for: indexPath) as! CustomCategoryCell
+        let cellData = categoryArray[indexPath.row]
+        cell.categoryLabel.text = cellData.categoryName
+        cell.bookCountLabel.text = "\(String(cellData.bookCount)) 本"
+        return cell
+    }
     
     
 }

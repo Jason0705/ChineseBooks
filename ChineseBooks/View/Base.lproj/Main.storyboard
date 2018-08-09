@@ -66,7 +66,39 @@
                             </segmentedControl>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hi-fK-tqM" userLabel="Male View">
                                 <rect key="frame" x="0.0" y="99" width="375" height="568"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6en-l9-3QP">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="568"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gYr-ws-ZTL">
+                                            <size key="itemSize" width="99" height="100"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="categoryCell" id="YOj-sn-OZV">
+                                                <rect key="frame" x="0.0" y="0.0" width="99" height="100"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="99" height="100"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="aoE-7A-etc"/>
+                                            <outlet property="delegate" destination="BYZ-38-t0r" id="85a-yt-1YY"/>
+                                        </connections>
+                                    </collectionView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="6en-l9-3QP" secondAttribute="trailing" id="FUw-p3-rYD"/>
+                                    <constraint firstAttribute="bottom" secondItem="6en-l9-3QP" secondAttribute="bottom" id="GSm-BR-We2"/>
+                                    <constraint firstItem="6en-l9-3QP" firstAttribute="leading" secondItem="2Hi-fK-tqM" secondAttribute="leading" id="KKg-iO-nDk"/>
+                                    <constraint firstItem="6en-l9-3QP" firstAttribute="top" secondItem="2Hi-fK-tqM" secondAttribute="top" id="jXz-tk-Y0s"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -84,6 +116,9 @@
                     <navigationItem key="navigationItem" title="免费书城" id="aZa-pn-fJu">
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="hFk-u5-I7f"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="maleCategoryCollectionView" destination="6en-l9-3QP" id="ani-ub-6dq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
