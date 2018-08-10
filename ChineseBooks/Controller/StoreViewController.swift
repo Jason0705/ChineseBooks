@@ -12,12 +12,24 @@ import SwiftyJSON
 
 class StoreViewController: UIViewController {
     
-    let url = "http://api.zhuishushenqi.com/cats"
+    var url = "http://api.zhuishushenqi.com/cats"
+    //var segmentedControlIndex = 0
     
-    var categoryArray = [Category]()
+    var maleCategoryArray = [Category]()
+    var femaleCategoryArray = [Category]()
     
     
+    @IBOutlet weak var storeStackView: UIStackView!
     @IBOutlet weak var maleCategoryCollectionView: UICollectionView!
+    @IBOutlet weak var femaleCategoryCollectionView: UICollectionView!
+    
+    @IBOutlet weak var maleViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var femaleViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var rankingViewWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var switchViewSegmentedControl: UISegmentedControl!
+    
+    
     
     
     
@@ -28,9 +40,15 @@ class StoreViewController: UIViewController {
         
         // Register CustomCategoryCell.xib
         maleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
+        femaleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
         
         // Style
-        cellStyle()
+        //cellStyle()
+        
+        maleViewWidth.constant = storeStackView.frame.size.width
+        femaleViewWidth.constant = 0
+        rankingViewWidth.constant = 0
+        maleCategoryCollectionView.collectionViewLayout = cellStyle()
     }
 
 
@@ -44,6 +62,7 @@ class StoreViewController: UIViewController {
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createCategoryDict(with: categoryJSON)
                 //print(categoryJSON["male"].arrayValue)
+                //print(categoryJSON)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -62,29 +81,86 @@ class StoreViewController: UIViewController {
             let bookCount = category["bookCount"].intValue
             let newElement = Category(name: name, count: bookCount)
             
-            //print(newElement)
-            categoryArray.append(newElement)
+            //print(newElement.categoryName)
+            maleCategoryArray.append(newElement)
+        }
+        
+        for category in json["female"].arrayValue {
+            let name = category["name"].stringValue
+            let bookCount = category["bookCount"].intValue
+            let newElement = Category(name: name, count: bookCount)
+            
+            //print(newElement.categoryName)
+            femaleCategoryArray.append(newElement)
         }
         //print(categoryArray[0].categoryName)
+        //print(femaleCategoryArray[0].categoryName)
         maleCategoryCollectionView.reloadData()
+        femaleCategoryCollectionView.reloadData()
     }
 
     
     // CollectionView Cell Style
-    func cellStyle() {
+    func cellStyle() -> UICollectionViewFlowLayout {
         //let itemSize = UIScreen.main.bounds.width/3 - 3
-        let cellSize = maleCategoryCollectionView.frame.size.width/3
+        let cellSize = storeStackView.frame.size.width/3 - 12
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
         layout.itemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
-        maleCategoryCollectionView.collectionViewLayout = layout
+        return layout
+        
+//        if index == 0 {
+//            maleCategoryCollectionView.collectionViewLayout = layout
+//        }
+//        else if index == 1 {
+//            femaleCategoryCollectionView.collectionViewLayout = layout
+//        }
+        
     }
     
     
+    // MARK: - Action
+    
+    @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            maleViewWidth.constant = storeStackView.frame.size.width
+            femaleViewWidth.constant = 0
+            rankingViewWidth.constant = 0
+//            segmentedControlIndex = 0
+//            cellStyle(for: segmentedControlIndex)
+            maleCategoryCollectionView.collectionViewLayout = cellStyle()
+        }
+        else if sender.selectedSegmentIndex == 1 {
+            maleViewWidth.constant = 0
+            femaleViewWidth.constant = storeStackView.frame.size.width
+            rankingViewWidth.constant = 0
+//            segmentedControlIndex = 1
+//            cellStyle(for: segmentedControlIndex)
+            femaleCategoryCollectionView.collectionViewLayout = cellStyle()
+        }
+        else if sender.selectedSegmentIndex == 2 {
+            //url = "http://api.zhuishushenqi.com/ranking"
+            maleViewWidth.constant = 0
+            femaleViewWidth.constant = 0
+            rankingViewWidth.constant = storeStackView.frame.size.width
+            //getCategoryData(from: url)
+        }
+        
+    }
+    
+    
+    
+    
+    
 }
+
+
+
+
+
 
 
 // MARK: - CollectionView Datasource Method
@@ -93,13 +169,29 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     // Number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categoryArray.count
+        if collectionView == maleCategoryCollectionView {
+            return maleCategoryArray.count
+        }
+        else if collectionView == femaleCategoryCollectionView {
+            return femaleCategoryArray.count
+        }
+        return 0
     }
     
     // Populate cells
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCategoryCell", for: indexPath) as! CustomCategoryCell
-        let cellData = categoryArray[indexPath.row]
+        var cellData = maleCategoryArray[indexPath.row]
+        
+        if collectionView == maleCategoryCollectionView {
+            cellData = maleCategoryArray[indexPath.row]
+            cell.backgroundColor = UIColor.green
+        }
+        else if collectionView == femaleCategoryCollectionView {
+            cellData = femaleCategoryArray[indexPath.row]
+            cell.backgroundColor = UIColor.green
+        }
         cell.categoryLabel.text = cellData.categoryName
         cell.bookCountLabel.text = "\(String(cellData.bookCount)) 本"
         return cell

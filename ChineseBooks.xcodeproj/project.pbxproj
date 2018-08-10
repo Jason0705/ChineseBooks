@@ -17,6 +17,7 @@
 		D182F5BA211BF993000D9384 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5B9211BF993000D9384 /* Category.swift */; };
 		D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */; };
 		D182F5BF211CBC6C000D9384 /* CustomCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */; };
+		D182F5C5211E1421000D9384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5C4211E1421000D9384 /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		D182F5B9211BF993000D9384 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryCell.swift; sourceTree = "<group>"; };
 		D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCategoryCell.xib; sourceTree = "<group>"; };
+		D182F5C4211E1421000D9384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F82CB08AA72C6D741E38A8ED /* Pods-ChineseBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				D13146DD211BB36400B7B465 /* StoreViewController.swift */,
+				D182F5C4211E1421000D9384 /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D182F5C5211E1421000D9384 /* ViewController.swift in Sources */,
 				D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */,
 				D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
