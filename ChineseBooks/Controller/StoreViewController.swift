@@ -30,9 +30,6 @@ class StoreViewController: UIViewController {
     @IBOutlet weak var switchViewSegmentedControl: UISegmentedControl!
     
     
-    
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -110,14 +107,9 @@ class StoreViewController: UIViewController {
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
-        return layout
+        //maleCategoryCollectionView.collectionViewLayout = layout
         
-//        if index == 0 {
-//            maleCategoryCollectionView.collectionViewLayout = layout
-//        }
-//        else if index == 1 {
-//            femaleCategoryCollectionView.collectionViewLayout = layout
-//        }
+        return layout
         
     }
     
