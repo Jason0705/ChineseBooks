@@ -40,10 +40,8 @@ class StoreViewController: UIViewController {
         femaleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
         
         // Style
-        //cellStyle()
-        
-        //storeStackView.frame.size.width = UIScreen.main.bounds.width
-        maleViewWidth.constant = UIScreen.main.bounds.width
+        storeStackView.frame.size.width = UIScreen.main.bounds.width
+        maleViewWidth.constant = storeStackView.frame.size.width
         femaleViewWidth.constant = 0
         rankingViewWidth.constant = 0
         maleCategoryCollectionView.collectionViewLayout = cellStyle()
@@ -100,11 +98,11 @@ class StoreViewController: UIViewController {
     
     // CollectionView Cell Style
     func cellStyle() -> UICollectionViewFlowLayout {
-        let itemSize = UIScreen.main.bounds.width/3 - 12
-        //let cellSize = storeStackView.frame.size.width/3 - 12
+        //let itemSize = UIScreen.main.bounds.width/3 - 12
+        let cellSize = storeStackView.frame.size.width/3 - 12
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
-        layout.itemSize = CGSize(width: itemSize, height: itemSize)
+        layout.itemSize = CGSize(width: cellSize, height: cellSize)
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
@@ -119,26 +117,23 @@ class StoreViewController: UIViewController {
     
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            maleViewWidth.constant = UIScreen.main.bounds.width
+            
+            maleViewWidth.constant = storeStackView.frame.size.width
             femaleViewWidth.constant = 0
             rankingViewWidth.constant = 0
-//            segmentedControlIndex = 0
-//            cellStyle(for: segmentedControlIndex)
             maleCategoryCollectionView.collectionViewLayout = cellStyle()
         }
         else if sender.selectedSegmentIndex == 1 {
             maleViewWidth.constant = 0
-            femaleViewWidth.constant = UIScreen.main.bounds.width
+            femaleViewWidth.constant = storeStackView.frame.size.width
             rankingViewWidth.constant = 0
-//            segmentedControlIndex = 1
-//            cellStyle(for: segmentedControlIndex)
             femaleCategoryCollectionView.collectionViewLayout = cellStyle()
         }
         else if sender.selectedSegmentIndex == 2 {
             //url = "http://api.zhuishushenqi.com/ranking"
             maleViewWidth.constant = 0
             femaleViewWidth.constant = 0
-            rankingViewWidth.constant = UIScreen.main.bounds.width
+            rankingViewWidth.constant = storeStackView.frame.size.width
             //getCategoryData(from: url)
         }
         

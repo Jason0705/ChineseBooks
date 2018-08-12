@@ -8,37 +8,76 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIScrollViewDelegate {
 
-    @IBOutlet weak var v1width: NSLayoutConstraint!
-    @IBOutlet weak var v2width: NSLayoutConstraint!
-    @IBOutlet weak var v3width: NSLayoutConstraint!
-    @IBOutlet weak var containerView: UIView!
+   
+    @IBOutlet weak var testSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var testScrollView: UIScrollView!
     
+    var lastContentOffset: CGFloat = 0
     
+    var v1 : View1 = View1(nibName: "View1", bundle: nil)
+    var v2 : View2 = View2(nibName: "View2", bundle: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        testScrollView.delegate = self
+        
+        
+        createScrollView()
+        
+    }
+    
 
-        // Do any additional setup after loading the view.
+    func createScrollView() {
+        addChildViewController(v1)
+        testScrollView.addSubview(v1.view)
+        v1.didMove(toParentViewController: self)
+        
+        addChildViewController(v2)
+        testScrollView.addSubview(v2.view)
+        v2.didMove(toParentViewController: self)
+        
+        var v2Frame : CGRect = v2.view.frame
+        v2Frame.origin.x = self.view.frame.width
+        v2.view.frame = v2Frame
+        
+        testScrollView.contentSize = CGSize(width: self.view.frame.width * 2, height: testScrollView.frame.height)
     }
     
     
-    @IBAction func b1pressed(_ sender: UIButton) {
-        v1width.constant = containerView.frame.size.width
-        v2width.constant = 0
-        v3width.constant = 0
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        lastContentOffset = testScrollView.contentOffset.x
     }
-    @IBAction func b2pressed(_ sender: UIButton) {
-        v1width.constant = 0
-        v2width.constant = containerView.frame.size.width
-        v3width.constant = 0
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if (self.lastContentOffset < scrollView.contentOffset.x) {
+            print("left")
+            testSegmentedControl.selectedSegmentIndex += 1
+        } else if (self.lastContentOffset > scrollView.contentOffset.x) {
+            print("right")
+            if testSegmentedControl.selectedSegmentIndex >= 0 {
+                testSegmentedControl.selectedSegmentIndex -= 1
+            }
+            
+            
+        }
     }
-    @IBAction func b3pressed(_ sender: UIButton) {
-        v1width.constant = 0
-        v2width.constant = 0
-        v3width.constant = containerView.frame.size.width
+
+    
+    
+    
+    
+    
+    @IBAction func testSegmentedControlPressed(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+            testScrollView.scrollRectToVisible(v1.view.frame, animated: true)
+        }
+        else if sender.selectedSegmentIndex == 1 {
+            testScrollView.scrollRectToVisible(v2.view.frame, animated: true)
+        }
     }
+    
     
     
     
