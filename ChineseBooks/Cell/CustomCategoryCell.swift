@@ -10,8 +10,7 @@ import UIKit
 
 class CustomCategoryCell: UICollectionViewCell {
 
-    @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var bookCountLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
     
     
 //    override func awakeFromNib() {

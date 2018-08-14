@@ -12,20 +12,22 @@ import SwiftyJSON
 
 class StoreViewController: UIViewController {
     
-    var url = "http://api.zhuishushenqi.com/cats"
-    //var segmentedControlIndex = 0
+    let categoryURL = "http://api.zhuishushenqi.com/cats"
+    let rankURL = "http://api.zhuishushenqi.com/ranking"
     
     var maleCategoryArray = [Category]()
     var femaleCategoryArray = [Category]()
+    var rankArray = [Rank]()
     
     
     @IBOutlet weak var storeStackView: UIStackView!
     @IBOutlet weak var maleCategoryCollectionView: UICollectionView!
     @IBOutlet weak var femaleCategoryCollectionView: UICollectionView!
+    @IBOutlet weak var rankCollectionView: UICollectionView!
     
     @IBOutlet weak var maleViewWidth: NSLayoutConstraint!
     @IBOutlet weak var femaleViewWidth: NSLayoutConstraint!
-    @IBOutlet weak var rankingViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var rankViewWidth: NSLayoutConstraint!
     
     @IBOutlet weak var switchViewSegmentedControl: UISegmentedControl!
     
@@ -33,17 +35,19 @@ class StoreViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        getCategoryData(from: url)
+        getCategoryData(from: categoryURL)
+        getRankData(from: rankURL)
         
         // Register CustomCategoryCell.xib
         maleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
         femaleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
+        rankCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
         
         // Style
         storeStackView.frame.size.width = UIScreen.main.bounds.width
         maleViewWidth.constant = storeStackView.frame.size.width
         femaleViewWidth.constant = 0
-        rankingViewWidth.constant = 0
+        rankViewWidth.constant = 0
         maleCategoryCollectionView.collectionViewLayout = cellStyle()
     }
 
@@ -56,7 +60,21 @@ class StoreViewController: UIViewController {
             response in
             if response.result.isSuccess{
                 let categoryJSON : JSON = JSON(response.result.value!)
-                self.createCategoryDict(with: categoryJSON)
+                self.createCategoryArray(with: categoryJSON)
+                //print(categoryJSON["male"].arrayValue)
+                //print(categoryJSON)
+            } else {
+                print("Couldnt process JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+    
+    func getRankData(from url: String) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let categoryJSON : JSON = JSON(response.result.value!)
+                self.createRankArray(with: categoryJSON)
                 //print(categoryJSON["male"].arrayValue)
                 //print(categoryJSON)
             } else {
@@ -69,9 +87,9 @@ class StoreViewController: UIViewController {
     // MARK: - JSON Parsing
     
     // Parse JSON data
-    func createCategoryDict(with json: JSON) {
+    func createCategoryArray(with json: JSON) {
         guard !json.isEmpty else {fatalError("json unavailible!")}
-        
+        // Create  maleCatagoryArray
         for category in json["male"].arrayValue {
             let name = category["name"].stringValue
             let bookCount = category["bookCount"].intValue
@@ -80,7 +98,7 @@ class StoreViewController: UIViewController {
             //print(newElement.categoryName)
             maleCategoryArray.append(newElement)
         }
-        
+        // Create femaleCategoryArray
         for category in json["female"].arrayValue {
             let name = category["name"].stringValue
             let bookCount = category["bookCount"].intValue
@@ -89,12 +107,30 @@ class StoreViewController: UIViewController {
             //print(newElement.categoryName)
             femaleCategoryArray.append(newElement)
         }
-        //print(categoryArray[0].categoryName)
+        
+        //print(maleCategoryArray[0].categoryName)
         //print(femaleCategoryArray[0].categoryName)
         maleCategoryCollectionView.reloadData()
         femaleCategoryCollectionView.reloadData()
     }
+    
+    func createRankArray(with json: JSON) {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+        // Create rankArray
+        for rank in json["rankings"].arrayValue {
+            let title = rank["title"].stringValue
+            let id = rank["_id"].stringValue
+            let newElement = Rank(title: title, id: id)
+            
+            rankArray.append(newElement)
+        }
+        //print(rankArray[0].rankTitle)
+        rankCollectionView.reloadData()
+    }
 
+    
+    
+    // MARK: - Styling
     
     // CollectionView Cell Style
     func cellStyle() -> UICollectionViewFlowLayout {
@@ -113,28 +149,44 @@ class StoreViewController: UIViewController {
     }
     
     
+    
     // MARK: - Action
     
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             
-            maleViewWidth.constant = storeStackView.frame.size.width
-            femaleViewWidth.constant = 0
-            rankingViewWidth.constant = 0
+//            maleViewWidth.constant = storeStackView.frame.size.width
+//            femaleViewWidth.constant = 0
+//            rankingViewWidth.constant = 0
             maleCategoryCollectionView.collectionViewLayout = cellStyle()
+            UIView.animate(withDuration: 0.5) {
+                self.maleViewWidth.constant = self.storeStackView.frame.size.width
+                self.femaleViewWidth.constant = 0
+                self.rankViewWidth.constant = 0
+                self.view.layoutIfNeeded()
+            }
+            
         }
         else if sender.selectedSegmentIndex == 1 {
-            maleViewWidth.constant = 0
-            femaleViewWidth.constant = storeStackView.frame.size.width
-            rankingViewWidth.constant = 0
+//            maleViewWidth.constant = 0
+//            femaleViewWidth.constant = storeStackView.frame.size.width
+//            rankingViewWidth.constant = 0
             femaleCategoryCollectionView.collectionViewLayout = cellStyle()
+            UIView.animate(withDuration: 0.5) {
+                self.maleViewWidth.constant = 0
+                self.femaleViewWidth.constant = self.storeStackView.frame.size.width
+                self.rankViewWidth.constant = 0
+                self.view.layoutIfNeeded()
+            }
         }
         else if sender.selectedSegmentIndex == 2 {
-            //url = "http://api.zhuishushenqi.com/ranking"
-            maleViewWidth.constant = 0
-            femaleViewWidth.constant = 0
-            rankingViewWidth.constant = storeStackView.frame.size.width
-            //getCategoryData(from: url)
+            rankCollectionView.collectionViewLayout = cellStyle()
+            UIView.animate(withDuration: 0.5) {
+                self.maleViewWidth.constant = 0
+                self.femaleViewWidth.constant = 0
+                self.rankViewWidth.constant = self.storeStackView.frame.size.width
+                self.view.layoutIfNeeded()
+            }
         }
         
     }
@@ -164,6 +216,9 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         else if collectionView == femaleCategoryCollectionView {
             return femaleCategoryArray.count
         }
+        else if collectionView == rankCollectionView {
+            return rankArray.count
+        }
         return 0
     }
     
@@ -171,18 +226,19 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customCategoryCell", for: indexPath) as! CustomCategoryCell
-        var cellData = maleCategoryArray[indexPath.row]
         
         if collectionView == maleCategoryCollectionView {
-            cellData = maleCategoryArray[indexPath.row]
-            cell.backgroundColor = UIColor.green
+            let cellData = maleCategoryArray[indexPath.row]
+            cell.nameLabel.text = cellData.categoryName
         }
         else if collectionView == femaleCategoryCollectionView {
-            cellData = femaleCategoryArray[indexPath.row]
-            cell.backgroundColor = UIColor.green
+            let cellData = femaleCategoryArray[indexPath.row]
+            cell.nameLabel.text = cellData.categoryName
         }
-        cell.categoryLabel.text = cellData.categoryName
-        cell.bookCountLabel.text = "\(String(cellData.bookCount)) 本"
+        else if collectionView == rankCollectionView {
+            let cellData = rankArray[indexPath.row]
+            cell.nameLabel.text = cellData.rankTitle
+        }
         return cell
     }
     
