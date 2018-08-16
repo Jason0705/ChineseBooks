@@ -23,6 +23,7 @@
 		D182F5D0211F9CEA000D9384 /* View2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5CE211F9CEA000D9384 /* View2.swift */; };
 		D182F5D1211F9CEA000D9384 /* View2.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5CF211F9CEA000D9384 /* View2.xib */; };
 		D182F5E221239463000D9384 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E121239463000D9384 /* Rank.swift */; };
+		D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E32124924A000D9384 /* CategoryListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		D182F5CE211F9CEA000D9384 /* View2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View2.swift; sourceTree = "<group>"; };
 		D182F5CF211F9CEA000D9384 /* View2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View2.xib; sourceTree = "<group>"; };
 		D182F5E121239463000D9384 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
+		D182F5E32124924A000D9384 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		F82CB08AA72C6D741E38A8ED /* Pods-ChineseBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -114,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				D13146DD211BB36400B7B465 /* StoreViewController.swift */,
+				D182F5E32124924A000D9384 /* CategoryListViewController.swift */,
 				D182F5C4211E1421000D9384 /* ViewController.swift */,
 				D182F5CA211F9758000D9384 /* View1.swift */,
 				D182F5CB211F9758000D9384 /* View1.xib */,
@@ -269,6 +272,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */,
 				D182F5C5211E1421000D9384 /* ViewController.swift in Sources */,
 				D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */,
 				D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */,

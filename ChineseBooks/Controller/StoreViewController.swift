@@ -61,8 +61,6 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createCategoryArray(with: categoryJSON)
-                //print(categoryJSON["male"].arrayValue)
-                //print(categoryJSON)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -75,8 +73,6 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createRankArray(with: categoryJSON)
-                //print(categoryJSON["male"].arrayValue)
-                //print(categoryJSON)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -95,7 +91,6 @@ class StoreViewController: UIViewController {
             let bookCount = category["bookCount"].intValue
             let newElement = Category(name: name, count: bookCount)
             
-            //print(newElement.categoryName)
             maleCategoryArray.append(newElement)
         }
         // Create femaleCategoryArray
@@ -104,12 +99,8 @@ class StoreViewController: UIViewController {
             let bookCount = category["bookCount"].intValue
             let newElement = Category(name: name, count: bookCount)
             
-            //print(newElement.categoryName)
             femaleCategoryArray.append(newElement)
         }
-        
-        //print(maleCategoryArray[0].categoryName)
-        //print(femaleCategoryArray[0].categoryName)
         maleCategoryCollectionView.reloadData()
         femaleCategoryCollectionView.reloadData()
     }
@@ -124,7 +115,6 @@ class StoreViewController: UIViewController {
             
             rankArray.append(newElement)
         }
-        //print(rankArray[0].rankTitle)
         rankCollectionView.reloadData()
     }
 
@@ -142,8 +132,6 @@ class StoreViewController: UIViewController {
         layout.minimumInteritemSpacing = 8
         layout.minimumLineSpacing = 8
         
-        //maleCategoryCollectionView.collectionViewLayout = layout
-        
         return layout
         
     }
@@ -154,10 +142,6 @@ class StoreViewController: UIViewController {
     
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            
-//            maleViewWidth.constant = storeStackView.frame.size.width
-//            femaleViewWidth.constant = 0
-//            rankingViewWidth.constant = 0
             maleCategoryCollectionView.collectionViewLayout = cellStyle()
             UIView.animate(withDuration: 0.5) {
                 self.maleViewWidth.constant = self.storeStackView.frame.size.width
@@ -168,9 +152,6 @@ class StoreViewController: UIViewController {
             
         }
         else if sender.selectedSegmentIndex == 1 {
-//            maleViewWidth.constant = 0
-//            femaleViewWidth.constant = storeStackView.frame.size.width
-//            rankingViewWidth.constant = 0
             femaleCategoryCollectionView.collectionViewLayout = cellStyle()
             UIView.animate(withDuration: 0.5) {
                 self.maleViewWidth.constant = 0
@@ -195,7 +176,6 @@ class StoreViewController: UIViewController {
     
     
     
-    
 }
 
 
@@ -207,6 +187,8 @@ class StoreViewController: UIViewController {
 // MARK: - CollectionView Datasource Method
 
 extension StoreViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    
     
     // Number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -241,6 +223,52 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         return cell
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == maleCategoryCollectionView {
+//            let destinationVC = CategoryListViewController()
+//            destinationVC.major = maleCategoryArray[indexPath.row].categoryName
+//            destinationVC.gender = "male"
+//            let navController = UINavigationController(rootViewController: destinationVC)
+//            present(navController, animated: true, completion: nil)
+            performSegue(withIdentifier: "goToCategoryList", sender: maleCategoryCollectionView)
+            //print(maleCategoryCollectionView.indexPathsForSelectedItems)
+        }
+        else if collectionView == femaleCategoryCollectionView {
+//            let destinationVC = CategoryListViewController()
+//            destinationVC.major = femaleCategoryArray[indexPath.row].categoryName
+//            destinationVC.gender = "female"
+//            let navController = UINavigationController(rootViewController: destinationVC)
+//            present(navController, animated: true, completion: nil)
+            performSegue(withIdentifier: "goToCategoryList", sender: femaleCategoryCollectionView)
+            //print(femaleCategoryCollectionView.indexPathsForSelectedItems)
+        }
+    }
+   
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToCategoryList" {
+            
+            let destinationVC = segue.destination as! CategoryListViewController
+            let senderView = sender as! UICollectionView
+            
+            if senderView.tag == 0 {
+                if let indexPaths = maleCategoryCollectionView.indexPathsForSelectedItems {
+                    let indexPath = indexPaths[0] as NSIndexPath
+                    destinationVC.major = maleCategoryArray[indexPath.row].categoryName
+                    destinationVC.gender = "male"
+                }
+            }
+            else if senderView.tag == 1 {
+                if let indexPaths = femaleCategoryCollectionView.indexPathsForSelectedItems {
+                    let indexPath = indexPaths[0] as NSIndexPath
+                    destinationVC.major = femaleCategoryArray[indexPath.row].categoryName
+                    destinationVC.gender = "female"
+                }
+            }
+        }
+    }
+    
     
     
 }
