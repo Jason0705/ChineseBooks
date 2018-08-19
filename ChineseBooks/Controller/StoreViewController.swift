@@ -12,7 +12,7 @@ import SwiftyJSON
 
 class StoreViewController: UIViewController {
     
-    let categoryURL = "http://api.zhuishushenqi.com/cats"
+    let categoryURL = "http://api.zhuishushenqi.com/cats/lv2/statistics"
     let rankURL = "http://api.zhuishushenqi.com/ranking"
     
     var maleCategoryArray = [Category]()
