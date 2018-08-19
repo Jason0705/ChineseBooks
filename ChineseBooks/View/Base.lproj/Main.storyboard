@@ -258,15 +258,39 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPv-Dc-kPq" userLabel="Hot View">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GhN-7S-NVY">
-                                                        <rect key="frame" x="56" y="212" width="263" height="142"/>
-                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-Ke-XSM" userLabel="Hot Collection View">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="567"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Em0-ww-vhn">
+                                                            <size key="itemSize" width="50" height="50"/>
+                                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                        </collectionViewFlowLayout>
+                                                        <cells>
+                                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="GhJ-VT-DjB">
+                                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                </view>
+                                                            </collectionViewCell>
+                                                        </cells>
+                                                        <connections>
+                                                            <outlet property="dataSource" destination="LeI-4X-b4r" id="Xtg-2q-NcG"/>
+                                                            <outlet property="delegate" destination="LeI-4X-b4r" id="TzM-YO-ypZ"/>
+                                                        </connections>
+                                                    </collectionView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="zNq-Ke-XSM" firstAttribute="leading" secondItem="aPv-Dc-kPq" secondAttribute="leading" id="18W-ei-PmY"/>
+                                                    <constraint firstAttribute="trailing" secondItem="zNq-Ke-XSM" secondAttribute="trailing" id="Bd4-4t-CdP"/>
+                                                    <constraint firstAttribute="width" constant="375" id="Crl-0r-FpV"/>
+                                                    <constraint firstAttribute="bottom" secondItem="zNq-Ke-XSM" secondAttribute="bottom" id="Oko-2i-0U4"/>
+                                                    <constraint firstItem="zNq-Ke-XSM" firstAttribute="top" secondItem="aPv-Dc-kPq" secondAttribute="top" id="XNd-C9-uKq"/>
+                                                </constraints>
                                             </view>
                                         </subviews>
                                     </stackView>
@@ -296,7 +320,9 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="UfA-xr-TPl"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="label" destination="GhN-7S-NVY" id="e6Z-Qn-Oxq"/>
+                        <outlet property="hotCollectionView" destination="zNq-Ke-XSM" id="eLo-0a-FgJ"/>
+                        <outlet property="hotViewWidth" destination="Crl-0r-FpV" id="hwk-iP-gha"/>
+                        <outlet property="listStackView" destination="Iy8-94-Fsz" id="sUT-pN-ZZI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kSt-E9-gJP" userLabel="First Responder" sceneMemberID="firstResponder"/>

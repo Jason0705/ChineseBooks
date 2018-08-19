@@ -62,7 +62,7 @@ class StoreViewController: UIViewController {
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createCategoryArray(with: categoryJSON)
             } else {
-                print("Couldnt process JSON response, Error: \(response.result.error)")
+                print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
             }
         }
     }
@@ -71,10 +71,10 @@ class StoreViewController: UIViewController {
         Alamofire.request(url).responseJSON {
             response in
             if response.result.isSuccess{
-                let categoryJSON : JSON = JSON(response.result.value!)
-                self.createRankArray(with: categoryJSON)
+                let rankJSON : JSON = JSON(response.result.value!)
+                self.createRankArray(with: rankJSON)
             } else {
-                print("Couldnt process JSON response, Error: \(response.result.error)")
+                print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
             }
         }
     }
@@ -227,22 +227,10 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == maleCategoryCollectionView {
-//            let destinationVC = CategoryListViewController()
-//            destinationVC.major = maleCategoryArray[indexPath.row].categoryName
-//            destinationVC.gender = "male"
-//            let navController = UINavigationController(rootViewController: destinationVC)
-//            present(navController, animated: true, completion: nil)
             performSegue(withIdentifier: "goToCategoryList", sender: maleCategoryCollectionView)
-            //print(maleCategoryCollectionView.indexPathsForSelectedItems)
         }
         else if collectionView == femaleCategoryCollectionView {
-//            let destinationVC = CategoryListViewController()
-//            destinationVC.major = femaleCategoryArray[indexPath.row].categoryName
-//            destinationVC.gender = "female"
-//            let navController = UINavigationController(rootViewController: destinationVC)
-//            present(navController, animated: true, completion: nil)
             performSegue(withIdentifier: "goToCategoryList", sender: femaleCategoryCollectionView)
-            //print(femaleCategoryCollectionView.indexPathsForSelectedItems)
         }
     }
    
