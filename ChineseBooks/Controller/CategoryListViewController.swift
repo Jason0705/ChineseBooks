@@ -28,6 +28,7 @@ class CategoryListViewController: UIViewController {
     @IBOutlet weak var hotCollectionView: UICollectionView!
     @IBOutlet weak var newCollectionView: UICollectionView!
     @IBOutlet weak var reputationCollectionView: UICollectionView!
+    @IBOutlet weak var overCollectionView: UICollectionView!
     
     @IBOutlet weak var hotViewWidth: NSLayoutConstraint!
     @IBOutlet weak var newViewWidth: NSLayoutConstraint!
@@ -48,11 +49,13 @@ class CategoryListViewController: UIViewController {
         getHotData(from: hotURL)
         getNewData(from: newURL)
         getReputationData(from: reputationURL)
+        getOverData(from: overURL)
         
         // Register CustomBookCell.xib
         hotCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
         newCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
         reputationCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
+        overCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
 
         // Style
         listStackView.frame.size.width = UIScreen.main.bounds.width
@@ -103,6 +106,18 @@ class CategoryListViewController: UIViewController {
         }
     }
     
+    func getOverData(from url: String) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let bookListJSON : JSON = JSON(response.result.value!)
+                self.createOverList(with: bookListJSON)
+            } else {
+                print("Couldnt process JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+    
 
     
     
@@ -115,10 +130,9 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let intro = book["shortIntro"].stringValue
             let cover = book["cover"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, intro: intro, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover)
             
             hotBookList.append(newElement)
         }
@@ -131,10 +145,9 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let intro = book["shortIntro"].stringValue
             let cover = book["cover"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, intro: intro, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover)
             
             newBookList.append(newElement)
         }
@@ -147,14 +160,28 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let intro = book["shortIntro"].stringValue
             let cover = book["cover"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, intro: intro, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover)
             
             reputationBookList.append(newElement)
         }
         reputationCollectionView.reloadData()
+    }
+    
+    func createOverList(with json: JSON) {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+        for book in json["books"].arrayValue {
+            let title = book["title"].stringValue
+            let id = book["_id"].stringValue
+            let author = book["author"].stringValue
+            let cover = book["cover"].stringValue
+            
+            let newElement = Book(title: title, id: id, author: author, cover: cover)
+            
+            overBookList.append(newElement)
+        }
+        overCollectionView.reloadData()
     }
 
     
@@ -210,6 +237,7 @@ class CategoryListViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 3 {
+            overCollectionView.collectionViewLayout = cellStyle()
             UIView.animate(withDuration: 0.5) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0
@@ -245,6 +273,9 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         else if collectionView == reputationCollectionView {
             return reputationBookList.count
         }
+        else if collectionView == overCollectionView {
+            return overBookList.count
+        }
         return 0
     }
     
@@ -264,6 +295,11 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         }
         else if collectionView == reputationCollectionView {
             let cellData = reputationBookList[indexPath.row]
+            cell.bookTitleLabel.text = cellData.bookTitle
+            cell.bookAuthorLabel.text = cellData.bookAuthor
+        }
+        else if collectionView == overCollectionView {
+            let cellData = overBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
         }
