@@ -20,11 +20,14 @@ class CategoryListViewController: UIViewController {
     
     var hotBookList = [Book]()
     var newBookList = [Book]()
+    var reputationBookList = [Book]()
+    var overBookList = [Book]()
     
     
     @IBOutlet weak var listStackView: UIStackView!
     @IBOutlet weak var hotCollectionView: UICollectionView!
     @IBOutlet weak var newCollectionView: UICollectionView!
+    @IBOutlet weak var reputationCollectionView: UICollectionView!
     
     @IBOutlet weak var hotViewWidth: NSLayoutConstraint!
     @IBOutlet weak var newViewWidth: NSLayoutConstraint!
@@ -44,10 +47,12 @@ class CategoryListViewController: UIViewController {
         
         getHotData(from: hotURL)
         getNewData(from: newURL)
+        getReputationData(from: reputationURL)
         
         // Register CustomBookCell.xib
         hotCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
         newCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
+        reputationCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
 
         // Style
         listStackView.frame.size.width = UIScreen.main.bounds.width
@@ -80,6 +85,18 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createNewList(with: bookListJSON)
+            } else {
+                print("Couldnt process JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+    
+    func getReputationData(from url: String) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let bookListJSON : JSON = JSON(response.result.value!)
+                self.createReputationList(with: bookListJSON)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -122,6 +139,22 @@ class CategoryListViewController: UIViewController {
             newBookList.append(newElement)
         }
         newCollectionView.reloadData()
+    }
+    
+    func createReputationList(with json: JSON) {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+        for book in json["books"].arrayValue {
+            let title = book["title"].stringValue
+            let id = book["_id"].stringValue
+            let author = book["author"].stringValue
+            let intro = book["shortIntro"].stringValue
+            let cover = book["cover"].stringValue
+            
+            let newElement = Book(title: title, id: id, author: author, intro: intro, cover: cover)
+            
+            reputationBookList.append(newElement)
+        }
+        reputationCollectionView.reloadData()
     }
 
     
@@ -167,6 +200,7 @@ class CategoryListViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 2 {
+            reputationCollectionView.collectionViewLayout = cellStyle()
             UIView.animate(withDuration: 0.5) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0
@@ -208,6 +242,9 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         else if collectionView == newCollectionView {
             return newBookList.count
         }
+        else if collectionView == reputationCollectionView {
+            return reputationBookList.count
+        }
         return 0
     }
     
@@ -222,6 +259,11 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         }
         else if collectionView == newCollectionView {
             let cellData = newBookList[indexPath.row]
+            cell.bookTitleLabel.text = cellData.bookTitle
+            cell.bookAuthorLabel.text = cellData.bookAuthor
+        }
+        else if collectionView == reputationCollectionView {
+            let cellData = reputationBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
         }
