@@ -69,7 +69,7 @@ class CategoryListViewController: UIViewController {
     
     // MARK: - Networking
     
-    // getBookData Method
+    // getData Methods
     func getHotData(from url: String) {
         Alamofire.request(url).responseJSON {
             response in
@@ -131,8 +131,10 @@ class CategoryListViewController: UIViewController {
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
             let cover = book["cover"].stringValue
+            let intro = book["shortIntro"].stringValue
+            let category = book["minorCate"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
             
             hotBookList.append(newElement)
         }
@@ -146,8 +148,10 @@ class CategoryListViewController: UIViewController {
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
             let cover = book["cover"].stringValue
+            let intro = book["shortIntro"].stringValue
+            let category = book["minorCate"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
             
             newBookList.append(newElement)
         }
@@ -161,8 +165,10 @@ class CategoryListViewController: UIViewController {
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
             let cover = book["cover"].stringValue
+            let intro = book["shortIntro"].stringValue
+            let category = book["minorCate"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
             
             reputationBookList.append(newElement)
         }
@@ -176,8 +182,10 @@ class CategoryListViewController: UIViewController {
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
             let cover = book["cover"].stringValue
+            let intro = book["shortIntro"].stringValue
+            let category = book["minorCate"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
             
             overBookList.append(newElement)
         }
@@ -198,7 +206,6 @@ class CategoryListViewController: UIViewController {
         layout.minimumLineSpacing = 16
         
         return layout
-        
     }
     
     

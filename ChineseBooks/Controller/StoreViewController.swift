@@ -133,7 +133,6 @@ class StoreViewController: UIViewController {
         layout.minimumLineSpacing = 8
         
         return layout
-        
     }
     
     
@@ -260,12 +259,9 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         else if segue.identifier == "goToRankList" {
             let destinationVC = segue.destination as! RankListViewController
-            let senderView = sender as! UICollectionView
-            if senderView.tag == 2 {
-                if let indexPaths = rankCollectionView.indexPathsForSelectedItems {
-                    let indexPath = indexPaths[0] as NSIndexPath
-                    destinationVC.rankID = rankArray[indexPath.row].rankID
-                }
+            if let indexPaths = rankCollectionView.indexPathsForSelectedItems {
+                let indexPath = indexPaths[0] as NSIndexPath
+                destinationVC.rankID = rankArray[indexPath.row].rankID
             }
         }
     }
