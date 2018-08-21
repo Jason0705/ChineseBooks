@@ -145,7 +145,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7f-Ub-0Es" userLabel="Ranking View">
                                                 <rect key="frame" x="375" y="0.0" width="0.0" height="568"/>
                                                 <subviews>
-                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GqT-Op-Xzy">
+                                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GqT-Op-Xzy">
                                                         <rect key="frame" x="0.0" y="0.0" width="0.0" height="568"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AhT-Ke-jAV">
@@ -226,11 +226,73 @@
                         <outlet property="storeStackView" destination="qZi-og-lqT" id="GUd-ej-8Zl"/>
                         <outlet property="switchViewSegmentedControl" destination="hjo-93-2hQ" id="hg5-au-huY"/>
                         <segue destination="LeI-4X-b4r" kind="show" identifier="goToCategoryList" id="JSj-Nr-O6e"/>
+                        <segue destination="lAz-vM-uU0" kind="show" identifier="goToRankList" id="e9a-7T-90z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+        </scene>
+        <!--小说列表-->
+        <scene sceneID="27l-Ze-FK0">
+            <objects>
+                <viewController id="lAz-vM-uU0" customClass="RankListViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mDl-Pq-x95">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-5Z-ggR" userLabel="Rank View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kdo-nm-23q">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nt7-Zt-tKP">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ctD-xJ-QdD">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                    </collectionView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Kdo-nm-23q" firstAttribute="top" secondItem="UeQ-5Z-ggR" secondAttribute="top" id="23a-r5-yH0"/>
+                                    <constraint firstAttribute="bottom" secondItem="Kdo-nm-23q" secondAttribute="bottom" id="7En-sR-F1O"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kdo-nm-23q" secondAttribute="trailing" id="Ltq-Rq-o6L"/>
+                                    <constraint firstItem="Kdo-nm-23q" firstAttribute="leading" secondItem="UeQ-5Z-ggR" secondAttribute="leading" id="bdl-XL-SSI"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="UeQ-5Z-ggR" firstAttribute="bottom" secondItem="ZJo-JR-p3x" secondAttribute="bottom" id="1VS-Ke-f6o"/>
+                            <constraint firstItem="UeQ-5Z-ggR" firstAttribute="leading" secondItem="ZJo-JR-p3x" secondAttribute="leading" id="KiM-hW-lTt"/>
+                            <constraint firstItem="UeQ-5Z-ggR" firstAttribute="top" secondItem="ZJo-JR-p3x" secondAttribute="top" id="VCb-Dc-jc3"/>
+                            <constraint firstItem="UeQ-5Z-ggR" firstAttribute="trailing" secondItem="ZJo-JR-p3x" secondAttribute="trailing" id="jF3-Kw-mDf"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="ZJo-JR-p3x"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="小说列表" id="dyX-77-orV">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="wCz-ze-RwF"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="rankCollectionView" destination="Kdo-nm-23q" id="UZj-Xb-M9I"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XqZ-H5-viP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2152.8000000000002" y="529.38530734632684"/>
         </scene>
         <!--小说列表-->
         <scene sceneID="59n-g9-Pgc">
@@ -457,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kSt-E9-gJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2148" y="135.38230884557723"/>
+            <point key="canvasLocation" x="2118" y="-360"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YKF-kU-GYJ">

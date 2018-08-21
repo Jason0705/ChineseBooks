@@ -232,6 +232,9 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         else if collectionView == femaleCategoryCollectionView {
             performSegue(withIdentifier: "goToCategoryList", sender: femaleCategoryCollectionView)
         }
+        else if collectionView == rankCollectionView {
+            performSegue(withIdentifier: "goToRankList", sender: rankCollectionView)
+        }
     }
    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -252,6 +255,16 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
                     let indexPath = indexPaths[0] as NSIndexPath
                     destinationVC.major = femaleCategoryArray[indexPath.row].categoryName
                     destinationVC.gender = "female"
+                }
+            }
+        }
+        else if segue.identifier == "goToRankList" {
+            let destinationVC = segue.destination as! RankListViewController
+            let senderView = sender as! UICollectionView
+            if senderView.tag == 2 {
+                if let indexPaths = rankCollectionView.indexPathsForSelectedItems {
+                    let indexPath = indexPaths[0] as NSIndexPath
+                    destinationVC.rankID = rankArray[indexPath.row].rankID
                 }
             }
         }
