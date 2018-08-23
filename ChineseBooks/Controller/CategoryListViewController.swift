@@ -133,8 +133,9 @@ class CategoryListViewController: UIViewController {
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
+            let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
             hotBookList.append(newElement)
         }
@@ -150,8 +151,9 @@ class CategoryListViewController: UIViewController {
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
+            let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
             newBookList.append(newElement)
         }
@@ -167,8 +169,9 @@ class CategoryListViewController: UIViewController {
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
+            let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
             reputationBookList.append(newElement)
         }
@@ -184,8 +187,9 @@ class CategoryListViewController: UIViewController {
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
+            let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
             overBookList.append(newElement)
         }
@@ -215,7 +219,7 @@ class CategoryListViewController: UIViewController {
     @IBAction func listSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             hotCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = self.listStackView.frame.size.width
                 self.newViewWidth.constant = 0
                 self.reputationViewWidth.constant = 0
@@ -225,7 +229,7 @@ class CategoryListViewController: UIViewController {
         }
         else if sender.selectedSegmentIndex == 1 {
             newCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = self.listStackView.frame.size.width
                 self.reputationViewWidth.constant = 0
@@ -235,7 +239,7 @@ class CategoryListViewController: UIViewController {
         }
         else if sender.selectedSegmentIndex == 2 {
             reputationCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0
                 self.reputationViewWidth.constant = self.listStackView.frame.size.width
@@ -245,7 +249,7 @@ class CategoryListViewController: UIViewController {
         }
         else if sender.selectedSegmentIndex == 3 {
             overCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0
                 self.reputationViewWidth.constant = 0
@@ -312,6 +316,73 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         }
         return cell
     }
+    
+    // Select Cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == hotCollectionView {
+            performSegue(withIdentifier: "goToDetail", sender: hotCollectionView)
+        }
+        else if collectionView == newCollectionView {
+            performSegue(withIdentifier: "goToDetail", sender: newCollectionView)
+        }
+        else if collectionView == reputationCollectionView {
+            performSegue(withIdentifier: "goToDetail", sender: reputationCollectionView)
+        }
+        else if collectionView == overCollectionView {
+            performSegue(withIdentifier: "goToDetail", sender: overCollectionView)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! BookDetailViewController
+        let senderView = sender as! UICollectionView
+        if senderView.tag == 0 {
+            if let indexPaths = hotCollectionView.indexPathsForSelectedItems {
+                let indexPath = indexPaths[0] as NSIndexPath
+                destinationVC.bookTitle = hotBookList[indexPath.row].bookTitle
+                destinationVC.author = hotBookList[indexPath.row].bookAuthor
+                destinationVC.category = hotBookList[indexPath.row].bookCategory
+                destinationVC.last = hotBookList[indexPath.row].lastChapter
+                destinationVC.intro = hotBookList[indexPath.row].bookIntro
+                //destinationVC.bookCoverImage =
+            }
+        }
+        else if senderView.tag == 1 {
+            if let indexPaths = newCollectionView.indexPathsForSelectedItems {
+                let indexPath = indexPaths[0] as NSIndexPath
+                destinationVC.bookTitle = newBookList[indexPath.row].bookTitle
+                destinationVC.author = newBookList[indexPath.row].bookAuthor
+                destinationVC.category = newBookList[indexPath.row].bookCategory
+                destinationVC.last = newBookList[indexPath.row].lastChapter
+                destinationVC.intro = newBookList[indexPath.row].bookIntro
+                //destinationVC.bookCoverImage =
+            }
+        }
+        else if senderView.tag == 2 {
+            if let indexPaths = reputationCollectionView.indexPathsForSelectedItems {
+                let indexPath = indexPaths[0] as NSIndexPath
+                destinationVC.bookTitle = reputationBookList[indexPath.row].bookTitle
+                destinationVC.author = reputationBookList[indexPath.row].bookAuthor
+                destinationVC.category = reputationBookList[indexPath.row].bookCategory
+                destinationVC.last = reputationBookList[indexPath.row].lastChapter
+                destinationVC.intro = reputationBookList[indexPath.row].bookIntro
+                //destinationVC.bookCoverImage =
+            }
+        }
+        else if senderView.tag == 3 {
+            if let indexPaths = overCollectionView.indexPathsForSelectedItems {
+                let indexPath = indexPaths[0] as NSIndexPath
+                destinationVC.bookTitle = overBookList[indexPath.row].bookTitle
+                destinationVC.author = overBookList[indexPath.row].bookAuthor
+                destinationVC.category = overBookList[indexPath.row].bookCategory
+                destinationVC.last = overBookList[indexPath.row].lastChapter
+                destinationVC.intro = overBookList[indexPath.row].bookIntro
+                //destinationVC.bookCoverImage =
+            }
+        }
+    }
+    
+    
     
     
 }

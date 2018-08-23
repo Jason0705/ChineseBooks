@@ -142,7 +142,7 @@ class StoreViewController: UIViewController {
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             maleCategoryCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = self.storeStackView.frame.size.width
                 self.femaleViewWidth.constant = 0
                 self.rankViewWidth.constant = 0
@@ -152,7 +152,7 @@ class StoreViewController: UIViewController {
         }
         else if sender.selectedSegmentIndex == 1 {
             femaleCategoryCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = 0
                 self.femaleViewWidth.constant = self.storeStackView.frame.size.width
                 self.rankViewWidth.constant = 0
@@ -161,7 +161,7 @@ class StoreViewController: UIViewController {
         }
         else if sender.selectedSegmentIndex == 2 {
             rankCollectionView.collectionViewLayout = cellStyle()
-            UIView.animate(withDuration: 0.5) {
+            UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = 0
                 self.femaleViewWidth.constant = 0
                 self.rankViewWidth.constant = self.storeStackView.frame.size.width
@@ -223,7 +223,7 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
     
-    
+    // Select cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == maleCategoryCollectionView {
             performSegue(withIdentifier: "goToCategoryList", sender: maleCategoryCollectionView)

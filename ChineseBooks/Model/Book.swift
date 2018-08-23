@@ -16,14 +16,16 @@ class Book {
     let bookCover : String
     let bookIntro : String
     let bookCategory : String
+    let lastChapter : String
     
-    init(title: String, id: String, author: String, cover: String, intro: String, category: String) {
+    init(title: String, id: String, author: String, cover: String, intro: String, category: String, last: String) {
         bookTitle = title
         bookID = id
         bookAuthor = author
         bookCover = cover
         bookIntro = intro
         bookCategory = category
+        lastChapter = last
         
     }
 }

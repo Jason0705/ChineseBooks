@@ -65,8 +65,9 @@ class RankListViewController: UIViewController {
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
+            let last = ""
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category)
+            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
             rankBookList.append(newElement)
         }
@@ -92,10 +93,13 @@ class RankListViewController: UIViewController {
 
 
 extension RankListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    // Number of Cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return rankBookList.count
     }
     
+    // Populate Cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customBookCell", for: indexPath) as! CustomBookCell
         let cellData = rankBookList[indexPath.row]
@@ -103,6 +107,24 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.bookAuthorLabel.text = cellData.bookAuthor
         
         return cell
+    }
+    
+    // Select Cell
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "toDetail", sender: rankCollectionView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! BookDetailViewController
+        if let indexPaths = rankCollectionView.indexPathsForSelectedItems {
+            let indexPath = indexPaths[0] as NSIndexPath
+            destinationVC.bookTitle = rankBookList[indexPath.row].bookTitle
+            destinationVC.author = rankBookList[indexPath.row].bookAuthor
+            destinationVC.category = rankBookList[indexPath.row].bookCategory
+            destinationVC.last = rankBookList[indexPath.row].lastChapter
+            destinationVC.intro = rankBookList[indexPath.row].bookIntro
+            //destinationVC.bookCoverImage =
+        }
     }
     
     
