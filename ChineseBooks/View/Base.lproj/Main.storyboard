@@ -215,7 +215,11 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="免费书城" id="aZa-pn-fJu">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="hFk-u5-I7f"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="hFk-u5-I7f">
+                            <connections>
+                                <segue destination="b2U-hM-86p" kind="show" id="4qI-54-deD"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="femaleCategoryCollectionView" destination="oLG-nb-rC1" id="jc0-96-Hzf"/>
@@ -232,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1076" y="133.5832083958021"/>
+            <point key="canvasLocation" x="1079" y="134"/>
         </scene>
         <!--小说列表-->
         <scene sceneID="27l-Ze-FK0">
@@ -289,12 +293,16 @@
                         <viewLayoutGuide key="safeArea" id="ZJo-JR-p3x"/>
                     </view>
                     <navigationItem key="navigationItem" title="小说列表" id="dyX-77-orV">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="wCz-ze-RwF"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="wCz-ze-RwF">
+                            <connections>
+                                <segue destination="b2U-hM-86p" kind="show" id="62f-25-pyy"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="rankCollectionView" destination="Kdo-nm-23q" id="UZj-Xb-M9I"/>
                         <outlet property="rankView" destination="UeQ-5Z-ggR" id="c2K-DH-HQ6"/>
-                        <segue destination="SvK-bT-gVK" kind="show" identifier="toDetail" id="fRC-RO-EX7"/>
+                        <segue destination="SvK-bT-gVK" kind="show" identifier="goToDetail" id="GVq-nl-wR7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XqZ-H5-viP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -449,7 +457,100 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fB4-J6-fIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2821.5999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="4484" y="134"/>
+        </scene>
+        <!--搜索-->
+        <scene sceneID="r0e-fi-fA6">
+            <objects>
+                <viewController id="b2U-hM-86p" customClass="SearchViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CCi-us-vNb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="M6w-qw-jd8" userLabel="Container View">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <subviews>
+                                    <searchBar contentMode="redraw" placeholder="搜索书名或作者" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Lqu-Cj-b62">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <scopeButtonTitles>
+                                            <string>Title</string>
+                                            <string>Title</string>
+                                        </scopeButtonTitles>
+                                        <connections>
+                                            <outlet property="delegate" destination="b2U-hM-86p" id="ANs-T4-wll"/>
+                                        </connections>
+                                    </searchBar>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aD3-ZC-R9U" userLabel="Result View">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="495"/>
+                                        <subviews>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="WyU-JI-ysq">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="495"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Xww-B8-N6t">
+                                                    <size key="itemSize" width="50" height="50"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="1Q6-5N-2gk">
+                                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </view>
+                                                    </collectionViewCell>
+                                                </cells>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="b2U-hM-86p" id="2n4-vU-Kjm"/>
+                                                    <outlet property="delegate" destination="b2U-hM-86p" id="qlo-W5-dJr"/>
+                                                </connections>
+                                            </collectionView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstItem="WyU-JI-ysq" firstAttribute="top" secondItem="aD3-ZC-R9U" secondAttribute="top" id="4gO-2b-w2d"/>
+                                            <constraint firstAttribute="trailing" secondItem="WyU-JI-ysq" secondAttribute="trailing" id="SKw-1p-U0F"/>
+                                            <constraint firstItem="WyU-JI-ysq" firstAttribute="leading" secondItem="aD3-ZC-R9U" secondAttribute="leading" id="Zms-Kh-DkW"/>
+                                            <constraint firstAttribute="bottom" secondItem="WyU-JI-ysq" secondAttribute="bottom" id="eot-Ts-DOv"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Lqu-Cj-b62" firstAttribute="leading" secondItem="M6w-qw-jd8" secondAttribute="leading" id="6K3-D4-SD8"/>
+                                    <constraint firstAttribute="trailing" secondItem="aD3-ZC-R9U" secondAttribute="trailing" id="Hnd-A8-W5r"/>
+                                    <constraint firstItem="aD3-ZC-R9U" firstAttribute="top" secondItem="Lqu-Cj-b62" secondAttribute="bottom" id="cMK-Wd-qCp"/>
+                                    <constraint firstItem="Lqu-Cj-b62" firstAttribute="top" secondItem="M6w-qw-jd8" secondAttribute="top" id="kRW-SI-LL5"/>
+                                    <constraint firstItem="aD3-ZC-R9U" firstAttribute="leading" secondItem="M6w-qw-jd8" secondAttribute="leading" id="sRY-Qp-3aB"/>
+                                    <constraint firstAttribute="bottom" secondItem="aD3-ZC-R9U" secondAttribute="bottom" id="ued-FJ-KUM"/>
+                                    <constraint firstAttribute="trailing" secondItem="Lqu-Cj-b62" secondAttribute="trailing" id="uqL-Y6-hv7"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="M6w-qw-jd8" firstAttribute="trailing" secondItem="Mb4-HE-j5d" secondAttribute="trailing" id="3I2-lc-DIP"/>
+                            <constraint firstItem="M6w-qw-jd8" firstAttribute="bottom" secondItem="Mb4-HE-j5d" secondAttribute="bottom" id="LVb-Jo-IR1"/>
+                            <constraint firstItem="M6w-qw-jd8" firstAttribute="leading" secondItem="Mb4-HE-j5d" secondAttribute="leading" id="bW2-kd-dYY"/>
+                            <constraint firstItem="M6w-qw-jd8" firstAttribute="top" secondItem="Mb4-HE-j5d" secondAttribute="top" id="mgX-33-3G8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Mb4-HE-j5d"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="搜索" id="Qx6-uG-47N"/>
+                    <connections>
+                        <outlet property="resultCollectionView" destination="WyU-JI-ysq" id="Aug-K7-WpE"/>
+                        <outlet property="resultView" destination="aD3-ZC-R9U" id="u76-jw-sqj"/>
+                        <outlet property="searchBar" destination="Lqu-Cj-b62" id="XgM-5K-lTE"/>
+                        <segue destination="SvK-bT-gVK" kind="show" identifier="goToDetail" id="rsf-Ke-1cJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I8u-fv-Arp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3120.8000000000002" y="133.5832083958021"/>
         </scene>
         <!--小说列表-->
         <scene sceneID="59n-g9-Pgc">
@@ -659,7 +760,11 @@
                         <viewLayoutGuide key="safeArea" id="heh-SQ-YPz"/>
                     </view>
                     <navigationItem key="navigationItem" title="小说列表" id="12Y-wJ-bbm">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="UfA-xr-TPl"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="UfA-xr-TPl">
+                            <connections>
+                                <segue destination="b2U-hM-86p" kind="show" identifier="" id="eju-wV-CCk"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="hotCollectionView" destination="zNq-Ke-XSM" id="eLo-0a-FgJ"/>
@@ -672,7 +777,7 @@
                         <outlet property="overViewWidth" destination="tC7-GL-Wpb" id="Sds-BD-ttb"/>
                         <outlet property="reputationCollectionView" destination="C2r-zc-ene" id="2ke-vU-3xc"/>
                         <outlet property="reputationViewWidth" destination="lVO-GX-J0p" id="pST-qR-sk6"/>
-                        <segue destination="SvK-bT-gVK" kind="show" identifier="goToDetail" id="XHV-sa-0z5"/>
+                        <segue destination="SvK-bT-gVK" kind="show" identifier="goToDetail" id="svF-8a-mU1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kSt-E9-gJP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -745,6 +850,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="XHV-sa-0z5"/>
+        <segue reference="62f-25-pyy"/>
+        <segue reference="GVq-nl-wR7"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,8 +1,8 @@
 //
-//  RankListViewController.swift
+//  SearchViewController.swift
 //  ChineseBooks
 //
-//  Created by Jason Li on 2018-08-20.
+//  Created by Jason Li on 2018-08-24.
 //  Copyright © 2018 Jason Li. All rights reserved.
 //
 
@@ -10,42 +10,38 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class RankListViewController: UIViewController {
-    
-    let baseURL = "http://api.zhuishushenqi.com/ranking/"
-    var rankID = ""
-    
-    var rankBookList = [Book]()
+class SearchViewController: UIViewController {
 
-    @IBOutlet weak var rankView: UIView!
-    @IBOutlet weak var rankCollectionView: UICollectionView!
+    let baseURL = "http://api.zhuishushenqi.com/book/fuzzy-search?query="
+    var searchInput = ""
+    var resultBookList = [Book]()
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var resultCollectionView: UICollectionView!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let url = "\(baseURL)\(rankID)"
-        
-        getRankData(from: url)
         
         // Register CustomBookCell.xib
-        rankCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
+        resultCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
         
         // Style
-        rankView.frame.size.width = UIScreen.main.bounds.width
-        rankCollectionView.collectionViewLayout = cellStyle()
+        resultCollectionView.collectionViewLayout = cellStyle()
     }
 
+    
     // MARK: - Networking
     
-    // getRankData Method
-    func getRankData(from url: String) {
+    // getResultData Method
+    func getResultData(from url: String) {
         Alamofire.request(url).responseJSON {
             response in
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
-                self.createRankList(with: bookListJSON)
+                self.createResultList(with: bookListJSON)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -56,22 +52,22 @@ class RankListViewController: UIViewController {
     // MARK: - JSON Parsing
     
     // Parse JSON data
-    func createRankList(with json: JSON) {
+    func createResultList(with json: JSON) {
         guard !json.isEmpty else {fatalError("json unavailible!")}
-        for book in json["ranking"]["books"].arrayValue {
+        for book in json["books"].arrayValue {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
             let cover = book["cover"].stringValue
             let intro = book["shortIntro"].stringValue
-            let category = book["minorCate"].stringValue
-            let last = ""
+            let category = book["Cat"].stringValue
+            let last = book["lastChapter"].stringValue
             
             let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
             
-            rankBookList.append(newElement)
+            resultBookList.append(newElement)
         }
-        rankCollectionView.reloadData()
+        resultCollectionView.reloadData()
     }
     
     
@@ -79,7 +75,7 @@ class RankListViewController: UIViewController {
     
     // CollectionView Cell Style
     func cellStyle() -> UICollectionViewFlowLayout {
-        let cellSize = rankView.frame.size.width/3 - 24
+        let cellSize = resultView.frame.size.width/3 - 24
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
         layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
@@ -89,20 +85,38 @@ class RankListViewController: UIViewController {
         return layout
     }
     
+    
+    
+
 }
 
 
-extension RankListViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+
+extension SearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchInput = searchBar.text!
+        let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        
+        getResultData(from: url)
+        
+        self.view.endEditing(true)
+    }
+    
+}
+
+
+
+extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     // Number of Cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return rankBookList.count
+        return resultBookList.count
     }
     
     // Populate Cell
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "customBookCell", for: indexPath) as! CustomBookCell
-        let cellData = rankBookList[indexPath.row]
+        let cellData = resultBookList[indexPath.row]
         cell.bookTitleLabel.text = cellData.bookTitle
         cell.bookAuthorLabel.text = cellData.bookAuthor
         
@@ -111,23 +125,22 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
     
     // Select Cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToDetail", sender: rankCollectionView)
+        performSegue(withIdentifier: "goToDetail", sender: resultCollectionView)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToDetail" {
             let destinationVC = segue.destination as! BookDetailViewController
-            if let indexPaths = rankCollectionView.indexPathsForSelectedItems {
+            if let indexPaths = resultCollectionView.indexPathsForSelectedItems {
                 let indexPath = indexPaths[0] as NSIndexPath
-                destinationVC.bookTitle = rankBookList[indexPath.row].bookTitle
-                destinationVC.author = rankBookList[indexPath.row].bookAuthor
-                destinationVC.category = rankBookList[indexPath.row].bookCategory
-                destinationVC.last = rankBookList[indexPath.row].lastChapter
-                destinationVC.intro = rankBookList[indexPath.row].bookIntro
+                destinationVC.bookTitle = resultBookList[indexPath.row].bookTitle
+                destinationVC.author = resultBookList[indexPath.row].bookAuthor
+                destinationVC.category = resultBookList[indexPath.row].bookCategory
+                destinationVC.last = resultBookList[indexPath.row].lastChapter
+                destinationVC.intro = resultBookList[indexPath.row].bookIntro
                 //destinationVC.bookCoverImage =
             }
         }
-        
     }
     
     

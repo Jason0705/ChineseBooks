@@ -29,6 +29,7 @@
 		D182F5E221239463000D9384 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E121239463000D9384 /* Rank.swift */; };
 		D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E32124924A000D9384 /* CategoryListViewController.swift */; };
 		D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */; };
+		D1F211132130628700DBC373 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211122130628700DBC373 /* SearchViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		D182F5E121239463000D9384 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		D182F5E32124924A000D9384 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		D1F211122130628700DBC373 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F82CB08AA72C6D741E38A8ED /* Pods-ChineseBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,7 @@
 				D13146DD211BB36400B7B465 /* StoreViewController.swift */,
 				D182F5E32124924A000D9384 /* CategoryListViewController.swift */,
 				D12421A4212BA2FA009AC580 /* RankListViewController.swift */,
+				D1F211122130628700DBC373 /* SearchViewController.swift */,
 				D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */,
 				D182F5C4211E1421000D9384 /* ViewController.swift */,
 				D182F5CA211F9758000D9384 /* View1.swift */,
@@ -288,6 +291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F211132130628700DBC373 /* SearchViewController.swift in Sources */,
 				D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */,
 				D124219C2128E723009AC580 /* CustomBookCell.swift in Sources */,
 				D182F5C5211E1421000D9384 /* ViewController.swift in Sources */,
