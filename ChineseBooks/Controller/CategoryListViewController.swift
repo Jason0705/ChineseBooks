@@ -345,6 +345,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.category = hotBookList[indexPath.row].bookCategory
                     destinationVC.last = hotBookList[indexPath.row].lastChapter
                     destinationVC.intro = hotBookList[indexPath.row].bookIntro
+                    destinationVC.bookID = hotBookList[indexPath.row].bookID
                     //destinationVC.bookCoverImage =
                 }
             }
@@ -356,6 +357,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.category = newBookList[indexPath.row].bookCategory
                     destinationVC.last = newBookList[indexPath.row].lastChapter
                     destinationVC.intro = newBookList[indexPath.row].bookIntro
+                    destinationVC.bookID = newBookList[indexPath.row].bookID
                     //destinationVC.bookCoverImage =
                 }
             }
@@ -367,6 +369,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.category = reputationBookList[indexPath.row].bookCategory
                     destinationVC.last = reputationBookList[indexPath.row].lastChapter
                     destinationVC.intro = reputationBookList[indexPath.row].bookIntro
+                    destinationVC.bookID = reputationBookList[indexPath.row].bookID
                     //destinationVC.bookCoverImage =
                 }
             }
@@ -378,6 +381,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.category = overBookList[indexPath.row].bookCategory
                     destinationVC.last = overBookList[indexPath.row].lastChapter
                     destinationVC.intro = overBookList[indexPath.row].bookIntro
+                    destinationVC.bookID = overBookList[indexPath.row].bookID
                     //destinationVC.bookCoverImage =
                 }
             }

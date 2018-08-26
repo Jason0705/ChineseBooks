@@ -15,6 +15,7 @@ class BookDetailViewController: UIViewController {
     var category = ""
     var last = ""
     var intro = ""
+    var bookID = ""
     
     
     @IBOutlet weak var bookCoverImage: UIImageView!
@@ -42,6 +43,15 @@ class BookDetailViewController: UIViewController {
     }
     
     @IBAction func readButtonPressed(_ sender: UIButton) {
+        performSegue(withIdentifier: "goToChapter", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToChapter" {
+            let destinationVC = segue.destination as! ChapterViewController
+            destinationVC.bookTitle = self.bookTitle
+            destinationVC.bookID = self.bookID
+        }
     }
     
 

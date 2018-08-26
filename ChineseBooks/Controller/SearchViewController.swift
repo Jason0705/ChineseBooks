@@ -138,6 +138,7 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
                 destinationVC.category = resultBookList[indexPath.row].bookCategory
                 destinationVC.last = resultBookList[indexPath.row].lastChapter
                 destinationVC.intro = resultBookList[indexPath.row].bookIntro
+                destinationVC.bookID = resultBookList[indexPath.row].bookID
                 //destinationVC.bookCoverImage =
             }
         }

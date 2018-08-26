@@ -453,11 +453,69 @@
                         <outlet property="lastLabel" destination="VxO-K5-gxN" id="4vX-T2-RGa"/>
                         <outlet property="readButton" destination="FXQ-b6-huW" id="JhZ-C9-Zj8"/>
                         <outlet property="titleLabel" destination="HWA-QI-AxE" id="Mdy-yn-kBq"/>
+                        <segue destination="8zg-GW-XFM" kind="show" identifier="goToChapter" id="Kd6-Mr-PCv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fB4-J6-fIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4484" y="134"/>
+            <point key="canvasLocation" x="3588" y="134"/>
+        </scene>
+        <!--小说章节-->
+        <scene sceneID="Upv-dT-ctU">
+            <objects>
+                <viewController id="8zg-GW-XFM" customClass="ChapterViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZL-4l-6Wq">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4G-CW-zA3" userLabel="Container View">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5Yz-eL-GYh">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="chapterCell" id="uD1-zT-unC">
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uD1-zT-unC" id="A5P-IY-Gio">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="8zg-GW-XFM" id="S1I-29-ti2"/>
+                                            <outlet property="delegate" destination="8zg-GW-XFM" id="r0E-Gh-m5i"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="5Yz-eL-GYh" secondAttribute="bottom" id="CyE-2y-i63"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Yz-eL-GYh" secondAttribute="trailing" id="EUj-xW-Jde"/>
+                                    <constraint firstItem="5Yz-eL-GYh" firstAttribute="leading" secondItem="r4G-CW-zA3" secondAttribute="leading" id="d52-Yb-fy2"/>
+                                    <constraint firstItem="5Yz-eL-GYh" firstAttribute="top" secondItem="r4G-CW-zA3" secondAttribute="top" id="nqW-uz-chF"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r4G-CW-zA3" firstAttribute="leading" secondItem="4QI-C3-F3e" secondAttribute="leading" id="Clg-rN-5Zu"/>
+                            <constraint firstItem="r4G-CW-zA3" firstAttribute="trailing" secondItem="4QI-C3-F3e" secondAttribute="trailing" id="S2g-Nd-i4d"/>
+                            <constraint firstItem="r4G-CW-zA3" firstAttribute="top" secondItem="4QI-C3-F3e" secondAttribute="top" id="rPp-xD-ZsN"/>
+                            <constraint firstItem="r4G-CW-zA3" firstAttribute="bottom" secondItem="4QI-C3-F3e" secondAttribute="bottom" id="xzK-2N-6Fu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4QI-C3-F3e"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="小说章节" largeTitleDisplayMode="never" id="WpI-q3-OEK"/>
+                    <connections>
+                        <outlet property="chapterTableView" destination="5Yz-eL-GYh" id="P4p-Md-aHH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TtC-fN-QyR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4493.6000000000004" y="133.5832083958021"/>
         </scene>
         <!--搜索-->
         <scene sceneID="r0e-fi-fA6">
@@ -550,7 +608,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8u-fv-Arp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3120.8000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2809" y="134"/>
         </scene>
         <!--小说列表-->
         <scene sceneID="59n-g9-Pgc">
@@ -851,6 +909,6 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="62f-25-pyy"/>
-        <segue reference="GVq-nl-wR7"/>
+        <segue reference="rsf-Ke-1cJ"/>
     </inferredMetricsTieBreakers>
 </document>

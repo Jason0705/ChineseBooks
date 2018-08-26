@@ -124,6 +124,7 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
                 destinationVC.category = rankBookList[indexPath.row].bookCategory
                 destinationVC.last = rankBookList[indexPath.row].lastChapter
                 destinationVC.intro = rankBookList[indexPath.row].bookIntro
+                destinationVC.bookID = rankBookList[indexPath.row].bookID
                 //destinationVC.bookCoverImage =
             }
         }
