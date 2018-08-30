@@ -18,6 +18,7 @@
 		D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D13146E2211BB36400B7B465 /* ChineseBooks.xcdatamodeld */; };
 		D13146E6211BB36500B7B465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13146E5211BB36500B7B465 /* Assets.xcassets */; };
 		D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13146E7211BB36500B7B465 /* LaunchScreen.storyboard */; };
+		D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160F4E12138B26C0005AF54 /* ContentViewController.swift */; };
 		D182F5BA211BF993000D9384 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5B9211BF993000D9384 /* Category.swift */; };
 		D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */; };
 		D182F5BF211CBC6C000D9384 /* CustomCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */; };
@@ -49,6 +50,7 @@
 		D13146E5211BB36500B7B465 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D13146E8211BB36500B7B465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13146EA211BB36500B7B465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D160F4E12138B26C0005AF54 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
 		D182F5B9211BF993000D9384 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryCell.swift; sourceTree = "<group>"; };
 		D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCategoryCell.xib; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				D1F211122130628700DBC373 /* SearchViewController.swift */,
 				D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */,
 				D1F211142133686D00DBC373 /* ChapterViewController.swift */,
+				D160F4E12138B26C0005AF54 /* ContentViewController.swift */,
 				D182F5C4211E1421000D9384 /* ViewController.swift */,
 				D182F5CA211F9758000D9384 /* View1.swift */,
 				D182F5CB211F9758000D9384 /* View1.xib */,
@@ -306,6 +309,7 @@
 				D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */,
 				D12421992128D732009AC580 /* Book.swift in Sources */,
 				D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */,
+				D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */,
 				D182F5D0211F9CEA000D9384 /* View2.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
 				D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */,
