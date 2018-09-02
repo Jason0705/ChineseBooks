@@ -72,7 +72,7 @@ class ChapterViewController: UIViewController {
 
 extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // Number of Cell
+    // Number of cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return chapterArray.count
     }
@@ -85,5 +85,19 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // Select cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "goToPages", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goToPages" {
+            let destinationVC = segue.destination as! BookPagesViewController
+            if let indexPath = chapterTableView.indexPathForSelectedRow {
+                destinationVC.chapterTitle = chapterArray[indexPath.row].chapterTitle
+                destinationVC.chapterLink = chapterArray[indexPath.row].chapterLink
+            }
+        }
+    }
     
 }
