@@ -12,6 +12,7 @@
 		D124219C2128E723009AC580 /* CustomBookCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D124219A2128E723009AC580 /* CustomBookCell.swift */; };
 		D124219D2128E723009AC580 /* CustomBookCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D124219B2128E723009AC580 /* CustomBookCell.xib */; };
 		D12421A5212BA2FA009AC580 /* RankListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12421A4212BA2FA009AC580 /* RankListViewController.swift */; };
+		D12FD725213B837400A26903 /* BookPagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D12FD724213B837300A26903 /* BookPagesViewController.swift */; };
 		D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13146DB211BB36400B7B465 /* AppDelegate.swift */; };
 		D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13146DD211BB36400B7B465 /* StoreViewController.swift */; };
 		D13146E1211BB36400B7B465 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13146DF211BB36400B7B465 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 		D124219A2128E723009AC580 /* CustomBookCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBookCell.swift; sourceTree = "<group>"; };
 		D124219B2128E723009AC580 /* CustomBookCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomBookCell.xib; sourceTree = "<group>"; };
 		D12421A4212BA2FA009AC580 /* RankListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RankListViewController.swift; sourceTree = "<group>"; };
+		D12FD724213B837300A26903 /* BookPagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookPagesViewController.swift; sourceTree = "<group>"; };
 		D13146D8211BB36400B7B465 /* ChineseBooks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChineseBooks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D13146DB211BB36400B7B465 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D13146DD211BB36400B7B465 /* StoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,7 @@
 				D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */,
 				D1F211142133686D00DBC373 /* ChapterViewController.swift */,
 				D160F4E12138B26C0005AF54 /* ContentViewController.swift */,
+				D12FD724213B837300A26903 /* BookPagesViewController.swift */,
 				D182F5C4211E1421000D9384 /* ViewController.swift */,
 				D182F5CA211F9758000D9384 /* View1.swift */,
 				D182F5CB211F9758000D9384 /* View1.xib */,
@@ -312,6 +315,7 @@
 				D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */,
 				D182F5D0211F9CEA000D9384 /* View2.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
+				D12FD725213B837400A26903 /* BookPagesViewController.swift in Sources */,
 				D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */,
 				D182F5E221239463000D9384 /* Rank.swift in Sources */,
 				D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */,
