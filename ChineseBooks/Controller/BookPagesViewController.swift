@@ -12,8 +12,11 @@ import SwiftyJSON
 
 class BookPagesViewController: UIViewController {
 
-    var chapterTitle = ""
-    var chapterLink = ""
+    var chapterArray = [Chapter]()
+    var chapterIndex = 0
+    
+    //var chapterTitle = ""
+    //var chapterLink = ""
     var body = ""
     
     var splitedContentArray = [String]()
@@ -28,7 +31,8 @@ class BookPagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        //let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
 
         getBodyData(from: url)
         
@@ -115,7 +119,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
         
-        dataVC.chapterTitle = chapterTitle
+        dataVC.chapterTitle = chapterArray[chapterIndex].chapterTitle
         dataVC.body = splitedContentArray[index]
         return dataVC
     }

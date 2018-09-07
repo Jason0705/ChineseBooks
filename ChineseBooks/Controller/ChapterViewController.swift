@@ -94,8 +94,10 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToPages" {
             let destinationVC = segue.destination as! BookPagesViewController
             if let indexPath = chapterTableView.indexPathForSelectedRow {
-                destinationVC.chapterTitle = chapterArray[indexPath.row].chapterTitle
-                destinationVC.chapterLink = chapterArray[indexPath.row].chapterLink
+                //destinationVC.chapterTitle = chapterArray[indexPath.row].chapterTitle
+                //destinationVC.chapterLink = chapterArray[indexPath.row].chapterLink
+                destinationVC.chapterArray = chapterArray
+                destinationVC.chapterIndex = indexPath.row
             }
         }
     }
