@@ -44,6 +44,8 @@ class BookPagesViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+
+        
         contentTextView.text = body
         let fitRange = contentTextView.numberOfCharactersThatFitTextView()
         splitedContentArray = body.split(by: fitRange)
@@ -115,6 +117,22 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         if (splitedContentArray.count == 0) || (index >= splitedContentArray.count) {
             return nil
         }
+//        if splitedContentArray.count == 0 {
+//            if chapterIndex == 0 {
+//                return nil
+//            }
+//            chapterIndex -= 1
+//            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+//            getBodyData(from: url)
+//        }
+//        else if index >= splitedContentArray.count {
+//            if chapterIndex >= chapterArray.count {
+//                return nil
+//            }
+//            chapterIndex += 1
+//            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+//            getBodyData(from: url)
+//        }
         
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
@@ -137,8 +155,21 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         var index = indexOfViewController(viewController: viewController
             as! ContentViewController)
         
-        if (index == 0) || (index == NSNotFound) {
+//        if (index == 0) || (index == NSNotFound) {
+//            return nil
+//        }
+        if index == NSNotFound {
             return nil
+        }
+        if index == 0 {
+            if chapterIndex == 0 {
+                return nil
+            }
+            chapterIndex -= 1
+            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            getBodyData(from: url)
+            index = 0
+            return viewControllerAtIndex(index: index)
         }
         
         index = index - 1
@@ -155,7 +186,16 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         
         index = index + 1
         if index == splitedContentArray.count {
-            return nil
+            //return nil
+            if chapterIndex >= chapterArray.count {
+                return nil
+            }
+            chapterIndex += 1
+            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            getBodyData(from: url)
+            index = 0
+            print(chapterIndex)
+            return viewControllerAtIndex(index: index)
         }
         return viewControllerAtIndex(index: index)
     }
