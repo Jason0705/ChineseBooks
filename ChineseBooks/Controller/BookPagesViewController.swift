@@ -31,26 +31,26 @@ class BookPagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
         let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-
-        getBodyData(from: url)
+        
+        getBodyData(from: url, completionHandler: {
+            data in
+            self.body = data
+            
+            self.contentTextView.text = self.body
+            let fitRange = self.contentTextView.numberOfCharactersThatFitTextView()
+            self.splitedContentArray = self.body.split(by: fitRange)
+            
+            self.initializeView()
+            
+        })
         
         //navigationController?.isNavigationBarHidden = true
         
     }
   
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-
-        
-        contentTextView.text = body
-        let fitRange = contentTextView.numberOfCharactersThatFitTextView()
-        splitedContentArray = body.split(by: fitRange)
-        
-        
+    func initializeView() {
         // Initialize UIPageViewController
         pageController = UIPageViewController(
             transitionStyle: .pageCurl,
@@ -82,12 +82,13 @@ class BookPagesViewController: UIViewController {
     // MARK: - Networking
     
     // getRankData Method
-    func getBodyData(from url: String) {
+    func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
         Alamofire.request(url).responseJSON {
             response in
             if response.result.isSuccess{
                 let bodyJSON : JSON = JSON(response.result.value!)
-                self.createBodyData(with: bodyJSON)
+                let bodyData = self.createBodyData(with: bodyJSON)
+                completionHandler(bodyData)
             } else {
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
@@ -98,10 +99,11 @@ class BookPagesViewController: UIViewController {
     // MARK: - JSON Parsing
     
     // Parse JSON data
-    func createBodyData(with json: JSON) {
+    func createBodyData(with json: JSON) -> String {
         guard !json.isEmpty else {fatalError("json unavailible!")}
         
-        body = json["chapter"]["body"].stringValue
+        let bodyData = json["chapter"]["body"].stringValue
+        return bodyData
     }
 
     
@@ -117,22 +119,6 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         if (splitedContentArray.count == 0) || (index >= splitedContentArray.count) {
             return nil
         }
-//        if splitedContentArray.count == 0 {
-//            if chapterIndex == 0 {
-//                return nil
-//            }
-//            chapterIndex -= 1
-//            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-//            getBodyData(from: url)
-//        }
-//        else if index >= splitedContentArray.count {
-//            if chapterIndex >= chapterArray.count {
-//                return nil
-//            }
-//            chapterIndex += 1
-//            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-//            getBodyData(from: url)
-//        }
         
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
@@ -167,9 +153,18 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             chapterIndex -= 1
             let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-            getBodyData(from: url)
-            index = 0
-            return viewControllerAtIndex(index: index)
+            
+            getBodyData(from: url, completionHandler: {
+                data in
+                self.body = data
+                
+                self.contentTextView.text = self.body
+                let fitRange = self.contentTextView.numberOfCharactersThatFitTextView()
+                self.splitedContentArray = self.body.split(by: fitRange)
+                
+                self.initializeView()
+                
+            })
         }
         
         index = index - 1
@@ -192,10 +187,18 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             chapterIndex += 1
             let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-            getBodyData(from: url)
-            index = 0
-            print(chapterIndex)
-            return viewControllerAtIndex(index: index)
+            
+            getBodyData(from: url, completionHandler: {
+                data in
+                self.body = data
+                
+                self.contentTextView.text = self.body
+                let fitRange = self.contentTextView.numberOfCharactersThatFitTextView()
+                self.splitedContentArray = self.body.split(by: fitRange)
+                
+                self.initializeView()
+                
+            })
         }
         return viewControllerAtIndex(index: index)
     }
