@@ -124,7 +124,9 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
         
         dataVC.chapterTitle = chapterArray[chapterIndex].chapterTitle
-        dataVC.body = splitedContentArray[index]
+        if index >= 0 {
+            dataVC.body = splitedContentArray[index]
+        }
         return dataVC
     }
     
@@ -141,14 +143,11 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         var index = indexOfViewController(viewController: viewController
             as! ContentViewController)
         
-//        if (index == 0) || (index == NSNotFound) {
-//            return nil
-//        }
         if index == NSNotFound {
             return nil
         }
         if index == 0 {
-            if chapterIndex == 0 {
+            if chapterIndex <= 0 {
                 return nil
             }
             chapterIndex -= 1
@@ -178,10 +177,10 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         if index == NSNotFound {
             return nil
         }
-                
+        
         index = index + 1
+        
         if index == splitedContentArray.count {
-            //return nil
             if chapterIndex >= chapterArray.count - 1 {
                 return nil
             }
@@ -200,6 +199,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 
             })
         }
+        
         return viewControllerAtIndex(index: index)
     }
     
