@@ -178,11 +178,11 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         if index == NSNotFound {
             return nil
         }
-        
+                
         index = index + 1
         if index == splitedContentArray.count {
             //return nil
-            if chapterIndex >= chapterArray.count {
+            if chapterIndex >= chapterArray.count - 1 {
                 return nil
             }
             chapterIndex += 1
