@@ -22,7 +22,6 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKX-U1-1fy">
                         <rect key="frame" x="0.0" y="0.0" width="110" height="151"/>
-                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="NKX-U1-1fy" secondAttribute="height" multiplier="110:151" id="h0a-5b-lqJ"/>
                         </constraints>

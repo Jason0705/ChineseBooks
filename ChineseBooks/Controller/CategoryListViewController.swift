@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class CategoryListViewController: UIViewController {
 
@@ -42,9 +43,9 @@ class CategoryListViewController: UIViewController {
         super.viewDidLoad()
         
         let hotURL = "\(baseURL)major=\(major.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&gender=\(gender)&type=hot"
-        let newURL = "\(baseURL)major=\(major.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&gender=\(gender)&type=new"
-        let reputationURL = "\(baseURL)major=\(major.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&gender=\(gender)&type=reputation"
-        let overURL = "\(baseURL)major=\(major.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)&gender=\(gender)&type=over"
+        let newURL = "\(baseURL)major=\(major.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)&gender=\(gender)&type=new"
+        let reputationURL = "\(baseURL)major=\(major.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)&gender=\(gender)&type=reputation"
+        let overURL = "\(baseURL)major=\(major.addingPercentEncoding( withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!)&gender=\(gender)&type=over"
         
         getHotData(from: hotURL)
         getNewData(from: newURL)
@@ -130,12 +131,12 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
             let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             hotBookList.append(newElement)
         }
@@ -148,12 +149,12 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
             let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             newBookList.append(newElement)
         }
@@ -166,12 +167,12 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
             let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             reputationBookList.append(newElement)
         }
@@ -184,12 +185,12 @@ class CategoryListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
             let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             overBookList.append(newElement)
         }
@@ -298,21 +299,29 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
             let cellData = hotBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
+            let coverURL = URL(string: cellData.bookCoverURL)
+            cell.bookCoverImage.kf.setImage(with: coverURL)
         }
         else if collectionView == newCollectionView {
             let cellData = newBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
+            let coverURL = URL(string: cellData.bookCoverURL)
+            cell.bookCoverImage.kf.setImage(with: coverURL)
         }
         else if collectionView == reputationCollectionView {
             let cellData = reputationBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
+            let coverURL = URL(string: cellData.bookCoverURL)
+            cell.bookCoverImage.kf.setImage(with: coverURL)
         }
         else if collectionView == overCollectionView {
             let cellData = overBookList[indexPath.row]
             cell.bookTitleLabel.text = cellData.bookTitle
             cell.bookAuthorLabel.text = cellData.bookAuthor
+            let coverURL = URL(string: cellData.bookCoverURL)
+            cell.bookCoverImage.kf.setImage(with: coverURL)
         }
         return cell
     }
@@ -346,7 +355,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.last = hotBookList[indexPath.row].lastChapter
                     destinationVC.intro = hotBookList[indexPath.row].bookIntro
                     destinationVC.bookID = hotBookList[indexPath.row].bookID
-                    //destinationVC.bookCoverImage =
+                    destinationVC.bookCoverURL = hotBookList[indexPath.row].bookCoverURL
                 }
             }
             else if senderView.tag == 1 {
@@ -358,7 +367,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.last = newBookList[indexPath.row].lastChapter
                     destinationVC.intro = newBookList[indexPath.row].bookIntro
                     destinationVC.bookID = newBookList[indexPath.row].bookID
-                    //destinationVC.bookCoverImage =
+                    destinationVC.bookCoverURL = newBookList[indexPath.row].bookCoverURL
                 }
             }
             else if senderView.tag == 2 {
@@ -370,7 +379,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.last = reputationBookList[indexPath.row].lastChapter
                     destinationVC.intro = reputationBookList[indexPath.row].bookIntro
                     destinationVC.bookID = reputationBookList[indexPath.row].bookID
-                    //destinationVC.bookCoverImage =
+                    destinationVC.bookCoverURL = reputationBookList[indexPath.row].bookCoverURL
                 }
             }
             else if senderView.tag == 3 {
@@ -382,7 +391,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
                     destinationVC.last = overBookList[indexPath.row].lastChapter
                     destinationVC.intro = overBookList[indexPath.row].bookIntro
                     destinationVC.bookID = overBookList[indexPath.row].bookID
-                    //destinationVC.bookCoverImage =
+                    destinationVC.bookCoverURL = overBookList[indexPath.row].bookCoverURL
                 }
             }
         }
@@ -392,6 +401,7 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
     
     
 }
+
 
 
 

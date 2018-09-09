@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class SearchViewController: UIViewController {
 
@@ -58,12 +59,12 @@ class SearchViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["Cat"].stringValue
             let last = book["lastChapter"].stringValue
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             resultBookList.append(newElement)
         }
@@ -95,7 +96,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchInput = searchBar.text!
-        let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+        let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))"
         
         getResultData(from: url)
         
@@ -119,6 +120,8 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
         let cellData = resultBookList[indexPath.row]
         cell.bookTitleLabel.text = cellData.bookTitle
         cell.bookAuthorLabel.text = cellData.bookAuthor
+        let coverURL = URL(string: cellData.bookCoverURL)
+        cell.bookCoverImage.kf.setImage(with: coverURL)
         
         return cell
     }
@@ -139,10 +142,11 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
                 destinationVC.last = resultBookList[indexPath.row].lastChapter
                 destinationVC.intro = resultBookList[indexPath.row].bookIntro
                 destinationVC.bookID = resultBookList[indexPath.row].bookID
-                //destinationVC.bookCoverImage =
+                destinationVC.bookCoverURL = resultBookList[indexPath.row].bookCoverURL
             }
         }
     }
     
     
 }
+

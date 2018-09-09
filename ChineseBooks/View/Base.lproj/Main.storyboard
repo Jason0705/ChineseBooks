@@ -325,7 +325,6 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JBf-t0-O5Y">
                                                 <rect key="frame" x="8" y="8" width="156" height="214"/>
-                                                <color key="backgroundColor" red="0.39517235760000002" green="0.92216175789999999" blue="0.97520536179999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="JBf-t0-O5Y" secondAttribute="height" multiplier="78:107" id="DSC-c3-qPR"/>
                                                 </constraints>
@@ -1019,7 +1018,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="62f-25-pyy"/>
+        <segue reference="4qI-54-deD"/>
         <segue reference="rsf-Ke-1cJ"/>
     </inferredMetricsTieBreakers>
 </document>

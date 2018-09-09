@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class BookDetailViewController: UIViewController {
 
@@ -16,6 +17,7 @@ class BookDetailViewController: UIViewController {
     var last = ""
     var intro = ""
     var bookID = ""
+    var bookCoverURL = ""
     
     
     @IBOutlet weak var bookCoverImage: UIImageView!
@@ -35,6 +37,8 @@ class BookDetailViewController: UIViewController {
         categoryLabel.text = "分类: \(category)"
         lastLabel.text = last
         introTextView.text = intro
+        let coverURL = URL(string: bookCoverURL)
+        bookCoverImage.kf.setImage(with: coverURL)
 
     }
 

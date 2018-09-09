@@ -13,16 +13,16 @@ class Book {
     let bookTitle : String
     let bookID : String
     let bookAuthor : String
-    let bookCover : String
+    let bookCoverURL : String
     let bookIntro : String
     let bookCategory : String
     let lastChapter : String
     
-    init(title: String, id: String, author: String, cover: String, intro: String, category: String, last: String) {
+    init(title: String, id: String, author: String, coverURL: String, intro: String, category: String, last: String) {
         bookTitle = title
         bookID = id
         bookAuthor = author
-        bookCover = cover
+        bookCoverURL = coverURL
         bookIntro = intro
         bookCategory = category
         lastChapter = last

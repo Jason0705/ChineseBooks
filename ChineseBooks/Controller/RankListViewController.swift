@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import Kingfisher
 
 class RankListViewController: UIViewController {
     
@@ -62,12 +63,12 @@ class RankListViewController: UIViewController {
             let title = book["title"].stringValue
             let id = book["_id"].stringValue
             let author = book["author"].stringValue
-            let cover = book["cover"].stringValue
+            let coverURL = book["cover"].stringValue.dropFirst("/agent/".count).removingPercentEncoding!
             let intro = book["shortIntro"].stringValue
             let category = book["minorCate"].stringValue
             let last = ""
             
-            let newElement = Book(title: title, id: id, author: author, cover: cover, intro: intro, category: category, last: last)
+            let newElement = Book(title: title, id: id, author: author, coverURL: coverURL, intro: intro, category: category, last: last)
             
             rankBookList.append(newElement)
         }
@@ -105,6 +106,8 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
         let cellData = rankBookList[indexPath.row]
         cell.bookTitleLabel.text = cellData.bookTitle
         cell.bookAuthorLabel.text = cellData.bookAuthor
+        let coverURL = URL(string: cellData.bookCoverURL)
+        cell.bookCoverImage.kf.setImage(with: coverURL)
         
         return cell
     }
@@ -125,7 +128,7 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
                 destinationVC.last = rankBookList[indexPath.row].lastChapter
                 destinationVC.intro = rankBookList[indexPath.row].bookIntro
                 destinationVC.bookID = rankBookList[indexPath.row].bookID
-                //destinationVC.bookCoverImage =
+                destinationVC.bookCoverURL = rankBookList[indexPath.row].bookCoverURL
             }
         }
         
@@ -133,3 +136,4 @@ extension RankListViewController: UICollectionViewDataSource, UICollectionViewDe
     
     
 }
+
