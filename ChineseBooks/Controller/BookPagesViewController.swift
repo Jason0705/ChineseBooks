@@ -124,6 +124,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
         
         dataVC.chapterTitle = chapterArray[chapterIndex].chapterTitle
+        dataVC.pageCounte = "\(index + 1)/\(splitedContentArray.count)"
         if index >= 0 {
             dataVC.body = splitedContentArray[index]
         }

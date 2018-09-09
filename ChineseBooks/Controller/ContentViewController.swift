@@ -12,10 +12,12 @@ class ContentViewController: UIViewController {
 
     var chapterTitle = ""
     var body = ""
+    var pageCounte = ""
     
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var pageCounterLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -27,6 +29,7 @@ class ContentViewController: UIViewController {
         super.viewWillAppear(animated)
         titleLabel.text = chapterTitle
         contentTextView.text = body
+        pageCounterLabel.text = pageCounte
     }
 
 }
