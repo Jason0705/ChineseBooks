@@ -8,9 +8,14 @@
 
 import UIKit
 import Kingfisher
+import CoreData
 
 class BookDetailViewController: UIViewController {
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var addedBookArray = [CDBook]()
+    
     var bookTitle = ""
     var author = ""
     var category = ""
@@ -41,9 +46,29 @@ class BookDetailViewController: UIViewController {
         bookCoverImage.kf.setImage(with: coverURL)
 
     }
+    
+    func saveBooks() {
+        do {
+            try context.save()
+        } catch {
+            print("Error Saving Context: \(error)")
+        }
+    }
 
     
     @IBAction func addButtonPressed(_ sender: UIButton) {
+        let newBook = CDBook(context: context)
+        newBook.id = bookID
+        newBook.title = bookTitle
+        newBook.author = author
+        newBook.category = category
+        newBook.last = last
+        newBook.intro = intro
+        newBook.coverURL = bookCoverURL
+        newBook.added = true
+        
+        addedBookArray.append(newBook)
+        saveBooks()
     }
     
     @IBAction func readButtonPressed(_ sender: UIButton) {
@@ -57,6 +82,8 @@ class BookDetailViewController: UIViewController {
             destinationVC.bookID = self.bookID
         }
     }
+    
+    
     
 
 }

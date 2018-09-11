@@ -127,7 +127,6 @@
 				D182F5BB211CBBF0000D9384 /* Cell */,
 				D13146E5211BB36500B7B465 /* Assets.xcassets */,
 				D13146EA211BB36500B7B465 /* Info.plist */,
-				D13146E2211BB36400B7B465 /* ChineseBooks.xcdatamodeld */,
 			);
 			path = ChineseBooks;
 			sourceTree = "<group>";
@@ -168,6 +167,7 @@
 				D182F5E121239463000D9384 /* Rank.swift */,
 				D12421982128D732009AC580 /* Book.swift */,
 				D1F2111621336C2500DBC373 /* Chapter.swift */,
+				D13146E2211BB36400B7B465 /* ChineseBooks.xcdatamodeld */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -531,7 +531,8 @@
 				D13146E3211BB36400B7B465 /* ChineseBooks.xcdatamodel */,
 			);
 			currentVersion = D13146E3211BB36400B7B465 /* ChineseBooks.xcdatamodel */;
-			path = ChineseBooks.xcdatamodeld;
+			name = ChineseBooks.xcdatamodeld;
+			path = ../ChineseBooks.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
