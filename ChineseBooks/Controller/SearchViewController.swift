@@ -95,12 +95,29 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchInput = searchBar.text!
-        let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed))"
+        resultBookList = [Book]()
+        if searchBar.text?.count != 0 {
+            searchInput = searchBar.text!
+            let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            
+            getResultData(from: url)
+        }
         
-        getResultData(from: url)
         
         self.view.endEditing(true)
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        resultBookList = [Book]()
+        resultCollectionView.reloadData()
+        self.view.endEditing(true)
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchBar.text?.count == 0 {
+            resultBookList = [Book]()
+            resultCollectionView.reloadData()
+        }
     }
     
 }
