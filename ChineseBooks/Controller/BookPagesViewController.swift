@@ -32,17 +32,17 @@ class BookPagesViewController: UIViewController {
         super.viewDidLoad()
         
         let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-        
+
         getBodyData(from: url, completionHandler: {
             data in
             self.body = data
-            
+
             self.contentTextView.text = self.body
             let fitRange = self.contentTextView.numberOfCharactersThatFitTextView()
             self.splitedContentArray = self.body.split(by: fitRange)
-            
+
             self.initializeView()
-            
+
         })
         
         //navigationController?.isNavigationBarHidden = true
@@ -94,14 +94,14 @@ class BookPagesViewController: UIViewController {
             }
         }
     }
-    
-    
+
+
     // MARK: - JSON Parsing
-    
+
     // Parse JSON data
     func createBodyData(with json: JSON) -> String {
         guard !json.isEmpty else {fatalError("json unavailible!")}
-        
+
         let bodyData = json["chapter"]["body"].stringValue
         return bodyData
     }

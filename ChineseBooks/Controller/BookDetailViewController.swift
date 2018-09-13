@@ -80,6 +80,7 @@ class BookDetailViewController: UIViewController {
             let destinationVC = segue.destination as! ChapterViewController
             destinationVC.bookTitle = self.bookTitle
             destinationVC.bookID = self.bookID
+            destinationVC.downloadButtonState = false
         }
     }
     

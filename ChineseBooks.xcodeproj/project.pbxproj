@@ -20,14 +20,10 @@
 		D13146E6211BB36500B7B465 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D13146E5211BB36500B7B465 /* Assets.xcassets */; };
 		D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D13146E7211BB36500B7B465 /* LaunchScreen.storyboard */; };
 		D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D160F4E12138B26C0005AF54 /* ContentViewController.swift */; };
+		D17BF0FD2149A43100C2BD46 /* MyBooksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17BF0FC2149A43100C2BD46 /* MyBooksViewController.swift */; };
 		D182F5BA211BF993000D9384 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5B9211BF993000D9384 /* Category.swift */; };
 		D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */; };
 		D182F5BF211CBC6C000D9384 /* CustomCategoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */; };
-		D182F5C5211E1421000D9384 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5C4211E1421000D9384 /* ViewController.swift */; };
-		D182F5CC211F9758000D9384 /* View1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5CA211F9758000D9384 /* View1.swift */; };
-		D182F5CD211F9758000D9384 /* View1.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5CB211F9758000D9384 /* View1.xib */; };
-		D182F5D0211F9CEA000D9384 /* View2.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5CE211F9CEA000D9384 /* View2.swift */; };
-		D182F5D1211F9CEA000D9384 /* View2.xib in Resources */ = {isa = PBXBuildFile; fileRef = D182F5CF211F9CEA000D9384 /* View2.xib */; };
 		D182F5E221239463000D9384 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E121239463000D9384 /* Rank.swift */; };
 		D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E32124924A000D9384 /* CategoryListViewController.swift */; };
 		D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */; };
@@ -53,14 +49,10 @@
 		D13146E8211BB36500B7B465 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D13146EA211BB36500B7B465 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D160F4E12138B26C0005AF54 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		D17BF0FC2149A43100C2BD46 /* MyBooksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyBooksViewController.swift; sourceTree = "<group>"; };
 		D182F5B9211BF993000D9384 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		D182F5BC211CBC6C000D9384 /* CustomCategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCategoryCell.swift; sourceTree = "<group>"; };
 		D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCategoryCell.xib; sourceTree = "<group>"; };
-		D182F5C4211E1421000D9384 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		D182F5CA211F9758000D9384 /* View1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View1.swift; sourceTree = "<group>"; };
-		D182F5CB211F9758000D9384 /* View1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View1.xib; sourceTree = "<group>"; };
-		D182F5CE211F9CEA000D9384 /* View2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View2.swift; sourceTree = "<group>"; };
-		D182F5CF211F9CEA000D9384 /* View2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = View2.xib; sourceTree = "<group>"; };
 		D182F5E121239463000D9384 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		D182F5E32124924A000D9384 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +126,7 @@
 		D13146F0211BC75C00B7B465 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				D17BF0FC2149A43100C2BD46 /* MyBooksViewController.swift */,
 				D13146DD211BB36400B7B465 /* StoreViewController.swift */,
 				D182F5E32124924A000D9384 /* CategoryListViewController.swift */,
 				D12421A4212BA2FA009AC580 /* RankListViewController.swift */,
@@ -142,11 +135,6 @@
 				D1F211142133686D00DBC373 /* ChapterViewController.swift */,
 				D12FD724213B837300A26903 /* BookPagesViewController.swift */,
 				D160F4E12138B26C0005AF54 /* ContentViewController.swift */,
-				D182F5C4211E1421000D9384 /* ViewController.swift */,
-				D182F5CA211F9758000D9384 /* View1.swift */,
-				D182F5CB211F9758000D9384 /* View1.xib */,
-				D182F5CE211F9CEA000D9384 /* View2.swift */,
-				D182F5CF211F9CEA000D9384 /* View2.xib */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -243,13 +231,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D182F5CD211F9758000D9384 /* View1.xib in Resources */,
 				D124219D2128E723009AC580 /* CustomBookCell.xib in Resources */,
 				D182F5BF211CBC6C000D9384 /* CustomCategoryCell.xib in Resources */,
 				D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */,
 				D13146E6211BB36500B7B465 /* Assets.xcassets in Resources */,
 				D13146E1211BB36400B7B465 /* Main.storyboard in Resources */,
-				D182F5D1211F9CEA000D9384 /* View2.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,13 +295,12 @@
 				D1F2111721336C2500DBC373 /* Chapter.swift in Sources */,
 				D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */,
 				D124219C2128E723009AC580 /* CustomBookCell.swift in Sources */,
-				D182F5C5211E1421000D9384 /* ViewController.swift in Sources */,
 				D13146DE211BB36400B7B465 /* StoreViewController.swift in Sources */,
+				D17BF0FD2149A43100C2BD46 /* MyBooksViewController.swift in Sources */,
 				D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */,
 				D12421992128D732009AC580 /* Book.swift in Sources */,
 				D182F5BE211CBC6C000D9384 /* CustomCategoryCell.swift in Sources */,
 				D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */,
-				D182F5D0211F9CEA000D9384 /* View2.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
 				D12FD725213B837400A26903 /* BookPagesViewController.swift in Sources */,
 				D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */,
@@ -323,7 +308,6 @@
 				D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */,
 				D12421A5212BA2FA009AC580 /* RankListViewController.swift in Sources */,
 				D182F5BA211BF993000D9384 /* Category.swift in Sources */,
-				D182F5CC211F9758000D9384 /* View1.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

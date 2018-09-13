@@ -12,39 +12,86 @@
     </dependencies>
     <scenes>
         <!--我的书架-->
-        <scene sceneID="ZLA-ku-fpa">
+        <scene sceneID="ULt-3I-YTN">
             <objects>
-                <tableViewController id="tEj-mx-Pcv" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FAN-kH-H6B">
+                <viewController id="8pK-JS-DeU" customClass="MyBooksViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Elf-JH-sZi">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2k8-sW-Zzn" userLabel="Container View">
+                                <rect key="frame" x="0.0" y="116" width="375" height="551"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qer-Ks-aSu">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Y5-Vi-RB6">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="KWo-NH-5PP">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="8pK-JS-DeU" id="XuO-i4-FI8"/>
+                                            <outlet property="delegate" destination="8pK-JS-DeU" id="wtG-Y1-Re2"/>
+                                        </connections>
+                                    </collectionView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的书架暂时为空！请进入商城进行搜索和添加。" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUN-er-SWM">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="551"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="XUN-er-SWM" secondAttribute="trailing" id="H74-iC-QEX"/>
+                                    <constraint firstAttribute="bottom" secondItem="XUN-er-SWM" secondAttribute="bottom" id="IEt-v1-Z0t"/>
+                                    <constraint firstItem="qer-Ks-aSu" firstAttribute="top" secondItem="2k8-sW-Zzn" secondAttribute="top" id="Ile-W3-wEg"/>
+                                    <constraint firstItem="qer-Ks-aSu" firstAttribute="leading" secondItem="2k8-sW-Zzn" secondAttribute="leading" id="R1X-GA-LLQ"/>
+                                    <constraint firstAttribute="trailing" secondItem="qer-Ks-aSu" secondAttribute="trailing" id="VAk-fV-jXa"/>
+                                    <constraint firstItem="XUN-er-SWM" firstAttribute="top" secondItem="2k8-sW-Zzn" secondAttribute="top" id="Zcg-YX-6aw"/>
+                                    <constraint firstAttribute="bottom" secondItem="qer-Ks-aSu" secondAttribute="bottom" id="dbG-Wa-6pK"/>
+                                    <constraint firstItem="XUN-er-SWM" firstAttribute="leading" secondItem="2k8-sW-Zzn" secondAttribute="leading" id="ffV-IH-z7m"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="HmM-cJ-hpf">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HmM-cJ-hpf" id="2Pq-mV-DgE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="tEj-mx-Pcv" id="H1z-6R-QgU"/>
-                            <outlet property="delegate" destination="tEj-mx-Pcv" id="cX7-sO-l03"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="我的书架" id="cIy-EA-2tz">
-                        <barButtonItem key="rightBarButtonItem" title="书城" id="k6r-ui-fIc">
+                        <constraints>
+                            <constraint firstItem="2k8-sW-Zzn" firstAttribute="leading" secondItem="vd2-p9-YiU" secondAttribute="leading" id="L2f-V7-oQi"/>
+                            <constraint firstItem="2k8-sW-Zzn" firstAttribute="bottom" secondItem="vd2-p9-YiU" secondAttribute="bottom" id="OLz-a2-LQD"/>
+                            <constraint firstItem="2k8-sW-Zzn" firstAttribute="trailing" secondItem="vd2-p9-YiU" secondAttribute="trailing" id="r5V-bv-hRX"/>
+                            <constraint firstItem="2k8-sW-Zzn" firstAttribute="top" secondItem="vd2-p9-YiU" secondAttribute="top" id="vjd-Uv-bQu"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="vd2-p9-YiU"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="我的书架" id="3bz-jb-2KQ">
+                        <barButtonItem key="rightBarButtonItem" title="商城" id="RIV-Ad-haD">
                             <connections>
-                                <segue destination="BYZ-38-t0r" kind="show" id="dVp-cs-RxY"/>
+                                <segue destination="BYZ-38-t0r" kind="show" id="No5-Nj-trH"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cSX-9x-ASz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                    <connections>
+                        <outlet property="containerView" destination="2k8-sW-Zzn" id="QfH-Tc-1bq"/>
+                        <outlet property="defultLabel" destination="XUN-er-SWM" id="vCs-3o-IEn"/>
+                        <outlet property="myBooksCollectionView" destination="qer-Ks-aSu" id="aa8-ZO-45V"/>
+                        <segue destination="8zg-GW-XFM" kind="show" identifier="goToChapter" id="osF-wW-Ufi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ER6-Gf-r9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="76" y="133.5832083958021"/>
+            <point key="canvasLocation" x="103" y="134"/>
         </scene>
         <!--免费书城-->
         <scene sceneID="tne-QT-ifu">
@@ -247,10 +294,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeQ-5Z-ggR" userLabel="Rank View">
-                                <rect key="frame" x="0.0" y="124" width="375" height="543"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="595"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Kdo-nm-23q">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="543"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="595"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Nt7-Zt-tKP">
                                             <size key="itemSize" width="50" height="50"/>
@@ -507,9 +554,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4QI-C3-F3e"/>
                     </view>
-                    <navigationItem key="navigationItem" title="小说章节" largeTitleDisplayMode="never" id="WpI-q3-OEK"/>
+                    <navigationItem key="navigationItem" title="小说章节" largeTitleDisplayMode="never" id="WpI-q3-OEK">
+                        <barButtonItem key="rightBarButtonItem" title="缓存" id="paN-JT-Mcp">
+                            <connections>
+                                <action selector="downloadButtonPressed:" destination="8zg-GW-XFM" id="gXT-Dk-8QM"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="chapterTableView" destination="5Yz-eL-GYh" id="P4p-Md-aHH"/>
+                        <outlet property="downloadButton" destination="paN-JT-Mcp" id="FhZ-Ml-trT"/>
                         <segue destination="WKo-Mg-cwa" kind="show" identifier="goToPages" id="O4s-JM-3mT"/>
                     </connections>
                 </viewController>
@@ -997,62 +1051,17 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="tEj-mx-Pcv" kind="relationship" relationship="rootViewController" id="jfZ-zo-PWH"/>
+                        <segue destination="8pK-JS-DeU" kind="relationship" relationship="rootViewController" id="Aac-hg-4c0"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wqG-tp-lqF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-863.20000000000005" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="7Az-Hp-mcJ">
-            <objects>
-                <viewController id="ydf-Se-XXx" customClass="ViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="rhe-vc-dFv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="XhK-Tg-ZO5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="29"/>
-                                <segments>
-                                    <segment title="First"/>
-                                    <segment title="Second"/>
-                                    <segment title="Third"/>
-                                </segments>
-                                <connections>
-                                    <action selector="testSegmentedControlPressed:" destination="ydf-Se-XXx" eventType="valueChanged" id="WtX-6L-kZH"/>
-                                </connections>
-                            </segmentedControl>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Die-40-i4T">
-                                <rect key="frame" x="0.0" y="56" width="375" height="611"/>
-                                <gestureRecognizers/>
-                            </scrollView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <gestureRecognizers/>
-                        <constraints>
-                            <constraint firstItem="XhK-Tg-ZO5" firstAttribute="trailing" secondItem="9df-0i-zvy" secondAttribute="trailing" id="GTd-mp-KRD"/>
-                            <constraint firstItem="XhK-Tg-ZO5" firstAttribute="leading" secondItem="9df-0i-zvy" secondAttribute="leading" id="UNk-Vu-UmX"/>
-                            <constraint firstItem="Die-40-i4T" firstAttribute="bottom" secondItem="9df-0i-zvy" secondAttribute="bottom" id="Ubl-rl-bsi"/>
-                            <constraint firstItem="XhK-Tg-ZO5" firstAttribute="top" secondItem="9df-0i-zvy" secondAttribute="top" id="Uvo-nI-Awm"/>
-                            <constraint firstItem="Die-40-i4T" firstAttribute="leading" secondItem="9df-0i-zvy" secondAttribute="leading" id="ZcZ-Pd-gFA"/>
-                            <constraint firstItem="Die-40-i4T" firstAttribute="trailing" secondItem="9df-0i-zvy" secondAttribute="trailing" id="dHF-YH-ovF"/>
-                            <constraint firstItem="Die-40-i4T" firstAttribute="top" secondItem="XhK-Tg-ZO5" secondAttribute="bottom" constant="8" id="koM-cW-GqN"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="9df-0i-zvy"/>
-                    </view>
-                    <connections>
-                        <outlet property="testScrollView" destination="Die-40-i4T" id="JkK-PN-EEs"/>
-                        <outlet property="testSegmentedControl" destination="XhK-Tg-ZO5" id="WPD-gw-6eS"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rtE-YV-umF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-866.39999999999998" y="1040.3298350824589"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="4qI-54-deD"/>
-        <segue reference="rsf-Ke-1cJ"/>
+        <segue reference="62f-25-pyy"/>
+        <segue reference="osF-wW-Ufi"/>
+        <segue reference="GVq-nl-wR7"/>
     </inferredMetricsTieBreakers>
 </document>
