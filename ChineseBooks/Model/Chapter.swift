@@ -12,11 +12,9 @@ class Chapter {
     
     let chapterTitle : String
     let chapterLink : String
-    var chapterBody: String
     
-    init(title: String, link: String, body: String) {
+    init(title: String, link: String) {
         chapterTitle = title
         chapterLink = link
-        chapterBody = body
     }
 }

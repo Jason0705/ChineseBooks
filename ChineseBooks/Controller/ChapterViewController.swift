@@ -19,7 +19,7 @@ class ChapterViewController: UIViewController {
     var bookID = ""
     var chapterArray = [Chapter]()
     //var bodyArray = [String]()
-    //var downloadedChapterArray = [CDChapter]()
+    var downloadedChapterArray = [CDChapter]()
     var downloadButtonState = true
     
     
@@ -31,11 +31,12 @@ class ChapterViewController: UIViewController {
         super.viewDidLoad()
         
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+        getChapterData(from: url)
         //loadChapters()
-        getChapterData(from: url) { (data) in
-            //self.createBodyArray(with: data)
-            self.mergeArray(with: data)
-        }
+//        getChapterData(from: url) { (data) in
+//            //self.createBodyArray(with: data)
+//            self.mergeArray(with: data)
+//        }
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
@@ -45,30 +46,30 @@ class ChapterViewController: UIViewController {
     // MARK: - Networking
     
     // getResultData Method
-//    func getChapterData(from url: String) {
-//        Alamofire.request(url).responseJSON {
-//            response in
-//            if response.result.isSuccess{
-//                let chapterJSON : JSON = JSON(response.result.value!)
-//                self.createChapterArray(with: chapterJSON)
-//            } else {
-//                print("Couldnt process 1 JSON response, Error: \(response.result.error)")
-//            }
-//        }
-//    }
-    func getChapterData(from url: String, completionHandler: @escaping ([Chapter]) -> Void) {
+    func getChapterData(from url: String) {
         Alamofire.request(url).responseJSON {
             response in
             if response.result.isSuccess{
                 let chapterJSON : JSON = JSON(response.result.value!)
-                let chapterData = self.createChapterArray(with: chapterJSON)
-                completionHandler(chapterData)
+                self.createChapterArray(with: chapterJSON)
             } else {
                 print("Couldnt process 1 JSON response, Error: \(response.result.error)")
             }
         }
     }
-
+    func downloadChapterData(from url: String, completionHandler: @escaping ([CDChapter]) -> Void) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let chapterJSON : JSON = JSON(response.result.value!)
+                let CDChapterData = self.createCDChapterArray(with: chapterJSON)
+                completionHandler(CDChapterData)
+            } else {
+                print("Couldnt process 1 JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+//
     func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
         Alamofire.request(url).responseJSON {
             response in
@@ -98,19 +99,32 @@ class ChapterViewController: UIViewController {
     // MARK: - JSON Parsing
     
     // Parse JSON data
-    func createChapterArray(with json: JSON) -> [Chapter] {
+    func createChapterArray(with json: JSON) {
         guard !json.isEmpty else {fatalError("json unavailible!")}
         for chapter in json["mixToc"]["chapters"].arrayValue {
             let title = chapter["title"].stringValue
             let link = chapter["link"].stringValue
-            let body = ""
             
-            let newElement = Chapter(title: title, link: link, body: body)
-
+            let newElement = Chapter(title: title, link: link)
+            
             chapterArray.append(newElement)
         }
         chapterTableView.reloadData()
-        return chapterArray
+    }
+    
+    func createCDChapterArray(with json: JSON) -> [CDChapter] {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+        for chapter in json["mixToc"]["chapters"].arrayValue {
+            let newChapter = CDChapter(context: context)
+            newChapter.chapterTitle = chapter["title"].stringValue
+            newChapter.chapterLink = chapter["link"].stringValue
+            newChapter.chapterBody = ""
+
+            downloadedChapterArray.append(newChapter)
+            saveChapters()
+        }
+        //chapterTableView.reloadData()
+        return downloadedChapterArray
     }
     
     func createBodyData(with json: JSON) -> String {
@@ -119,6 +133,7 @@ class ChapterViewController: UIViewController {
         let bodyData = json["chapter"]["body"].stringValue
         return bodyData
     }
+    
 //    func createBodyData(with json: JSON) {
 //        guard !json.isEmpty else {fatalError("json unavailible!")}
 //
@@ -126,18 +141,18 @@ class ChapterViewController: UIViewController {
 //        bodyArray.append(body)
 //    }
     
-    func mergeArray(with array: [Chapter]) {
-//        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-//        getChapterData(from: url)
+    func mergeArray(with array: [CDChapter]) {
         for element in array {
-            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
             getBodyData(from: bodyURL, completionHandler: {
                 data in
+                //element.setValue(data, forKey: "chapterBody")
                 element.chapterBody = data
+                self.saveChapters()
             })
 
         }
-        
+
     }
     
 //    func createBodyArray(with array: [Chapter]) {
@@ -153,30 +168,34 @@ class ChapterViewController: UIViewController {
     
     
     
-//    func saveChapters() {
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Error Saving Context: \(error)")
-//        }
-//        chapterTableView.reloadData()
-//    }
-//
-//    func loadChapters() {
-//        let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
-//        do {
-//            downloadedChapterArray = try context.fetch(request)
-//        } catch {
-//            print("Error fetching data from context: \(error)")
-//        }
-//    }
-//
-//
-//
-//    @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
-//        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-//        downloadChapterData(from: url)
-//    }
+    func saveChapters() {
+        do {
+            try context.save()
+        } catch {
+            print("Error Saving Context: \(error)")
+        }
+        chapterTableView.reloadData()
+    }
+
+    func loadChapters() {
+        let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
+        do {
+            downloadedChapterArray = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
+    }
+
+
+
+    @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
+        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+        //downloadChapterData(from: url)
+        downloadChapterData(from: url) { (data) in
+            self.mergeArray(with: data)
+        }
+        
+    }
    
     
     
@@ -210,11 +229,15 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 
     // Select cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "goToPages", sender: self)
+        //performSegue(withIdentifier: "goToPages", sender: self)
         //print(bodyArray[indexPath.row])
 //        print(chapterArray[indexPath.row].chapterBody)
 //        print(chapterArray[indexPath.row].chapterTitle)
 //        print(indexPath.row)
+        loadChapters()
+        print(downloadedChapterArray[indexPath.row].chapterBody!)
+        print(downloadedChapterArray[indexPath.row].chapterTitle!)
+        print(downloadedChapterArray[indexPath.row].chapterLink!)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

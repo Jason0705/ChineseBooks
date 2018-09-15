@@ -18,7 +18,7 @@ class BookPagesViewController: UIViewController {
     
     //var chapterTitle = ""
     //var chapterLink = ""
-    //var body = ""
+    var body = ""
     
     var splitedContentArray = [String]()
     
@@ -32,27 +32,21 @@ class BookPagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-//
-//        getBodyData(from: url, completionHandler: {
-//            data in
-//            self.body = data
-//
-//            self.contentTextView.text = self.body
-//            let fitRange = self.contentTextView.numberOfCharactersThatFitTextView()
-//            self.splitedContentArray = self.body.split(by: fitRange)
-//
-//            self.initializeView()
-//
-//        })
+        let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+
+        getBodyData(from: url, completionHandler: {
+            data in
+            self.body = data
+
+            self.pageDevide()
+
+            self.initializeView()
+
+        })
         
         //navigationController?.isNavigationBarHidden = true
-        //body = chapterArray[chapterIndex].chapterBody
-//        contentTextView.text = chapterArray[chapterIndex].chapterBody
-//        let fitRange = contentTextView.numberOfCharactersThatFitTextView()
-//        splitedContentArray = chapterArray[chapterIndex].chapterBody.split(by: fitRange)
-        pageDevide()
-        initializeView()
+//        pageDevide()
+//        initializeView()
         
     }
   
@@ -86,38 +80,38 @@ class BookPagesViewController: UIViewController {
     }
     
     func pageDevide() {
-        contentTextView.text = chapterArray[chapterIndex].chapterBody
+        contentTextView.text = body //chapterArray[chapterIndex].chapterBody
         let fitRange = contentTextView.numberOfCharactersThatFitTextView()
-        splitedContentArray = chapterArray[chapterIndex].chapterBody.split(by: fitRange)
+        splitedContentArray = body.split(by: fitRange) //chapterArray[chapterIndex].chapterBody.split(by: fitRange)
     }
     
     
     // MARK: - Networking
     
     // getRankData Method
-//    func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
-//        Alamofire.request(url).responseJSON {
-//            response in
-//            if response.result.isSuccess{
-//                let bodyJSON : JSON = JSON(response.result.value!)
-//                let bodyData = self.createBodyData(with: bodyJSON)
-//                completionHandler(bodyData)
-//            } else {
-//                print("Couldnt process JSON response, Error: \(response.result.error)")
-//            }
-//        }
-//    }
-//
-//
-//    // MARK: - JSON Parsing
-//
-//    // Parse JSON data
-//    func createBodyData(with json: JSON) -> String {
-//        guard !json.isEmpty else {fatalError("json unavailible!")}
-//
-//        let bodyData = json["chapter"]["body"].stringValue
-//        return bodyData
-//    }
+    func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let bodyJSON : JSON = JSON(response.result.value!)
+                let bodyData = self.createBodyData(with: bodyJSON)
+                completionHandler(bodyData)
+            } else {
+                print("Couldnt process JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+
+
+    // MARK: - JSON Parsing
+
+    // Parse JSON data
+    func createBodyData(with json: JSON) -> String {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+
+        let bodyData = json["chapter"]["body"].stringValue
+        return bodyData
+    }
 
     
 
