@@ -113,6 +113,7 @@ extension MyBooksViewController: UICollectionViewDataSource, UICollectionViewDel
                 destinationVC.bookTitle = myBookList[indexPath.row].title!
                 destinationVC.bookID = myBookList[indexPath.row].id!
                 destinationVC.downloadButtonState = true
+                destinationVC.selectedBook = myBookList[indexPath.row]
             }
         }
     }

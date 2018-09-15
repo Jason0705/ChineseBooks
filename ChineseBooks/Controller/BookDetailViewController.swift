@@ -81,6 +81,7 @@ class BookDetailViewController: UIViewController {
             destinationVC.bookTitle = self.bookTitle
             destinationVC.bookID = self.bookID
             destinationVC.downloadButtonState = false
+            //destinationVC.selectedBook?.id = self.bookID
         }
     }
     

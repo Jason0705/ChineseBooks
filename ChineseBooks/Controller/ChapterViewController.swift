@@ -18,13 +18,21 @@ class ChapterViewController: UIViewController {
     var bookTitle = ""
     var bookID = ""
     var chapterArray = [Chapter]()
-    //var bodyArray = [String]()
     var downloadedChapterArray = [CDChapter]()
+    var chapterMarkArray = [CDChapterMark]()
     var downloadButtonState = true
+    
+    var selectedBook : CDBook? {
+        didSet {
+            loadChapters()
+            //loadChapterMarks()
+        }
+    }
     
     
     @IBOutlet weak var chapterTableView: UITableView!
     @IBOutlet weak var downloadButton: UIBarButtonItem!
+    
     
     
     override func viewDidLoad() {
@@ -40,6 +48,7 @@ class ChapterViewController: UIViewController {
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
+        
     }
     
     
@@ -119,6 +128,7 @@ class ChapterViewController: UIViewController {
             newChapter.chapterTitle = chapter["title"].stringValue
             newChapter.chapterLink = chapter["link"].stringValue
             newChapter.chapterBody = ""
+            newChapter.parentBook = selectedBook
 
             downloadedChapterArray.append(newChapter)
             saveChapters()
@@ -149,6 +159,7 @@ class ChapterViewController: UIViewController {
                 //element.setValue(data, forKey: "chapterBody")
                 element.chapterBody = data
                 self.saveChapters()
+                self.chapterTableView.reloadData()
             })
 
         }
@@ -167,7 +178,7 @@ class ChapterViewController: UIViewController {
     
     
     
-    
+    // Mark: - Save and Load Chapter
     func saveChapters() {
         do {
             try context.save()
@@ -179,22 +190,46 @@ class ChapterViewController: UIViewController {
 
     func loadChapters() {
         let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
+        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+        request.predicate = predicate
         do {
             downloadedChapterArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context: \(error)")
         }
     }
+    
+    // MARK: - Save and Load Chapter Book Mark
+    
+//    func saveChapterMarks() {
+//        do {
+//            try context.save()
+//        } catch {
+//            print("Error Saving Context: \(error)")
+//        }
+//        chapterTableView.reloadData()
+//    }
+//
+//    func loadChapterMarks() {
+//        let request : NSFetchRequest<CDChapterMark> = CDChapterMark.fetchRequest()
+//        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+//        request.predicate = predicate
+//        do {
+//            chapterMarkArray = try context.fetch(request)
+//        } catch {
+//            print("Error fetching data from context: \(error)")
+//        }
+//    }
 
 
 
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        //downloadChapterData(from: url)
         downloadChapterData(from: url) { (data) in
             self.mergeArray(with: data)
         }
-        
+        //loadChapters()
+        //chapterTableView.reloadData()
     }
    
     
@@ -214,16 +249,16 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     // Populate cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
-//        if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
-//            let cellData = downloadedChapterArray[indexPath.row]
-//            cell.textLabel?.text = "下--\(cellData.chapterTitle)"
-//        }
-//        else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
-//            let cellData = chapterArray[indexPath.row]
-//            cell.textLabel?.text = cellData.chapterTitle
-//        }
-        let cellData = chapterArray[indexPath.row]
-        cell.textLabel?.text = cellData.chapterTitle
+        if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
+            let cellData = downloadedChapterArray[indexPath.row]
+            cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
+        }
+        else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
+            let cellData = chapterArray[indexPath.row]
+            cell.textLabel?.text = cellData.chapterTitle
+        }
+//        let cellData = chapterArray[indexPath.row]
+//        cell.textLabel?.text = cellData.chapterTitle
         return cell
     }
 
@@ -234,10 +269,11 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 //        print(chapterArray[indexPath.row].chapterBody)
 //        print(chapterArray[indexPath.row].chapterTitle)
 //        print(indexPath.row)
-        loadChapters()
+        //loadChapters()
         print(downloadedChapterArray[indexPath.row].chapterBody!)
         print(downloadedChapterArray[indexPath.row].chapterTitle!)
         print(downloadedChapterArray[indexPath.row].chapterLink!)
+        
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

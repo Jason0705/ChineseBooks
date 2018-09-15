@@ -5,7 +5,6 @@
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="category" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="downloaded" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="intro" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last" optional="YES" attributeType="String" syncable="YES"/>
@@ -15,11 +14,11 @@
         <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDChapter" inverseName="parentBook" inverseEntity="CDChapter" syncable="YES"/>
     </entity>
     <entity name="CDChapter" representedClassName="CDChapter" syncable="YES" codeGenerationType="class">
-        <attribute name="chapterBody" attributeType="String" syncable="YES"/>
+        <attribute name="chapterBody" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chapterLink" attributeType="String" syncable="YES"/>
-        <attribute name="chapterTitle" attributeType="String" syncable="YES"/>
+        <attribute name="chapterTitle" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pageMark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDPageMark" inverseName="parentChapter" inverseEntity="CDPageMark" syncable="YES"/>
-        <relationship name="parentBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBook" inverseName="chapters" inverseEntity="CDBook" syncable="YES"/>
+        <relationship name="parentBook" maxCount="1" deletionRule="Nullify" destinationEntity="CDBook" inverseName="chapters" inverseEntity="CDBook" syncable="YES"/>
     </entity>
     <entity name="CDChapterMark" representedClassName="CDChapterMark" syncable="YES" codeGenerationType="class">
         <attribute name="chapterMark" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -30,7 +29,7 @@
         <relationship name="parentChapter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDChapter" inverseName="pageMark" inverseEntity="CDChapter" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDBook" positionX="-4041" positionY="159" width="128" height="223"/>
+        <element name="CDBook" positionX="-4041" positionY="159" width="128" height="208"/>
         <element name="CDChapterMark" positionX="-3834" positionY="189" width="128" height="73"/>
         <element name="CDChapter" positionX="-3836" positionY="278" width="128" height="118"/>
         <element name="CDPageMark" positionX="-3656" positionY="297" width="128" height="73"/>
