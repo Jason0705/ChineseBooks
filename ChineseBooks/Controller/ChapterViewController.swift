@@ -18,6 +18,7 @@ class ChapterViewController: UIViewController {
     var bookTitle = ""
     var bookID = ""
     var chapterArray = [Chapter]()
+    //var bodyArray = [String]()
     //var downloadedChapterArray = [CDChapter]()
     var downloadButtonState = true
     
@@ -30,9 +31,11 @@ class ChapterViewController: UIViewController {
         super.viewDidLoad()
         
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        
-        getChapterData(from: url)
         //loadChapters()
+        getChapterData(from: url) { (data) in
+            //self.createBodyArray(with: data)
+            self.mergeArray(with: data)
+        }
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
@@ -42,39 +45,51 @@ class ChapterViewController: UIViewController {
     // MARK: - Networking
     
     // getResultData Method
-    func getChapterData(from url: String) {
-        Alamofire.request(url).responseJSON {
-            response in
-            if response.result.isSuccess{
-                let chapterJSON : JSON = JSON(response.result.value!)
-                self.createChapterArray(with: chapterJSON)
-            } else {
-                print("Couldnt process JSON response, Error: \(response.result.error)")
-            }
-        }
-    }
-    
-//    func downloadChapterData(from url: String) {
+//    func getChapterData(from url: String) {
 //        Alamofire.request(url).responseJSON {
 //            response in
 //            if response.result.isSuccess{
 //                let chapterJSON : JSON = JSON(response.result.value!)
-//                self.createCDChapterArray(with: chapterJSON)
+//                self.createChapterArray(with: chapterJSON)
 //            } else {
-//                print("Couldnt process JSON response, Error: \(response.result.error)")
+//                print("Couldnt process 1 JSON response, Error: \(response.result.error)")
 //            }
 //        }
 //    }
-//
-//    func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
+    func getChapterData(from url: String, completionHandler: @escaping ([Chapter]) -> Void) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let chapterJSON : JSON = JSON(response.result.value!)
+                let chapterData = self.createChapterArray(with: chapterJSON)
+                completionHandler(chapterData)
+            } else {
+                print("Couldnt process 1 JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+
+    func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
+        Alamofire.request(url).responseJSON {
+            response in
+            if response.result.isSuccess{
+                let bodyJSON : JSON = JSON(response.result.value!)
+                let bodyData = self.createBodyData(with: bodyJSON)
+                completionHandler(bodyData)
+            } else {
+                print("Couldnt process 2 JSON response, Error: \(response.result.error)")
+            }
+        }
+    }
+    
+//    func getBodyData(from url: String) {
 //        Alamofire.request(url).responseJSON {
 //            response in
 //            if response.result.isSuccess{
 //                let bodyJSON : JSON = JSON(response.result.value!)
-//                let bodyData = self.createBodyData(with: bodyJSON)
-//                completionHandler(bodyData)
+//                self.createBodyData(with: bodyJSON)
 //            } else {
-//                print("Couldnt process JSON response, Error: \(response.result.error)")
+//                print("Couldnt 2 process JSON response, Error: \(response.result.error)")
 //            }
 //        }
 //    }
@@ -83,45 +98,55 @@ class ChapterViewController: UIViewController {
     // MARK: - JSON Parsing
     
     // Parse JSON data
-    func createChapterArray(with json: JSON) {
+    func createChapterArray(with json: JSON) -> [Chapter] {
         guard !json.isEmpty else {fatalError("json unavailible!")}
         for chapter in json["mixToc"]["chapters"].arrayValue {
             let title = chapter["title"].stringValue
             let link = chapter["link"].stringValue
+            let body = ""
             
-            let newElement = Chapter(title: title, link: link)
-            
+            let newElement = Chapter(title: title, link: link, body: body)
+
             chapterArray.append(newElement)
         }
         chapterTableView.reloadData()
+        return chapterArray
     }
     
-//    func createCDChapterArray(with json: JSON) {
-//        let newChapter = CDChapter(context: context)
+    func createBodyData(with json: JSON) -> String {
+        guard !json.isEmpty else {fatalError("json unavailible!")}
+
+        let bodyData = json["chapter"]["body"].stringValue
+        return bodyData
+    }
+//    func createBodyData(with json: JSON) {
 //        guard !json.isEmpty else {fatalError("json unavailible!")}
-//        for chapter in json["mixToc"]["chapters"].arrayValue {
-//            newChapter.chapterTitle = chapter["title"].stringValue
-//            newChapter.chapterLink = chapter["link"].stringValue
 //
-//            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapter["link"].stringValue.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-//
-//            getBodyData(from: url, completionHandler: {
-//                data in
-//                newChapter.chapterBody = data
-//            })
-//
-//            downloadedChapterArray.append(newChapter)
-//
-//            saveChapters()
+//        let body = json["chapter"]["body"].stringValue
+//        bodyArray.append(body)
+//    }
+    
+    func mergeArray(with array: [Chapter]) {
+//        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+//        getChapterData(from: url)
+        for element in array {
+            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            getBodyData(from: bodyURL, completionHandler: {
+                data in
+                element.chapterBody = data
+            })
+
+        }
+        
+    }
+    
+//    func createBodyArray(with array: [Chapter]) {
+//        for element in array {
+//            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+//            getBodyData(from: bodyURL)
 //        }
 //    }
-//
-//    func createBodyData(with json: JSON) -> String {
-//        guard !json.isEmpty else {fatalError("json unavailible!")}
-//
-//        let bodyData = json["chapter"]["body"].stringValue
-//        return bodyData
-//    }
+    
     
     
     
@@ -186,6 +211,10 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     // Select cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "goToPages", sender: self)
+        //print(bodyArray[indexPath.row])
+//        print(chapterArray[indexPath.row].chapterBody)
+//        print(chapterArray[indexPath.row].chapterTitle)
+//        print(indexPath.row)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
