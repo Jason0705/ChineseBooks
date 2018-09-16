@@ -270,16 +270,16 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 
     // Select cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //performSegue(withIdentifier: "goToPages", sender: self)
+        performSegue(withIdentifier: "goToPages", sender: self)
         //print(bodyArray[indexPath.row])
 //        print(chapterArray[indexPath.row].chapterBody)
 //        print(chapterArray[indexPath.row].chapterTitle)
 //        print(indexPath.row)
         //loadChapters()
-        print(downloadedChapterArray[indexPath.row].chapterBody!)
-        print(downloadedChapterArray[indexPath.row].chapterTitle!)
-        print(downloadedChapterArray[indexPath.row].chapterLink!)
-        
+//        print(downloadedChapterArray[indexPath.row].chapterBody!)
+//        print(downloadedChapterArray[indexPath.row].chapterTitle!)
+//        print(downloadedChapterArray[indexPath.row].chapterLink!)
+        //tableView.deselectRow(at: indexPath, animated: true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

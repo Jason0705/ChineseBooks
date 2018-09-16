@@ -33,17 +33,25 @@ class BookPagesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-
-        getBodyData(from: url, completionHandler: {
-            data in
-            self.body = data
-
-            self.pageDevide()
-
-            self.initializeView()
-
-        })
+        if chapterIndex >= CDChapterArray.count {
+            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+            
+            getBodyData(from: url, completionHandler: {
+                data in
+                self.body = data
+                
+                self.pageDevide()
+                
+                self.initializeView()
+                
+            })
+        }
+        else {
+            body = CDChapterArray[chapterIndex].chapterBody!
+            pageDevide()
+            initializeView()
+        }
+        
         
         //navigationController?.isNavigationBarHidden = true
 //        pageDevide()
@@ -177,8 +185,26 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
 //            contentTextView.text = body
 //            let fitRange = contentTextView.numberOfCharactersThatFitTextView()
 //            splitedContentArray = body.split(by: fitRange)
-            pageDevide()
-            initializeView()
+//            pageDevide()
+//            initializeView()
+            if chapterIndex >= CDChapterArray.count {
+                let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+                
+                getBodyData(from: url, completionHandler: {
+                    data in
+                    self.body = data
+                    
+                    self.pageDevide()
+                    
+                    self.initializeView()
+                    
+                })
+            }
+            else {
+                body = CDChapterArray[chapterIndex].chapterBody!
+                pageDevide()
+                initializeView()
+            }
         }
         
         index = index - 1
@@ -217,8 +243,26 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
 //            contentTextView.text = body
 //            let fitRange = contentTextView.numberOfCharactersThatFitTextView()
 //            splitedContentArray = body.split(by: fitRange)
-            pageDevide()
-            initializeView()
+//            pageDevide()
+//            initializeView()
+            if chapterIndex >= CDChapterArray.count {
+                let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+                
+                getBodyData(from: url, completionHandler: {
+                    data in
+                    self.body = data
+                    
+                    self.pageDevide()
+                    
+                    self.initializeView()
+                    
+                })
+            }
+            else {
+                body = CDChapterArray[chapterIndex].chapterBody!
+                pageDevide()
+                initializeView()
+            }
         }
         
         return viewControllerAtIndex(index: index)
