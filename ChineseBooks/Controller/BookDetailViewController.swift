@@ -16,6 +16,8 @@ class BookDetailViewController: UIViewController {
     
     var addedBookArray = [CDBook]()
     
+    var addedBook = [CDBook]()
+    
     var bookTitle = ""
     var author = ""
     var category = ""
@@ -44,6 +46,8 @@ class BookDetailViewController: UIViewController {
         introTextView.text = intro
         let coverURL = URL(string: bookCoverURL)
         bookCoverImage.kf.setImage(with: coverURL)
+        
+        loadButton()
 
     }
     
@@ -53,6 +57,26 @@ class BookDetailViewController: UIViewController {
         } catch {
             print("Error Saving Context: \(error)")
         }
+    }
+    
+    func loadButton() {
+        let request : NSFetchRequest <CDBook> = CDBook.fetchRequest()
+        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+        let predicate = NSPredicate(format: "id MATCHES %@", bookID)
+        request.predicate = predicate
+        do {
+            addedBook = try context.fetch(request)
+            if addedBook != [CDBook]() {
+                disableAddButton()
+            }
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
+    }
+    
+    func disableAddButton() {
+        addButton.isEnabled = false
+        addButton.setTitle("已添加", for: .normal)
     }
 
     
@@ -69,6 +93,7 @@ class BookDetailViewController: UIViewController {
         
         addedBookArray.append(newBook)
         saveBooks()
+        disableAddButton()
     }
     
     @IBAction func readButtonPressed(_ sender: UIButton) {
@@ -81,7 +106,7 @@ class BookDetailViewController: UIViewController {
             destinationVC.bookTitle = self.bookTitle
             destinationVC.bookID = self.bookID
             destinationVC.downloadButtonState = false
-            //destinationVC.selectedBook?.id = self.bookID
+            destinationVC.selectedBookID = self.bookID
         }
     }
     

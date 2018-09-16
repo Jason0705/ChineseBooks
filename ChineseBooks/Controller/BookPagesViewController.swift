@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class BookPagesViewController: UIViewController {
 
+    var CDChapterArray = [CDChapter]()
     var chapterArray = [Chapter]()
     //var bodyArray = [String]()
     var chapterIndex = 0

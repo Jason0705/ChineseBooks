@@ -22,10 +22,15 @@ class ChapterViewController: UIViewController {
     var chapterMarkArray = [CDChapterMark]()
     var downloadButtonState = true
     
-    var selectedBook : CDBook? {
+//    var selectedBook : CDBook? {
+//        didSet {
+//            loadChapters()
+//            //loadChapterMarks()
+//        }
+//    }
+    var selectedBookID : String? {
         didSet {
             loadChapters()
-            //loadChapterMarks()
         }
     }
     
@@ -128,7 +133,7 @@ class ChapterViewController: UIViewController {
             newChapter.chapterTitle = chapter["title"].stringValue
             newChapter.chapterLink = chapter["link"].stringValue
             newChapter.chapterBody = ""
-            newChapter.parentBook = selectedBook
+            newChapter.parentBook?.id = selectedBookID
 
             downloadedChapterArray.append(newChapter)
             saveChapters()
@@ -190,7 +195,8 @@ class ChapterViewController: UIViewController {
 
     func loadChapters() {
         let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
-        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBookID!)
         request.predicate = predicate
         do {
             downloadedChapterArray = try context.fetch(request)
@@ -280,6 +286,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToPages" {
             let destinationVC = segue.destination as! BookPagesViewController
             if let indexPath = chapterTableView.indexPathForSelectedRow {
+                destinationVC.CDChapterArray = downloadedChapterArray
                 destinationVC.chapterArray = chapterArray
                 destinationVC.chapterIndex = indexPath.row
             }
