@@ -14,25 +14,34 @@ import CoreData
 class ChapterViewController: UIViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let saveChapterMark = SaveChapterMark()
     
+    
+    var chapterBookMark = 0
     var bookTitle = ""
-    var bookID = ""
+    var bookID = "" //: String? {
+//        didSet {
+//            loadChapters()
+//            chapterBookMark = saveChapterMark.loadChapterMarks(with: bookID!)
+//        }
+    //}
     var chapterArray = [Chapter]()
     var downloadedChapterArray = [CDChapter]()
     var chapterMarkArray = [CDChapterMark]()
     var downloadButtonState = true
+   
     
-//    var selectedBook : CDBook? {
-//        didSet {
-//            loadChapters()
-//            //loadChapterMarks()
-//        }
-//    }
-    var selectedBookID : String? {
+    var selectedBook : CDBook? {
         didSet {
             loadChapters()
+            chapterBookMark = saveChapterMark.loadChapterMarks(with: selectedBook!.id!)
         }
     }
+//    var selectedBookID : String? {
+//        didSet {
+//            loadChapters()
+//        }
+//    }
     
     
     @IBOutlet weak var chapterTableView: UITableView!
@@ -53,6 +62,8 @@ class ChapterViewController: UIViewController {
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
+        
+        //chapterBookMark = saveChapterMark.loadChapterMarks(with: bookID!)
         
     }
     
@@ -133,7 +144,7 @@ class ChapterViewController: UIViewController {
             newChapter.chapterTitle = chapter["title"].stringValue
             newChapter.chapterLink = chapter["link"].stringValue
             newChapter.chapterBody = ""
-            newChapter.parentBook?.id = selectedBookID
+            newChapter.parentBook = selectedBook
 
             downloadedChapterArray.append(newChapter)
             saveChapters()
@@ -195,8 +206,8 @@ class ChapterViewController: UIViewController {
 
     func loadChapters() {
         let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
-        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
-        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBookID!)
+        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", bookID!)
         request.predicate = predicate
         do {
             downloadedChapterArray = try context.fetch(request)
@@ -258,10 +269,22 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
             let cellData = downloadedChapterArray[indexPath.row]
             cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
+            if indexPath.row == chapterBookMark {
+                cell.backgroundColor = UIColor.blue
+            }
+            else {
+                cell.backgroundColor = UIColor.white
+            }
         }
         else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
             let cellData = chapterArray[indexPath.row]
             cell.textLabel?.text = cellData.chapterTitle
+            if indexPath.row == chapterBookMark {
+                cell.backgroundColor = UIColor.blue
+            }
+            else {
+                cell.backgroundColor = UIColor.white
+            }
         }
 //        let cellData = chapterArray[indexPath.row]
 //        cell.textLabel?.text = cellData.chapterTitle
@@ -270,6 +293,13 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 
     // Select cell
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newChapterMark = CDChapterMark(context: context)
+        newChapterMark.chapterMark = Int16(indexPath.row)
+        newChapterMark.parentBook = selectedBook
+        chapterMarkArray.append(newChapterMark)
+        saveChapterMark.saveChapterMarks()
+        //print(bookID)
+        
         performSegue(withIdentifier: "goToPages", sender: self)
         //print(bodyArray[indexPath.row])
 //        print(chapterArray[indexPath.row].chapterBody)

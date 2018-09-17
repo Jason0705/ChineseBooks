@@ -15,8 +15,9 @@ class BookDetailViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var addedBookArray = [CDBook]()
-    
     var addedBook = [CDBook]()
+    
+    //let thisBook = CDBook()
     
     var bookTitle = ""
     var author = ""
@@ -48,8 +49,20 @@ class BookDetailViewController: UIViewController {
         bookCoverImage.kf.setImage(with: coverURL)
         
         loadButton()
+        //createCDBook()
 
     }
+    
+//    func createCDBook() {
+//        thisBook.id = bookID
+//        thisBook.title = bookTitle
+//        thisBook.author = author
+//        thisBook.category = category
+//        thisBook.last = last
+//        thisBook.intro = intro
+//        thisBook.coverURL = bookCoverURL
+//        thisBook.read = true
+//    }
     
     func saveBooks() {
         do {
@@ -108,7 +121,18 @@ class BookDetailViewController: UIViewController {
             destinationVC.bookTitle = self.bookTitle
             destinationVC.bookID = self.bookID
             destinationVC.downloadButtonState = false
-            destinationVC.selectedBookID = self.bookID
+            //destinationVC.selectedBookID = self.bookID
+            
+            let thisBook = CDBook(context: context)
+            thisBook.id = bookID
+            thisBook.title = bookTitle
+            thisBook.author = author
+            thisBook.category = category
+            thisBook.last = last
+            thisBook.intro = intro
+            thisBook.coverURL = bookCoverURL
+            thisBook.read = true
+            destinationVC.selectedBook = thisBook
         }
     }
     

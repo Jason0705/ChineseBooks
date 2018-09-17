@@ -46,6 +46,8 @@ class MyBooksViewController: UIViewController {
     
     func loadBooks() {
         let request : NSFetchRequest<CDBook> = CDBook.fetchRequest()
+        let predicate = NSPredicate(format: "added == YES")
+        request.predicate = predicate
         do {
             myBookList = try context.fetch(request)
         } catch {
@@ -113,8 +115,8 @@ extension MyBooksViewController: UICollectionViewDataSource, UICollectionViewDel
                 destinationVC.bookTitle = myBookList[indexPath.row].title!
                 destinationVC.bookID = myBookList[indexPath.row].id!
                 destinationVC.downloadButtonState = true
-                //destinationVC.selectedBook = myBookList[indexPath.row]
-                destinationVC.selectedBookID = myBookList[indexPath.row].id!
+                destinationVC.selectedBook = myBookList[indexPath.row]
+                //destinationVC.selectedBookID = myBookList[indexPath.row].id!
             }
         }
     }
