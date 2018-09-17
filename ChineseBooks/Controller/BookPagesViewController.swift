@@ -12,18 +12,24 @@ import SwiftyJSON
 
 class BookPagesViewController: UIViewController {
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let saveChapterMark = SaveChapterMark()
+    
     var CDChapterArray = [CDChapter]()
     var chapterArray = [Chapter]()
-    //var bodyArray = [String]()
     var chapterIndex = 0
     
-    //var chapterTitle = ""
-    //var chapterLink = ""
     var body = ""
     
     var splitedContentArray = [String]()
     
     var pageController: UIPageViewController?
+    
+    var selectedBook : CDBook? {
+        didSet {
+            
+        }
+    }
     
     
     @IBOutlet weak var contentTextView: UITextView!
@@ -168,6 +174,12 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 return nil
             }
             chapterIndex -= 1
+            
+            let newChapterMark = CDChapterMark(context: context)
+            newChapterMark.chapterMark = Int16(chapterIndex)
+            newChapterMark.parentBook = selectedBook
+            //chapterMarkArray.append(newChapterMark)
+            saveChapterMark.saveChapterMarks()
 //            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
 //
 //            getBodyData(from: url, completionHandler: {
@@ -226,6 +238,12 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 return nil
             }
             chapterIndex += 1
+            
+            let newChapterMark = CDChapterMark(context: context)
+            newChapterMark.chapterMark = Int16(chapterIndex)
+            newChapterMark.parentBook = selectedBook
+            //chapterMarkArray.append(newChapterMark)
+            saveChapterMark.saveChapterMarks()
 //            let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
 //
 //            getBodyData(from: url, completionHandler: {

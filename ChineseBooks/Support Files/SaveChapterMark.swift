@@ -31,7 +31,8 @@ class SaveChapterMark {
         do {
             array = try context.fetch(request)
             if array.count > 0 {
-                mark = Int(array[array.endIndex - 1].chapterMark)
+                //mark = Int(array[array.endIndex - 1].chapterMark)
+                mark = Int(array[0].chapterMark)
 //                for index in 0..<array.count - 1 {
 //                    if array[index].parentBook == nil {
 //                        context.delete(array[index])
@@ -64,6 +65,23 @@ class SaveChapterMark {
             print("Error fetching data from context: \(error)")
         }
         return mark
+    }
+    
+    func clearChapterMarks() {
+        let request : NSFetchRequest <CDChapterMark> = CDChapterMark.fetchRequest()
+        do {
+            var a = try context.fetch(request)
+            if a.count > 0 {
+                for index in 0..<a.count - 1 {
+                    if a[index].parentBook == nil {
+                        context.delete(a[index])
+                    }
+                }
+                saveChapterMarks()
+            }
+        } catch {
+            
+        }
     }
 
 }

@@ -19,13 +19,10 @@ class ChapterViewController: UIViewController {
     
     var chapterBookMark = 0
     var bookTitle = ""
-    var bookID = "" //: String? {
-//        didSet {
-//            loadChapters()
-//            chapterBookMark = saveChapterMark.loadChapterMarks(with: bookID!)
-//        }
-    //}
+    var bookID = ""
+
     var chapterArray = [Chapter]()
+    var CDChapterArray = [CDChapter]()
     var downloadedChapterArray = [CDChapter]()
     var chapterMarkArray = [CDChapterMark]()
     var downloadButtonState = true
@@ -37,11 +34,6 @@ class ChapterViewController: UIViewController {
             chapterBookMark = saveChapterMark.loadChapterMarks(with: selectedBook!.id!)
         }
     }
-//    var selectedBookID : String? {
-//        didSet {
-//            loadChapters()
-//        }
-//    }
     
     
     @IBOutlet weak var chapterTableView: UITableView!
@@ -60,10 +52,10 @@ class ChapterViewController: UIViewController {
 //            self.mergeArray(with: data)
 //        }
         
+        saveChapterMark.clearChapterMarks()
+        
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
-        
-        //chapterBookMark = saveChapterMark.loadChapterMarks(with: bookID!)
         
     }
     
@@ -144,13 +136,16 @@ class ChapterViewController: UIViewController {
             newChapter.chapterTitle = chapter["title"].stringValue
             newChapter.chapterLink = chapter["link"].stringValue
             newChapter.chapterBody = ""
+            newChapter.downloaded = false
             newChapter.parentBook = selectedBook
 
-            downloadedChapterArray.append(newChapter)
+            //downloadedChapterArray.append(newChapter)
+            CDChapterArray.append(newChapter)
             saveChapters()
         }
         //chapterTableView.reloadData()
-        return downloadedChapterArray
+        //return downloadedChapterArray
+        return CDChapterArray
     }
     
     func createBodyData(with json: JSON) -> String {
@@ -174,6 +169,7 @@ class ChapterViewController: UIViewController {
                 data in
                 //element.setValue(data, forKey: "chapterBody")
                 element.chapterBody = data
+                element.downloaded = true
                 self.saveChapters()
                 self.chapterTableView.reloadData()
             })
@@ -201,7 +197,7 @@ class ChapterViewController: UIViewController {
         } catch {
             print("Error Saving Context: \(error)")
         }
-        chapterTableView.reloadData()
+        //chapterTableView.reloadData()
     }
 
     func loadChapters() {
@@ -215,6 +211,31 @@ class ChapterViewController: UIViewController {
             print("Error fetching data from context: \(error)")
         }
     }
+    
+    func deleteChapters() {
+//        let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
+//        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
+//        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", bookID!)
+//        request.predicate = predicate
+//        do {
+//            let willDelete = try context.fetch(request)
+//            if willDelete.count > 0 {
+//                for index in 0..<willDelete.count {
+//                    context.delete(willDelete[index])
+//                }
+//                saveChapters()
+//            }
+//        } catch {
+//            print("Error fetching data from context: \(error)")
+//        }
+        if downloadedChapterArray.count > 0 {
+            for index in 0..<downloadedChapterArray.count {
+                context.delete(downloadedChapterArray[index])
+            }
+            saveChapters()
+        }
+    }
+    
     
     // MARK: - Save and Load Chapter Book Mark
     
@@ -241,7 +262,9 @@ class ChapterViewController: UIViewController {
 
 
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
+        
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+        deleteChapters()
         downloadChapterData(from: url) { (data) in
             self.mergeArray(with: data)
         }
@@ -266,9 +289,15 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     // Populate cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
-        if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
-            let cellData = downloadedChapterArray[indexPath.row]
-            cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
+        if indexPath.row >= 0 && indexPath.row < CDChapterArray.count {
+            let cellData = CDChapterArray[indexPath.row]
+            if cellData.downloaded == true {
+                cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
+            }
+            else {
+                cell.textLabel?.text = "\(cellData.chapterTitle!)"
+            }
+            
             if indexPath.row == chapterBookMark {
                 cell.backgroundColor = UIColor.blue
             }
@@ -276,7 +305,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.backgroundColor = UIColor.white
             }
         }
-        else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
+        else if indexPath.row >= CDChapterArray.count && indexPath.row < chapterArray.count {
             let cellData = chapterArray[indexPath.row]
             cell.textLabel?.text = cellData.chapterTitle
             if indexPath.row == chapterBookMark {
@@ -316,9 +345,10 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToPages" {
             let destinationVC = segue.destination as! BookPagesViewController
             if let indexPath = chapterTableView.indexPathForSelectedRow {
-                destinationVC.CDChapterArray = downloadedChapterArray
+                destinationVC.CDChapterArray = CDChapterArray
                 destinationVC.chapterArray = chapterArray
                 destinationVC.chapterIndex = indexPath.row
+                destinationVC.selectedBook = selectedBook
             }
         }
     }
