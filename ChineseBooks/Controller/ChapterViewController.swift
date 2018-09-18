@@ -56,8 +56,15 @@ class ChapterViewController: UIViewController {
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
-        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        let temp = selectedBook
+        selectedBook = temp
+        chapterTableView.reloadData()
+    }
+    
     
     
     // MARK: - Networking
