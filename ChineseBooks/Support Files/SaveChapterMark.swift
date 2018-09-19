@@ -13,7 +13,6 @@ class SaveChapterMark {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     //var mark = 0
-    var array = [CDChapterMark]()
     
     func saveChapterMarks() {
         do {
@@ -26,41 +25,17 @@ class SaveChapterMark {
         let request : NSFetchRequest <CDChapterMark> = CDChapterMark.fetchRequest()
         let predicate = NSPredicate(format: "parentBook.id MATCHES %@", id)
         var mark = 0
+        var array = [CDChapterMark]()
         
         request.predicate = predicate
         do {
             array = try context.fetch(request)
             if array.count > 0 {
-                //mark = Int(array[array.endIndex - 1].chapterMark)
-                mark = Int(array[0].chapterMark)
-//                for index in 0..<array.count - 1 {
-//                    if array[index].parentBook == nil {
-//                        context.delete(array[index])
-//                        saveChapterMarks()
-//                    }
-//
-//                }
-//                if array.count > 1 {
-//                    for index in 0..<array.count - 1 {
-//                        context.delete(array[index])
-//                        array.remove(at: index)
-//                        saveChapterMarks()
-//                    }
-//                    //saveChapterMarks()
-//                }
+                mark = Int(array[array.endIndex - 1].chapterMark)
+                //mark = Int(array[0].chapterMark)
 
             }
-//            mark = Int(array.last!.chapterMark)
-//            if array.count > 1 {
-//                for index in 0..<array.count - 1 {
-//                    context.delete(array[index])
-//                    array.remove(at: index)
-//                }
-//                saveChapterMarks()
-//            }
-            //print(array)
-            //print(id)
-            //return mark
+
         } catch {
             print("Error fetching data from context: \(error)")
         }
@@ -80,7 +55,7 @@ class SaveChapterMark {
                 saveChapterMarks()
             }
         } catch {
-            
+            print("Error fetching data from context: \(error)")
         }
     }
 

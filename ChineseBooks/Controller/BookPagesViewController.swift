@@ -14,22 +14,24 @@ class BookPagesViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let saveChapterMark = SaveChapterMark()
+    let savePageMark = SavePageMark()
+    
+    var body = ""
+    
+    var chapterIndex = 0
+    var pageBookMark = 0
     
     var CDChapterArray = [CDChapter]()
     var chapterArray = [Chapter]()
-    var chapterIndex = 0
+    //var chapterMarkArray = [CDChapterMark]()
+    var selectedBook = CDBook()
+    var selectedChapterMark = CDChapterMark()
     
-    var body = ""
     
     var splitedContentArray = [String]()
     
     var pageController: UIPageViewController?
     
-    var selectedBook : CDBook? {
-        didSet {
-            
-        }
-    }
     
     
     @IBOutlet weak var contentTextView: UITextView!
@@ -58,6 +60,8 @@ class BookPagesViewController: UIViewController {
             initializeView()
         }
         
+        //chapterMarkArray.append(selectedChapterMark)
+        pageBookMark = savePageMark.loadPageMarks(inChapter: Int16(chapterIndex), ofBook: selectedBook.id!)
         
         //navigationController?.isNavigationBarHidden = true
 //        pageDevide()
@@ -77,7 +81,7 @@ class BookPagesViewController: UIViewController {
         pageController?.dataSource = self
         
         let startingViewController: ContentViewController =
-            viewControllerAtIndex(index: 0)!
+            viewControllerAtIndex(index: pageBookMark)!
         
         let viewControllers: NSArray = [startingViewController]
         pageController!.setViewControllers(viewControllers
@@ -220,6 +224,15 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         }
         
         index = index - 1
+        let newPageMark = CDPageMark(context: context)
+        newPageMark.pageMark = Int16(index)
+        newPageMark.parentBookID = selectedBook.id
+        newPageMark.chapterMark = Int16(chapterIndex)
+        //newPageMark.parentChapterMark = chapterMarkArray[chapterMarkArray.endIndex - 1]
+        savePageMark.savePageMarks()
+        
+        savePageMark.clearPageMarks(inBook: selectedBook.id!)
+        
         return viewControllerAtIndex(index: index)
     }
     
@@ -282,6 +295,14 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 initializeView()
             }
         }
+        let newPageMark = CDPageMark(context: context)
+        newPageMark.pageMark = Int16(index)
+        newPageMark.parentBookID = selectedBook.id
+        newPageMark.chapterMark = Int16(chapterIndex)
+        //newPageMark.parentChapterMark = chapterMarkArray[chapterMarkArray.endIndex - 1]
+        savePageMark.savePageMarks()
+        
+        savePageMark.clearPageMarks(inBook: selectedBook.id!)
         
         return viewControllerAtIndex(index: index)
     }

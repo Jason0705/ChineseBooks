@@ -52,7 +52,7 @@ class ChapterViewController: UIViewController {
 //            self.mergeArray(with: data)
 //        }
         
-        saveChapterMark.clearChapterMarks()
+        //saveChapterMark.clearChapterMarks()
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
@@ -334,6 +334,8 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         newChapterMark.parentBook = selectedBook
         chapterMarkArray.append(newChapterMark)
         saveChapterMark.saveChapterMarks()
+        
+        saveChapterMark.clearChapterMarks()
         //print(bookID)
         
         performSegue(withIdentifier: "goToPages", sender: self)
@@ -355,7 +357,8 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
                 destinationVC.CDChapterArray = CDChapterArray
                 destinationVC.chapterArray = chapterArray
                 destinationVC.chapterIndex = indexPath.row
-                destinationVC.selectedBook = selectedBook
+                destinationVC.selectedBook = selectedBook!
+                destinationVC.selectedChapterMark = chapterMarkArray[chapterMarkArray.endIndex - 1]
             }
         }
     }

@@ -15,7 +15,7 @@ class BookDetailViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var addedBookArray = [CDBook]()
-    var addedBook = [CDBook]()
+    //var addedBook = [CDBook]()
     
     //let thisBook = CDBook()
     
@@ -75,12 +75,17 @@ class BookDetailViewController: UIViewController {
     func loadButton() {
         let request : NSFetchRequest <CDBook> = CDBook.fetchRequest()
         //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
-        let predicate = NSPredicate(format: "id MATCHES %@", bookID)
+        let predicate = NSPredicate(format: "added == YES")
         request.predicate = predicate
         do {
-            addedBook = try context.fetch(request)
-            if addedBook != [CDBook]() {
-                disableAddButton()
+            let addedBook = try context.fetch(request)
+//            if addedBook != [CDBook]() {
+//                disableAddButton()
+//            }
+            for book in addedBook {
+                if bookID == book.id {
+                    disableAddButton()
+                }
             }
         } catch {
             print("Error fetching data from context: \(error)")
