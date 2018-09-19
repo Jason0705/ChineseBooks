@@ -290,14 +290,23 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 
     // Number of cell
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chapterArray.count
+        var numberOfRow = 0
+        if chapterArray.count == 0 {
+            numberOfRow = downloadedChapterArray.count
+        }
+        else {
+            numberOfRow = chapterArray.count
+        }
+        return numberOfRow
     }
 
     // Populate cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
-        if indexPath.row >= 0 && indexPath.row < CDChapterArray.count {
-            let cellData = CDChapterArray[indexPath.row]
+        
+        
+        if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
+            let cellData = downloadedChapterArray[indexPath.row]
             if cellData.downloaded == true {
                 cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
             }
@@ -312,7 +321,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.backgroundColor = UIColor.white
             }
         }
-        else if indexPath.row >= CDChapterArray.count && indexPath.row < chapterArray.count {
+        else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
             let cellData = chapterArray[indexPath.row]
             cell.textLabel?.text = cellData.chapterTitle
             if indexPath.row == chapterBookMark {
@@ -354,7 +363,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToPages" {
             let destinationVC = segue.destination as! BookPagesViewController
             if let indexPath = chapterTableView.indexPathForSelectedRow {
-                destinationVC.CDChapterArray = CDChapterArray
+                destinationVC.CDChapterArray = downloadedChapterArray
                 destinationVC.chapterArray = chapterArray
                 destinationVC.chapterIndex = indexPath.row
                 destinationVC.selectedBook = selectedBook!

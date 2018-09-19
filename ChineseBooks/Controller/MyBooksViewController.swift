@@ -26,6 +26,7 @@ class MyBooksViewController: UIViewController {
         super.viewDidLoad()
         
         defultLabel.isHidden = true
+        clearBooks()
         //loadBooks()
         //myBooksCollectionView.reloadData()
         
@@ -44,6 +45,14 @@ class MyBooksViewController: UIViewController {
         loadBooks()
     }
     
+    func saveBooks() {
+        do {
+            try context.save()
+        } catch {
+            print("Error Saving Context: \(error)")
+        }
+    }
+    
     func loadBooks() {
         let request : NSFetchRequest<CDBook> = CDBook.fetchRequest()
         let predicate = NSPredicate(format: "added == YES")
@@ -60,6 +69,24 @@ class MyBooksViewController: UIViewController {
             defultLabel.isHidden = true
         }
         myBooksCollectionView.reloadData()
+    }
+    
+    func clearBooks() {
+        let request : NSFetchRequest<CDBook> = CDBook.fetchRequest()
+        let predicate = NSPredicate(format: "added == NIL")
+        request.predicate = predicate
+        do {
+            let willDelete = try context.fetch(request)
+            if willDelete.count > 0 {
+                for index in 0..<willDelete.count {
+                    context.delete(willDelete[index])
+                }
+                saveBooks()
+            }
+
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
     }
     
     
