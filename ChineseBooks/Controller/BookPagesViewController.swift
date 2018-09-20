@@ -109,11 +109,12 @@ class BookPagesViewController: UIViewController {
         
         let sentencesArray = text.components(separatedBy: "\n")
         for sentence in sentencesArray {
-            let frontPadded = String(repeating: " ", count: 4) + sentence
+            let frontPadded = String(repeating: "", count: 1) + sentence
             
 //            let attributed = NSMutableAttributedString(string: frontPadded)
 //            attributed.addAttribute(.foregroundColor, value: contentLabel.backgroundColor, range: NSRange.init(location: 0, length: 0))
             var linesArray = frontPadded.split(by: charactersPerLine)
+            //print(linesArray)
             for index in 0..<linesArray.count {
                 if linesArray[index].count < charactersPerLine {
                     linesArray[index] = linesArray[index] + "\n"
@@ -121,20 +122,31 @@ class BookPagesViewController: UIViewController {
                 lines.append(linesArray[index])
             }
         }
-        var i = numberOfLines
-        print(i)
+        
+//        var i = numberOfLines
         var newPageText = ""
-        for index in 0..<lines.count{
-            if (i / (index + 1)) >= 1 {
-                newPageText = newPageText + lines[index]
+//        var remainder = 0
+//        for index in 1..<lines.count + 1{
+//            if (i / (index)) >= 1 {
+//                newPageText = newPageText + lines[index - 1]
+//            }
+//            else {
+//                pagesArray.append(newPageText)
+//                i = i + numberOfLines
+//                newPageText = lines[index - 1]
+//            }
+//        }
+        let pages = lines.chunked(by: numberOfLines)
+        
+        for index in 0..<pages.count {
+            for i in 0..<pages[index].count {
+                newPageText = newPageText + pages[index][i]
             }
-            else {
-                pagesArray.append(newPageText)
-                i = i + numberOfLines
-                newPageText = lines[index]
-            }
+            pagesArray.append(newPageText)
+            newPageText = ""
         }
         
+        print(pagesArray)
         return pagesArray
 
     }
@@ -360,6 +372,14 @@ extension String {
         }
         
         return results.map { String($0) }
+    }
+}
+
+extension Array {
+    func chunked(by chunkSize: Int) -> [[Element]] {
+        return stride(from: 0, to: self.count, by: chunkSize).map {
+            Array(self[$0..<Swift.min($0 + chunkSize, self.count)])
+        }
     }
 }
 
