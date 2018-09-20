@@ -213,7 +213,8 @@ class ChapterViewController: UIViewController {
         //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", bookID!)
         request.predicate = predicate
         do {
-            downloadedChapterArray = try context.fetch(request)
+            //downloadedChapterArray = try context.fetch(request)
+            CDChapterArray = try context.fetch(request)
         } catch {
             print("Error fetching data from context: \(error)")
         }
@@ -235,12 +236,21 @@ class ChapterViewController: UIViewController {
 //        } catch {
 //            print("Error fetching data from context: \(error)")
 //        }
-        if downloadedChapterArray.count > 0 {
-            for index in 0..<downloadedChapterArray.count {
-                context.delete(downloadedChapterArray[index])
-            }
-            saveChapters()
-        }
+        
+//        if downloadedChapterArray.count > 0 {
+//            for index in 0..<downloadedChapterArray.count {
+//                context.delete(downloadedChapterArray[index])
+//            }
+//            saveChapters()
+//        }
+        
+//        if CDChapterArray.count > 0 {
+//            for index in 0..<CDChapterArray.count {
+//                context.delete(CDChapterArray[index])
+//            }
+//            saveChapters()
+//        }
+
     }
     
     
@@ -271,7 +281,7 @@ class ChapterViewController: UIViewController {
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
         
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        deleteChapters()
+        //deleteChapters()
         downloadChapterData(from: url) { (data) in
             self.mergeArray(with: data)
         }
@@ -292,7 +302,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         var numberOfRow = 0
         if chapterArray.count == 0 {
-            numberOfRow = downloadedChapterArray.count
+            numberOfRow = CDChapterArray.count
         }
         else {
             numberOfRow = chapterArray.count
@@ -305,8 +315,8 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
         
         
-        if indexPath.row >= 0 && indexPath.row < downloadedChapterArray.count {
-            let cellData = downloadedChapterArray[indexPath.row]
+        if indexPath.row >= 0 && indexPath.row < CDChapterArray.count {
+            let cellData = CDChapterArray[indexPath.row]
             if cellData.downloaded == true {
                 cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
             }
@@ -321,7 +331,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.backgroundColor = UIColor.white
             }
         }
-        else if indexPath.row >= downloadedChapterArray.count && indexPath.row < chapterArray.count {
+        else if indexPath.row >= CDChapterArray.count && indexPath.row < chapterArray.count {
             let cellData = chapterArray[indexPath.row]
             cell.textLabel?.text = cellData.chapterTitle
             if indexPath.row == chapterBookMark {
@@ -363,7 +373,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         if segue.identifier == "goToPages" {
             let destinationVC = segue.destination as! BookPagesViewController
             if let indexPath = chapterTableView.indexPathForSelectedRow {
-                destinationVC.CDChapterArray = downloadedChapterArray
+                destinationVC.CDChapterArray = CDChapterArray
                 destinationVC.chapterArray = chapterArray
                 destinationVC.chapterIndex = indexPath.row
                 destinationVC.selectedBook = selectedBook!

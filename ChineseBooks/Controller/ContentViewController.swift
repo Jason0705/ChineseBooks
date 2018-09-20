@@ -16,7 +16,9 @@ class ContentViewController: UIViewController {
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var contentTextView: UITextView!
+    //@IBOutlet weak var contentTextView: UITextView!
+    
+    @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var pageCounterLabel: UILabel!
     
     
@@ -28,7 +30,9 @@ class ContentViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         titleLabel.text = chapterTitle
-        contentTextView.text = body
+        //contentTextView.text = body
+        contentLabel.text = body
+        contentLabel.numberOfLines = Int(contentLabel.bounds.height / contentLabel.font.lineHeight)
         pageCounterLabel.text = pageCounte
     }
 

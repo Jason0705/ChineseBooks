@@ -34,7 +34,9 @@ class BookPagesViewController: UIViewController {
     
     
     
-    @IBOutlet weak var contentTextView: UITextView!
+    //@IBOutlet weak var contentTextView: UITextView!
+    
+    @IBOutlet weak var contentLabel: UILabel!
     
     
     
@@ -46,26 +48,23 @@ class BookPagesViewController: UIViewController {
             
             getBodyData(from: url, completionHandler: {
                 data in
-                self.body = data
+
                 
-                self.pageDevide()
+                self.splitedContentArray = self.pageSplit(with: data)
                 
                 self.initializeView()
                 
             })
         }
         else {
-            body = CDChapterArray[chapterIndex].chapterBody!
-            pageDevide()
+
+            splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
             initializeView()
         }
         
         //chapterMarkArray.append(selectedChapterMark)
         pageBookMark = savePageMark.loadPageMarks(inChapter: Int16(chapterIndex), ofBook: selectedBook.id!)
         
-        //navigationController?.isNavigationBarHidden = true
-//        pageDevide()
-//        initializeView()
         
     }
   
@@ -96,13 +95,50 @@ class BookPagesViewController: UIViewController {
         let pageViewRect = self.view.bounds
         pageController!.view.frame = pageViewRect
         pageController!.didMove(toParentViewController: self)
+        
     }
     
-    func pageDevide() {
-        contentTextView.text = body //chapterArray[chapterIndex].chapterBody
-        let fitRange = contentTextView.numberOfCharactersThatFitTextView()
-        splitedContentArray = body.split(by: fitRange) //chapterArray[chapterIndex].chapterBody.split(by: fitRange)
+    func pageSplit(with text: String) -> [String] {
+        var lines = [String]()
+        var pagesArray = [String]()
+        
+        let charactersPerLine = Int(contentLabel.bounds.width / (contentLabel.font.pointSize))
+        let numberOfLines = Int(contentLabel.bounds.height / contentLabel.font.lineHeight)
+
+        contentLabel.numberOfLines = numberOfLines
+        
+        let sentencesArray = text.components(separatedBy: "\n")
+        for sentence in sentencesArray {
+            let frontPadded = String(repeating: " ", count: 4) + sentence
+            
+//            let attributed = NSMutableAttributedString(string: frontPadded)
+//            attributed.addAttribute(.foregroundColor, value: contentLabel.backgroundColor, range: NSRange.init(location: 0, length: 0))
+            var linesArray = frontPadded.split(by: charactersPerLine)
+            for index in 0..<linesArray.count {
+                if linesArray[index].count < charactersPerLine {
+                    linesArray[index] = linesArray[index] + "\n"
+                }
+                lines.append(linesArray[index])
+            }
+        }
+        var i = numberOfLines
+        print(i)
+        var newPageText = ""
+        for index in 0..<lines.count{
+            if (i / (index + 1)) >= 1 {
+                newPageText = newPageText + lines[index]
+            }
+            else {
+                pagesArray.append(newPageText)
+                i = i + numberOfLines
+                newPageText = lines[index]
+            }
+        }
+        
+        return pagesArray
+
     }
+    
     
     
     // MARK: - Networking
@@ -208,17 +244,16 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 
                 getBodyData(from: url, completionHandler: {
                     data in
-                    self.body = data
-                    
-                    self.pageDevide()
-                    
+
+                    self.splitedContentArray = self.pageSplit(with: data)
+
                     self.initializeView()
                     
                 })
             }
             else {
-                body = CDChapterArray[chapterIndex].chapterBody!
-                pageDevide()
+
+                splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
                 initializeView()
             }
         }
@@ -281,17 +316,16 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 
                 getBodyData(from: url, completionHandler: {
                     data in
-                    self.body = data
-                    
-                    self.pageDevide()
-                    
+
+                    self.splitedContentArray = self.pageSplit(with: data)
+
                     self.initializeView()
                     
                 })
             }
             else {
-                body = CDChapterArray[chapterIndex].chapterBody!
-                pageDevide()
+
+                splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
                 initializeView()
             }
         }
@@ -329,18 +363,5 @@ extension String {
     }
 }
 
-// MARK: - Get textView fitRange
-extension UITextView {
-    func numberOfCharactersThatFitTextView() -> Int {
-        let fontRef = CTFontCreateWithName(font!.fontName as CFString, font!.pointSize, nil)
-        let attributes = [kCTFontAttributeName : fontRef]
-        let attributedString = NSAttributedString(string: text!, attributes: attributes as [NSAttributedStringKey : Any])
-        let frameSetterRef = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
-        
-        var characterFitRange: CFRange = CFRange()
-        
-        CTFramesetterSuggestFrameSizeWithConstraints(frameSetterRef, CFRangeMake(0, 0), nil, CGSize(width: bounds.size.width, height: bounds.size.height), &characterFitRange)
-        
-        return Int(characterFitRange.length)
-    }
-}
+
+
