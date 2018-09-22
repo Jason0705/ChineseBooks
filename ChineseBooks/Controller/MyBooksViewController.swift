@@ -15,16 +15,20 @@ class MyBooksViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var myBookList = [CDBook]()
+    var editMode = false
+    
     
     
     @IBOutlet weak var defultLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var editBarButton: UIBarButtonItem!
+    @IBOutlet weak var shopBarButton: UIBarButtonItem!
+    
     @IBOutlet weak var myBooksCollectionView: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         defultLabel.isHidden = true
         clearBooks()
         //loadBooks()
@@ -51,6 +55,7 @@ class MyBooksViewController: UIViewController {
         } catch {
             print("Error Saving Context: \(error)")
         }
+        myBooksCollectionView.reloadData()
     }
     
     func loadBooks() {
@@ -69,6 +74,24 @@ class MyBooksViewController: UIViewController {
             defultLabel.isHidden = true
         }
         myBooksCollectionView.reloadData()
+    }
+    
+    func deleteBook(at index: Int) {
+        let request : NSFetchRequest<CDBook> = CDBook.fetchRequest()
+        let predicate = NSPredicate(format: "id MATCHES %@", myBookList[index].id!)
+        request.predicate = predicate
+        do {
+            let willDelete = try context.fetch(request)
+            if willDelete.count > 0 {
+                for book in willDelete {
+                    context.delete(book)
+                }
+                saveBooks()
+                loadBooks()
+            }
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
     }
     
     func clearBooks() {
@@ -98,13 +121,51 @@ class MyBooksViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
         layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 16
-        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         return layout
     }
+    
+    
+    // MARK: - Edit Mode
+    
+    // Enter edit mode
+    func enterEditMode() {
+        editMode = true
+        editBarButton.title = "完成"
+        shopBarButton.isEnabled = false
+    }
+    
+    // Exit edit mode
+    func exitEditMode() {
+        editMode = false
+        editBarButton.title = "编辑"
+        shopBarButton.isEnabled = true
+    }
 
+    
 
+    @IBAction func editBarButtonPressed(_ sender: UIBarButtonItem) {
+        // Press 完成
+        if editMode == true {
+            exitEditMode()
+        }
+        // Press 编辑
+        else if editMode == false {
+            enterEditMode()
+        }
+        myBooksCollectionView.reloadData()
+    }
+    
+
+    @IBAction func longPressed(_ sender: UILongPressGestureRecognizer) {
+        enterEditMode()
+        myBooksCollectionView.reloadData()
+    }
+    
+    
+    
 }
 
 
@@ -122,6 +183,16 @@ extension MyBooksViewController: UICollectionViewDataSource, UICollectionViewDel
         let cellData = myBookList[indexPath.row]
         cell.bookTitleLabel.text = cellData.title
         cell.bookAuthorLabel.text = cellData.author
+        cell.cellDelegate = self
+        cell.deleteButton.isHidden = !editMode
+        cell.deleteButton.layer.cornerRadius = 0.5 * cell.deleteButton.bounds.size.width
+        cell.index = indexPath.row
+        if editMode == true {
+            cell.shakeIcons()
+        }
+        else if editMode == false {
+            cell.stopShakingIcons()
+        }
         let coverURL = URL(string: cellData.coverURL!)
         cell.bookCoverImage.kf.setImage(with: coverURL)
         
@@ -130,8 +201,10 @@ extension MyBooksViewController: UICollectionViewDataSource, UICollectionViewDel
     
     // Select Cell
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        exitEditMode()
         performSegue(withIdentifier: "goToChapter", sender: myBooksCollectionView)
     }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -146,6 +219,15 @@ extension MyBooksViewController: UICollectionViewDataSource, UICollectionViewDel
                 //destinationVC.selectedBookID = myBookList[indexPath.row].id!
             }
         }
+    }
+    
+    
+}
+
+
+extension MyBooksViewController: CollectionViewNew {
+    func deleteCell(withIndex index: Int) {
+        deleteBook(at: index)
     }
     
     

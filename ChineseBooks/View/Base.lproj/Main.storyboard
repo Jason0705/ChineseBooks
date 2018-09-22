@@ -25,6 +25,7 @@
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="qer-Ks-aSu">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="638"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <gestureRecognizers/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="9Y5-Vi-RB6">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -44,6 +45,7 @@
                                         <connections>
                                             <outlet property="dataSource" destination="8pK-JS-DeU" id="XuO-i4-FI8"/>
                                             <outlet property="delegate" destination="8pK-JS-DeU" id="wtG-Y1-Re2"/>
+                                            <outletCollection property="gestureRecognizers" destination="hHs-1f-ME2" appends="YES" id="wey-8x-OrC"/>
                                         </connections>
                                     </collectionView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="您的书架暂时为空！请进入商城进行搜索和添加。" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUN-er-SWM">
@@ -67,6 +69,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="2k8-sW-Zzn" firstAttribute="leading" secondItem="vd2-p9-YiU" secondAttribute="leading" id="L2f-V7-oQi"/>
                             <constraint firstItem="2k8-sW-Zzn" firstAttribute="bottom" secondItem="vd2-p9-YiU" secondAttribute="bottom" id="OLz-a2-LQD"/>
@@ -76,6 +79,11 @@
                         <viewLayoutGuide key="safeArea" id="vd2-p9-YiU"/>
                     </view>
                     <navigationItem key="navigationItem" title="我的书架" id="3bz-jb-2KQ">
+                        <barButtonItem key="leftBarButtonItem" title="编辑" id="pKd-Ir-1dL">
+                            <connections>
+                                <action selector="editBarButtonPressed:" destination="8pK-JS-DeU" id="2fY-rg-mUx"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="商城" id="RIV-Ad-haD">
                             <connections>
                                 <segue destination="BYZ-38-t0r" kind="show" id="No5-Nj-trH"/>
@@ -85,13 +93,20 @@
                     <connections>
                         <outlet property="containerView" destination="2k8-sW-Zzn" id="QfH-Tc-1bq"/>
                         <outlet property="defultLabel" destination="XUN-er-SWM" id="vCs-3o-IEn"/>
+                        <outlet property="editBarButton" destination="pKd-Ir-1dL" id="O6Y-RY-qUY"/>
                         <outlet property="myBooksCollectionView" destination="qer-Ks-aSu" id="aa8-ZO-45V"/>
+                        <outlet property="shopBarButton" destination="RIV-Ad-haD" id="rU6-Gh-VPZ"/>
                         <segue destination="8zg-GW-XFM" kind="show" identifier="goToChapter" id="osF-wW-Ufi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ER6-Gf-r9i" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="hHs-1f-ME2">
+                    <connections>
+                        <action selector="longPressed:" destination="8pK-JS-DeU" id="LNS-Tf-9f6"/>
+                    </connections>
+                </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="103" y="134"/>
+            <point key="canvasLocation" x="101.59999999999999" y="133.74384236453201"/>
         </scene>
         <!--免费书城-->
         <scene sceneID="tne-QT-ifu">
@@ -637,7 +652,7 @@
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-bC-1gg">
                                                 <rect key="frame" x="8" y="8" width="359" height="561"/>
-                                                <mutableString key="text">在晋国都城新绛数里之外，耸立着一座夯土墙环绕的坚固小城，此城名为赵氏之宫，乃是晋国六大卿族之一，赵氏的私邑。\n这儿却还有一个流传更广的名字：下宫！七十多年前那场“下宫之难”，杀得人头滚滚、血灌井田，赵氏满门被灭，只幸存一个赵氏孤儿。随后赵氏孤儿绝境复起，这座被摧毁的城邑也恢复了些许元气，幸存的隶臣们都感慨这是先祖的恩德泽被。\n不过在邑中一处宽阔的马厩中，却有个赵氏少年对这所谓的“德泽”嗤之以鼻，他用没人听得到的声音嘀咕道：\n“京剧和电影里尽是胡编乱造，我来到了这时代，才知道，世上压根没有屠岸贾这个人啊！”\n“好奇害死猫啊，我就不该乱问自毁三观的，谁曾想到，剧本里的贞洁烈女赵庄姬，也就是我这具身体的太祖母。</mutableString>
+                                                <string key="text">在晋国都城新绛数里之外，耸立着一座夯土墙环绕的坚固小城，此城名为赵氏之宫，乃是晋国六大卿族之一，赵氏的私邑。\n这儿却还有一个流传更广的名字：下宫！七十多年前那场“下宫之难”，杀得人头滚滚、血灌井田，赵氏满门被灭，只幸存一个赵氏孤儿。随后赵氏孤儿绝境复起，这座被摧毁的城邑也恢复了些许元气，幸存的隶臣们都感慨这是先祖的恩德泽被。\n不过在邑中一处宽阔的马厩中，却有个赵氏少年对这所谓的“德泽”嗤之以鼻，他用没人听得到的声音嘀咕道：\n“京剧和电影里尽是胡编乱造，我来到了这时代，才知道，世上压根没有屠岸贾这个人啊！”\n“好奇害死猫啊，我就不该乱问自毁三观的，谁曾想到，剧本里的贞洁烈女赵庄姬，也就是我这具身体的太祖母。</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -724,7 +739,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="20" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W3F-2f-N7w">
                                 <rect key="frame" x="8" y="126" width="359" height="561"/>
                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <mutableString key="text">在晋国都城新绛数里之外，耸立着一座夯土墙环绕的坚固小城，此城名为赵氏之宫，乃是晋国六大卿族之一，赵氏的私邑。\n这儿却还有一个流传更广的名字：下宫！七十多年前那场“下宫之难”，杀得人头滚滚、血灌井田，赵氏满门被灭，只幸存一个赵氏孤儿。随后赵氏孤儿绝境复起，这座被摧毁的城邑也恢复了些许元气，幸存的隶臣们都感慨这是先祖的恩德泽被。\n不过在邑中一处宽阔的马厩中，却有个赵氏少年对这所谓的“德泽”嗤之以鼻，他用没人听得到的声音嘀咕道：\n“京剧和电影里尽是胡编乱造，我来到了这时代，才知道，世上压根没有屠岸贾这个人啊！”\n“好奇害死猫啊，我就不该乱问自毁三观的，谁曾想到，剧本里的贞洁烈女赵庄姬，也就是我这具身体的太祖母。</mutableString>
+                                <string key="text">在晋国都城新绛数里之外，耸立着一座夯土墙环绕的坚固小城，此城名为赵氏之宫，乃是晋国六大卿族之一，赵氏的私邑。\n这儿却还有一个流传更广的名字：下宫！七十多年前那场“下宫之难”，杀得人头滚滚、血灌井田，赵氏满门被灭，只幸存一个赵氏孤儿。随后赵氏孤儿绝境复起，这座被摧毁的城邑也恢复了些许元气，幸存的隶臣们都感慨这是先祖的恩德泽被。\n不过在邑中一处宽阔的马厩中，却有个赵氏少年对这所谓的“德泽”嗤之以鼻，他用没人听得到的声音嘀咕道：\n“京剧和电影里尽是胡编乱造，我来到了这时代，才知道，世上压根没有屠岸贾这个人啊！”\n“好奇害死猫啊，我就不该乱问自毁三观的，谁曾想到，剧本里的贞洁烈女赵庄姬，也就是我这具身体的太祖母。</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1090,7 +1105,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="62f-25-pyy"/>
-        <segue reference="Kd6-Mr-PCv"/>
+        <segue reference="osF-wW-Ufi"/>
         <segue reference="GVq-nl-wR7"/>
     </inferredMetricsTieBreakers>
 </document>

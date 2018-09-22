@@ -146,7 +146,7 @@ class BookPagesViewController: UIViewController {
             newPageText = ""
         }
         
-        print(pagesArray)
+        //print(pagesArray)
         return pagesArray
 
     }

@@ -20,36 +20,55 @@
                 <rect key="frame" x="0.0" y="0.0" width="110" height="200"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKX-U1-1fy">
-                        <rect key="frame" x="0.0" y="0.0" width="110" height="151"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NKX-U1-1fy">
+                        <rect key="frame" x="4" y="4" width="102" height="145"/>
+                        <gestureRecognizers/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="NKX-U1-1fy" secondAttribute="height" multiplier="110:151" id="h0a-5b-lqJ"/>
+                            <constraint firstAttribute="width" secondItem="NKX-U1-1fy" secondAttribute="height" multiplier="47:67" id="38c-Mb-h4w"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fbL-XY-zsA">
-                        <rect key="frame" x="0.0" y="179.5" width="110" height="16"/>
+                        <rect key="frame" x="0.0" y="177.5" width="110" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x8x-c5-Bad">
-                        <rect key="frame" x="0.0" y="159" width="110" height="20.5"/>
+                        <rect key="frame" x="0.0" y="157" width="110" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button hidden="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iiP-vQ-TNo">
+                        <rect key="frame" x="0.0" y="0.0" width="25" height="25"/>
+                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="GqE-C9-879"/>
+                            <constraint firstAttribute="width" secondItem="iiP-vQ-TNo" secondAttribute="height" multiplier="1:1" id="Pcy-6S-ygh"/>
+                            <constraint firstAttribute="width" constant="25" id="RSR-y7-KVc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                        <state key="normal" title="X">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <connections>
+                            <action selector="deleteButtonPressed:" destination="gTV-IL-0wX" eventType="touchUpInside" id="cDz-R0-qb3"/>
+                        </connections>
+                    </button>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="x8x-c5-Bad" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="20t-VG-5Ng"/>
                 <constraint firstAttribute="trailing" secondItem="fbL-XY-zsA" secondAttribute="trailing" id="BfL-Lo-nhn"/>
-                <constraint firstItem="NKX-U1-1fy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="TqE-gI-cMx"/>
-                <constraint firstItem="NKX-U1-1fy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Zqk-aK-e4A"/>
-                <constraint firstAttribute="trailing" secondItem="NKX-U1-1fy" secondAttribute="trailing" id="fcw-NF-e1m"/>
-                <constraint firstItem="x8x-c5-Bad" firstAttribute="top" secondItem="NKX-U1-1fy" secondAttribute="bottom" constant="8" id="iui-AM-Jj4"/>
+                <constraint firstAttribute="trailing" secondItem="NKX-U1-1fy" secondAttribute="trailing" constant="4" id="C0t-4z-HpA"/>
+                <constraint firstItem="NKX-U1-1fy" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="4" id="DEn-VY-bqV"/>
+                <constraint firstItem="x8x-c5-Bad" firstAttribute="top" secondItem="NKX-U1-1fy" secondAttribute="bottom" constant="8" id="F1I-yN-fik"/>
+                <constraint firstItem="iiP-vQ-TNo" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="T2I-zU-Fbc"/>
+                <constraint firstItem="iiP-vQ-TNo" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jQ9-9e-tPo"/>
                 <constraint firstItem="fbL-XY-zsA" firstAttribute="top" secondItem="x8x-c5-Bad" secondAttribute="bottom" id="oIr-Ce-o6N"/>
                 <constraint firstItem="fbL-XY-zsA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tpi-Ro-i0v"/>
                 <constraint firstAttribute="trailing" secondItem="x8x-c5-Bad" secondAttribute="trailing" id="wUf-7M-MpF"/>
+                <constraint firstItem="NKX-U1-1fy" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="yuD-ud-NkY"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="127" height="226"/>
@@ -57,6 +76,7 @@
                 <outlet property="bookAuthorLabel" destination="fbL-XY-zsA" id="pNv-iK-mYa"/>
                 <outlet property="bookCoverImage" destination="NKX-U1-1fy" id="cc6-cf-6Hk"/>
                 <outlet property="bookTitleLabel" destination="x8x-c5-Bad" id="ybg-5j-lfV"/>
+                <outlet property="deleteButton" destination="iiP-vQ-TNo" id="iHW-lb-11f"/>
             </connections>
             <point key="canvasLocation" x="-27" y="1"/>
         </collectionViewCell>

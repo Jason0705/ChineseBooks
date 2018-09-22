@@ -11,7 +11,7 @@
         <attribute name="read" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="captherMark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDChapterMark" inverseName="parentBook" inverseEntity="CDChapterMark" syncable="YES"/>
-        <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDChapter" inverseName="parentBook" inverseEntity="CDChapter" syncable="YES"/>
+        <relationship name="chapters" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDChapter" inverseName="parentBook" inverseEntity="CDChapter" syncable="YES"/>
     </entity>
     <entity name="CDChapter" representedClassName="CDChapter" syncable="YES" codeGenerationType="class">
         <attribute name="chapterBody" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,7 +22,7 @@
     </entity>
     <entity name="CDChapterMark" representedClassName="CDChapterMark" syncable="YES" codeGenerationType="class">
         <attribute name="chapterMark" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="pageMark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDPageMark" inverseName="parentChapterMark" inverseEntity="CDPageMark" syncable="YES"/>
+        <relationship name="pageMark" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDPageMark" inverseName="parentChapterMark" inverseEntity="CDPageMark" syncable="YES"/>
         <relationship name="parentBook" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDBook" inverseName="captherMark" inverseEntity="CDBook" syncable="YES"/>
     </entity>
     <entity name="CDPageMark" representedClassName="CDPageMark" syncable="YES" codeGenerationType="class">

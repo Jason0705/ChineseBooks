@@ -80,8 +80,8 @@ class SearchViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
         layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 16
-        layout.minimumLineSpacing = 16
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
         
         return layout
     }
