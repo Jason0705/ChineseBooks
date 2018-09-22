@@ -17,9 +17,10 @@ class BookPagesViewController: UIViewController {
     let savePageMark = SavePageMark()
     
     var body = ""
-    
     var chapterIndex = 0
     var pageBookMark = 0
+    
+    var settingMode = false
     
     var CDChapterArray = [CDChapter]()
     var chapterArray = [Chapter]()
@@ -37,11 +38,16 @@ class BookPagesViewController: UIViewController {
     //@IBOutlet weak var contentTextView: UITextView!
     
     @IBOutlet weak var contentLabel: UILabel!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var settingView: UIView!
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        settingView.layer.cornerRadius = 10
+        self.navigationController?.isNavigationBarHidden = true
         
         if chapterIndex >= CDChapterArray.count {
             let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
@@ -50,7 +56,7 @@ class BookPagesViewController: UIViewController {
                 data in
 
                 
-                self.splitedContentArray = self.pageSplit(with: data)
+                self.pageSplit(with: data)
                 
                 self.initializeView()
                 
@@ -58,7 +64,7 @@ class BookPagesViewController: UIViewController {
         }
         else {
 
-            splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
+            pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
             initializeView()
         }
         
@@ -90,17 +96,16 @@ class BookPagesViewController: UIViewController {
                                            completion: nil)
         
         self.addChildViewController(pageController!)
-        self.view.addSubview(self.pageController!.view)
+        self.contentView.addSubview(self.pageController!.view)
         
-        let pageViewRect = self.view.bounds
+        let pageViewRect = self.contentView.bounds
         pageController!.view.frame = pageViewRect
         pageController!.didMove(toParentViewController: self)
         
     }
     
-    func pageSplit(with text: String) -> [String] {
+    func pageSplit(with text: String) {
         var lines = [String]()
-        var pagesArray = [String]()
         
         let charactersPerLine = Int(contentLabel.bounds.width / (contentLabel.font.pointSize))
         let numberOfLines = Int(contentLabel.bounds.height / contentLabel.font.lineHeight)
@@ -114,7 +119,7 @@ class BookPagesViewController: UIViewController {
 //            let attributed = NSMutableAttributedString(string: frontPadded)
 //            attributed.addAttribute(.foregroundColor, value: contentLabel.backgroundColor, range: NSRange.init(location: 0, length: 0))
             var linesArray = frontPadded.split(by: charactersPerLine)
-            //print(linesArray)
+            
             for index in 0..<linesArray.count {
                 if linesArray[index].count < charactersPerLine {
                     linesArray[index] = linesArray[index] + "\n"
@@ -123,31 +128,17 @@ class BookPagesViewController: UIViewController {
             }
         }
         
-//        var i = numberOfLines
         var newPageText = ""
-//        var remainder = 0
-//        for index in 1..<lines.count + 1{
-//            if (i / (index)) >= 1 {
-//                newPageText = newPageText + lines[index - 1]
-//            }
-//            else {
-//                pagesArray.append(newPageText)
-//                i = i + numberOfLines
-//                newPageText = lines[index - 1]
-//            }
-//        }
         let pages = lines.chunked(by: numberOfLines)
         
         for index in 0..<pages.count {
             for i in 0..<pages[index].count {
                 newPageText = newPageText + pages[index][i]
             }
-            pagesArray.append(newPageText)
+            splitedContentArray.append(newPageText)
             newPageText = ""
         }
         
-        //print(pagesArray)
-        return pagesArray
 
     }
     
@@ -180,6 +171,20 @@ class BookPagesViewController: UIViewController {
         return bodyData
     }
 
+    
+    
+    
+    // MARK: - Enable/Disable Setting Menu
+    @IBAction func tapViewTapped(_ sender: UITapGestureRecognizer) {
+        if settingMode == true {
+            settingMode = false
+        }
+        else if settingMode == false {
+            settingMode = true
+        }
+        settingView.isHidden = !settingMode
+        self.navigationController?.isNavigationBarHidden = !settingMode
+    }
     
 
 }
@@ -257,7 +262,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 getBodyData(from: url, completionHandler: {
                     data in
 
-                    self.splitedContentArray = self.pageSplit(with: data)
+                    self.pageSplit(with: data)
 
                     self.initializeView()
                     
@@ -265,7 +270,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             else {
 
-                splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
+                pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
                 initializeView()
             }
         }
@@ -329,15 +334,14 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
                 getBodyData(from: url, completionHandler: {
                     data in
 
-                    self.splitedContentArray = self.pageSplit(with: data)
-
+                    self.pageSplit(with: data)
                     self.initializeView()
                     
                 })
             }
             else {
 
-                splitedContentArray = pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
+                pageSplit(with: CDChapterArray[chapterIndex].chapterBody!)
                 initializeView()
             }
         }

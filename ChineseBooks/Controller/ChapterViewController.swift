@@ -356,7 +356,6 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         
         saveChapterMark.clearChapterMarks()
         //print(bookID)
-        
         performSegue(withIdentifier: "goToPages", sender: self)
         //print(bodyArray[indexPath.row])
 //        print(chapterArray[indexPath.row].chapterBody)
