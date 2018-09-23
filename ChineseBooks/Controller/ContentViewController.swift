@@ -13,13 +13,14 @@ class ContentViewController: UIViewController {
     var chapterTitle = ""
     var body = ""
     var pageCounte = ""
+    var backgroundColor = UIColor.white
+    var fontSize : CGFloat = 22
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    //@IBOutlet weak var contentTextView: UITextView!
-    
     @IBOutlet weak var contentLabel: UILabel!
     @IBOutlet weak var pageCounterLabel: UILabel!
+    @IBOutlet weak var containerView: UIView!
     
     
     override func viewDidLoad() {
@@ -29,11 +30,13 @@ class ContentViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        contentLabel.font = UIFont(name: contentLabel.font.fontName, size: fontSize)
+        
         titleLabel.text = chapterTitle
-        //contentTextView.text = body
         contentLabel.text = body
         contentLabel.numberOfLines = Int(contentLabel.bounds.height / contentLabel.font.lineHeight)
         pageCounterLabel.text = pageCounte
+        containerView.backgroundColor = backgroundColor
     }
 
 }

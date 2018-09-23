@@ -31,10 +31,15 @@
         <attribute name="parentBookID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="parentChapterMark" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDChapterMark" inverseName="pageMark" inverseEntity="CDChapterMark" syncable="YES"/>
     </entity>
+    <entity name="CDPreference" representedClassName="CDPreference" syncable="YES" codeGenerationType="class">
+        <attribute name="backgroundColor" attributeType="Transformable" syncable="YES"/>
+        <attribute name="fontSize" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CDBook" positionX="-4041" positionY="159" width="128" height="208"/>
         <element name="CDChapter" positionX="-3827" positionY="306" width="128" height="118"/>
         <element name="CDChapterMark" positionX="-3827" positionY="153" width="128" height="88"/>
         <element name="CDPageMark" positionX="-3636" positionY="162" width="128" height="103"/>
+        <element name="CDPreference" positionX="-4041" positionY="450" width="128" height="73"/>
     </elements>
 </model>
