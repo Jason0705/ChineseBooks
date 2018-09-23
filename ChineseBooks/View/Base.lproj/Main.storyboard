@@ -622,7 +622,7 @@
                                         </connections>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEl-sb-gcM" userLabel="Setting View">
-                                        <rect key="frame" x="8" y="433.66666666666657" width="359" height="191.33333333333331"/>
+                                        <rect key="frame" x="8" y="427.66666666666663" width="359" height="191.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7la-iB-ue7" userLabel="Labels Stack View">
                                                 <rect key="frame" x="32" y="33.333333333333371" width="52" height="125"/>
@@ -765,9 +765,9 @@
                                     <constraint firstItem="5u0-QO-4TU" firstAttribute="top" secondItem="Ywl-fT-El9" secondAttribute="top" id="QS1-4A-cb0"/>
                                     <constraint firstAttribute="bottom" secondItem="n9a-jD-BXc" secondAttribute="bottom" id="Sfq-GV-e0h"/>
                                     <constraint firstAttribute="trailing" secondItem="n9a-jD-BXc" secondAttribute="trailing" id="UaE-rQ-kKU"/>
-                                    <constraint firstItem="pEl-sb-gcM" firstAttribute="bottom" secondItem="5u0-QO-4TU" secondAttribute="bottom" id="cSP-Bj-b2f"/>
+                                    <constraint firstItem="pEl-sb-gcM" firstAttribute="bottom" secondItem="5u0-QO-4TU" secondAttribute="bottom" constant="-6" id="cSP-Bj-b2f"/>
                                     <constraint firstAttribute="trailing" secondItem="pEl-sb-gcM" secondAttribute="trailing" constant="8" id="oWl-qv-sfS"/>
-                                    <constraint firstAttribute="bottom" secondItem="pEl-sb-gcM" secondAttribute="bottom" constant="65" id="udr-Wl-wZs"/>
+                                    <constraint firstAttribute="bottom" secondItem="pEl-sb-gcM" secondAttribute="bottom" constant="71" id="udr-Wl-wZs"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -829,10 +829,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wt4-pp-bmm" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="621"/>
+                                        <rect key="frame" x="0.0" y="44" width="375" height="615"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOi-bC-1gg">
-                                                <rect key="frame" x="8" y="8" width="359" height="605"/>
+                                                <rect key="frame" x="8" y="8" width="359" height="599"/>
                                                 <string key="text">在晋国都城新绛数里之外，耸立着一座夯土墙环绕的坚固小城，此城名为赵氏之宫，乃是晋国六大卿族之一，赵氏的私邑。\n这儿却还有一个流传更广的名字：下宫！七十多年前那场“下宫之难”，杀得人头滚滚、血灌井田，赵氏满门被灭，只幸存一个赵氏孤儿。随后赵氏孤儿绝境复起，这座被摧毁的城邑也恢复了些许元气，幸存的隶臣们都感慨这是先祖的恩德泽被。\n不过在邑中一处宽阔的马厩中，却有个赵氏少年对这所谓的“德泽”嗤之以鼻，他用没人听得到的声音嘀咕道：\n“京剧和电影里尽是胡编乱造，我来到了这时代，才知道，世上压根没有屠岸贾这个人啊！”\n“好奇害死猫啊，我就不该乱问自毁三观的，谁曾想到，剧本里的贞洁烈女赵庄姬，也就是我这具身体的太祖母。</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
@@ -847,7 +847,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ujl-7Q-Pjc" userLabel="Page Cpunter View">
-                                        <rect key="frame" x="0.0" y="665" width="375" height="25"/>
+                                        <rect key="frame" x="0.0" y="659" width="375" height="25"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WwV-yX-i9A">
                                                 <rect key="frame" x="8" y="0.0" width="359" height="21"/>
@@ -866,10 +866,9 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q83-s0-ekr" userLabel="ADs View">
-                                        <rect key="frame" x="0.0" y="690" width="375" height="44"/>
-                                        <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="684" width="375" height="50"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="44" id="l91-iI-EVC"/>
+                                            <constraint firstAttribute="height" constant="50" id="l91-iI-EVC"/>
                                         </constraints>
                                     </view>
                                 </subviews>

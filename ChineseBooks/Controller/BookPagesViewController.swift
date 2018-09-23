@@ -28,7 +28,6 @@ class BookPagesViewController: UIViewController {
     //var chapterMarkArray = [CDChapterMark]()
     var selectedBook = CDBook()
     var selectedChapterMark = CDChapterMark()
-    
     var splitedContentArray = [String]()
     
     var pageController: UIPageViewController?
@@ -235,6 +234,7 @@ class BookPagesViewController: UIViewController {
         //newPageMark.parentChapterMark = chapterMarkArray[chapterMarkArray.endIndex - 1]
         savePageMark.savePageMarks()
         savePageMark.clearPageMarks(inBook: selectedBook.id!)
+        pageBookMark = savePageMark.loadPageMarks(inChapter: Int16(chapterIndex), ofBook: selectedBook.id!)
     }
     
     
@@ -311,7 +311,7 @@ class BookPagesViewController: UIViewController {
             contentLabel.font = UIFont(name: contentLabel.font.fontName, size: contentLabel.font.pointSize + 2)
             fontSize = contentLabel.font.pointSize - 2
         }
-        loadPages(at: pageBookMark)
+        loadPages(at: 0)
         let newPrefernece = CDPreference(context: context)
         newPrefernece.backgroundColor = pageBackgroundColor
         newPrefernece.fontSize = Float(fontSize)

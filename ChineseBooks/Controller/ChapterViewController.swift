@@ -20,6 +20,7 @@ class ChapterViewController: UIViewController {
     var chapterBookMark = 0
     var bookTitle = ""
     var bookID = ""
+    var chapterBookMarkIndexPath : IndexPath?
 
     var chapterArray = [Chapter]()
     var CDChapterArray = [CDChapter]()
@@ -32,6 +33,7 @@ class ChapterViewController: UIViewController {
         didSet {
             loadChapters()
             chapterBookMark = saveChapterMark.loadChapterMarks(with: selectedBook!.id!)
+            print("SET")
         }
     }
     
@@ -43,7 +45,7 @@ class ChapterViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
         getChapterData(from: url)
         //loadChapters()
@@ -56,13 +58,22 @@ class ChapterViewController: UIViewController {
         
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let temp = selectedBook
+        selectedBook = temp
+        chapterTableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let temp = selectedBook
-        selectedBook = temp
-        chapterTableView.reloadData()
+        if chapterBookMarkIndexPath != nil {
+            chapterTableView.scrollToRow(at: chapterBookMarkIndexPath!, at: UITableViewScrollPosition.top, animated: true)
+        }
     }
     
     
@@ -326,6 +337,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
             
             if indexPath.row == chapterBookMark {
                 cell.backgroundColor = UIColor.blue
+                chapterBookMarkIndexPath = indexPath
             }
             else {
                 cell.backgroundColor = UIColor.white
@@ -336,6 +348,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
             cell.textLabel?.text = cellData.chapterTitle
             if indexPath.row == chapterBookMark {
                 cell.backgroundColor = UIColor.blue
+                chapterBookMarkIndexPath = indexPath
             }
             else {
                 cell.backgroundColor = UIColor.white
@@ -355,6 +368,8 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         saveChapterMark.saveChapterMarks()
         
         saveChapterMark.clearChapterMarks()
+        
+        chapterTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
         //print(bookID)
         performSegue(withIdentifier: "goToPages", sender: self)
         //print(bodyArray[indexPath.row])
@@ -366,6 +381,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 //        print(downloadedChapterArray[indexPath.row].chapterTitle!)
 //        print(downloadedChapterArray[indexPath.row].chapterLink!)
         //tableView.deselectRow(at: indexPath, animated: true)
+    
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
