@@ -29,6 +29,8 @@
 		D182F5E221239463000D9384 /* Rank.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E121239463000D9384 /* Rank.swift */; };
 		D182F5E42124924A000D9384 /* CategoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D182F5E32124924A000D9384 /* CategoryListViewController.swift */; };
 		D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */; };
+		D1C084852157660E003040F6 /* CustomChapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C084832157660E003040F6 /* CustomChapterCell.swift */; };
+		D1C084862157660E003040F6 /* CustomChapterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C084842157660E003040F6 /* CustomChapterCell.xib */; };
 		D1F211132130628700DBC373 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211122130628700DBC373 /* SearchViewController.swift */; };
 		D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211142133686D00DBC373 /* ChapterViewController.swift */; };
 		D1F2111721336C2500DBC373 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F2111621336C2500DBC373 /* Chapter.swift */; };
@@ -60,6 +62,8 @@
 		D182F5E121239463000D9384 /* Rank.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rank.swift; sourceTree = "<group>"; };
 		D182F5E32124924A000D9384 /* CategoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryListViewController.swift; sourceTree = "<group>"; };
 		D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
+		D1C084832157660E003040F6 /* CustomChapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChapterCell.swift; sourceTree = "<group>"; };
+		D1C084842157660E003040F6 /* CustomChapterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomChapterCell.xib; sourceTree = "<group>"; };
 		D1F211122130628700DBC373 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D1F211142133686D00DBC373 /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		D1F2111621336C2500DBC373 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
@@ -181,6 +185,8 @@
 				D182F5BD211CBC6C000D9384 /* CustomCategoryCell.xib */,
 				D124219A2128E723009AC580 /* CustomBookCell.swift */,
 				D124219B2128E723009AC580 /* CustomBookCell.xib */,
+				D1C084832157660E003040F6 /* CustomChapterCell.swift */,
+				D1C084842157660E003040F6 /* CustomChapterCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -245,6 +251,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1C084862157660E003040F6 /* CustomChapterCell.xib in Resources */,
 				D124219D2128E723009AC580 /* CustomBookCell.xib in Resources */,
 				D182F5BF211CBC6C000D9384 /* CustomCategoryCell.xib in Resources */,
 				D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */,
@@ -317,6 +324,7 @@
 				D17BF100214F06DA00C2BD46 /* SaveChapterMark.swift in Sources */,
 				D160F4E22138B26C0005AF54 /* ContentViewController.swift in Sources */,
 				D13146E4211BB36400B7B465 /* ChineseBooks.xcdatamodeld in Sources */,
+				D1C084852157660E003040F6 /* CustomChapterCell.swift in Sources */,
 				D12FD725213B837400A26903 /* BookPagesViewController.swift in Sources */,
 				D13146DC211BB36400B7B465 /* AppDelegate.swift in Sources */,
 				D1337B1D2151F76B00EC746C /* SavePageMark.swift in Sources */,

@@ -20,7 +20,6 @@ class ChapterViewController: UIViewController {
     var chapterBookMark = 0
     var bookTitle = ""
     var bookID = ""
-    var chapterBookMarkIndexPath : IndexPath?
 
     var chapterArray = [Chapter]()
     var CDChapterArray = [CDChapter]()
@@ -33,7 +32,6 @@ class ChapterViewController: UIViewController {
         didSet {
             loadChapters()
             chapterBookMark = saveChapterMark.loadChapterMarks(with: selectedBook!.id!)
-            print("SET")
         }
     }
     
@@ -48,32 +46,23 @@ class ChapterViewController: UIViewController {
 
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
         getChapterData(from: url)
-        //loadChapters()
-//        getChapterData(from: url) { (data) in
-//            //self.createBodyArray(with: data)
-//            self.mergeArray(with: data)
-//        }
         
-        //saveChapterMark.clearChapterMarks()
+        // Register CustomCategoryCell.xib
+        chapterTableView.register(UINib(nibName: "CustomChapterCell", bundle: nil), forCellReuseIdentifier: "customChapterCell")
         
+        // Style
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
-        
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let temp = selectedBook
-        selectedBook = temp
-        chapterTableView.reloadData()
+        chapterTableView.separatorStyle = .none
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if chapterBookMarkIndexPath != nil {
-            chapterTableView.scrollToRow(at: chapterBookMarkIndexPath!, at: UITableViewScrollPosition.top, animated: true)
-        }
+        let temp = selectedBook
+        selectedBook = temp
+        chapterTableView.reloadData()
+        let chapterBookMarkIndexPath = IndexPath(row: chapterBookMark, section: 0)
+        chapterTableView.scrollToRow(at: chapterBookMarkIndexPath, at: UITableViewScrollPosition.top, animated: true)
     }
     
     
@@ -323,39 +312,37 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 
     // Populate cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
+        //let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
+        let cell = chapterTableView.dequeueReusableCell(withIdentifier: "customChapterCell", for: indexPath) as! CustomChapterCell
         
         
         if indexPath.row >= 0 && indexPath.row < CDChapterArray.count {
             let cellData = CDChapterArray[indexPath.row]
+            cell.chapterTitleLabel.text = cellData.chapterTitle
             if cellData.downloaded == true {
-                cell.textLabel?.text = "下--\(cellData.chapterTitle!)"
+                cell.downloadedLabel.isHidden = false
             }
             else {
-                cell.textLabel?.text = "\(cellData.chapterTitle!)"
+                cell.downloadedLabel.isHidden = true
             }
             
             if indexPath.row == chapterBookMark {
-                cell.backgroundColor = UIColor.blue
-                chapterBookMarkIndexPath = indexPath
+                cell.bookMarkImage.isHidden = false
             }
             else {
-                cell.backgroundColor = UIColor.white
+                cell.bookMarkImage.isHidden = true
             }
         }
         else if indexPath.row >= CDChapterArray.count && indexPath.row < chapterArray.count {
             let cellData = chapterArray[indexPath.row]
-            cell.textLabel?.text = cellData.chapterTitle
+            cell.chapterTitleLabel.text = cellData.chapterTitle
             if indexPath.row == chapterBookMark {
-                cell.backgroundColor = UIColor.blue
-                chapterBookMarkIndexPath = indexPath
+                cell.bookMarkImage.isHidden = false
             }
             else {
-                cell.backgroundColor = UIColor.white
+                cell.bookMarkImage.isHidden = true
             }
         }
-//        let cellData = chapterArray[indexPath.row]
-//        cell.textLabel?.text = cellData.chapterTitle
         return cell
     }
 
@@ -370,17 +357,7 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         saveChapterMark.clearChapterMarks()
         
         chapterTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
-        //print(bookID)
         performSegue(withIdentifier: "goToPages", sender: self)
-        //print(bodyArray[indexPath.row])
-//        print(chapterArray[indexPath.row].chapterBody)
-//        print(chapterArray[indexPath.row].chapterTitle)
-//        print(indexPath.row)
-        //loadChapters()
-//        print(downloadedChapterArray[indexPath.row].chapterBody!)
-//        print(downloadedChapterArray[indexPath.row].chapterTitle!)
-//        print(downloadedChapterArray[indexPath.row].chapterLink!)
-        //tableView.deselectRow(at: indexPath, animated: true)
     
     }
 
