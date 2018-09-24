@@ -550,13 +550,44 @@
                                             <outlet property="delegate" destination="8zg-GW-XFM" id="r0E-Gh-m5i"/>
                                         </connections>
                                     </tableView>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bpD-TO-Y1z" userLabel="Percentage View">
+                                        <rect key="frame" x="67" y="281" width="240" height="128"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ey6-Q5-hCt" userLabel="Label Stack View">
+                                                <rect key="frame" x="71" y="32" width="98" height="64"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqg-EE-Ce3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yhk-8L-ZmD">
+                                                        <rect key="frame" x="0.0" y="40" width="98" height="24"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.80000000000000004" green="0.90980392160000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Ey6-Q5-hCt" firstAttribute="centerX" secondItem="bpD-TO-Y1z" secondAttribute="centerX" id="7T5-29-5yw"/>
+                                            <constraint firstItem="Ey6-Q5-hCt" firstAttribute="centerY" secondItem="bpD-TO-Y1z" secondAttribute="centerY" id="JOH-11-3LB"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="5Yz-eL-GYh" secondAttribute="bottom" id="CyE-2y-i63"/>
                                     <constraint firstAttribute="trailing" secondItem="5Yz-eL-GYh" secondAttribute="trailing" id="EUj-xW-Jde"/>
+                                    <constraint firstItem="bpD-TO-Y1z" firstAttribute="leading" secondItem="r4G-CW-zA3" secondAttribute="leading" constant="67" id="Gxd-pW-o4O"/>
+                                    <constraint firstAttribute="trailing" secondItem="bpD-TO-Y1z" secondAttribute="trailing" constant="68" id="MTQ-If-AHs"/>
                                     <constraint firstItem="5Yz-eL-GYh" firstAttribute="leading" secondItem="r4G-CW-zA3" secondAttribute="leading" id="d52-Yb-fy2"/>
+                                    <constraint firstAttribute="bottom" secondItem="bpD-TO-Y1z" secondAttribute="bottom" constant="281" id="dse-pC-srK"/>
                                     <constraint firstItem="5Yz-eL-GYh" firstAttribute="top" secondItem="r4G-CW-zA3" secondAttribute="top" id="nqW-uz-chF"/>
+                                    <constraint firstItem="bpD-TO-Y1z" firstAttribute="top" secondItem="r4G-CW-zA3" secondAttribute="top" constant="281" id="zrb-6l-shS"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -579,6 +610,8 @@
                     <connections>
                         <outlet property="chapterTableView" destination="5Yz-eL-GYh" id="P4p-Md-aHH"/>
                         <outlet property="downloadButton" destination="paN-JT-Mcp" id="FhZ-Ml-trT"/>
+                        <outlet property="percentageLabel" destination="Yhk-8L-ZmD" id="U6v-u3-vMH"/>
+                        <outlet property="percentageView" destination="bpD-TO-Y1z" id="eEA-Af-yBA"/>
                         <segue destination="WKo-Mg-cwa" kind="show" identifier="goToPages" id="O4s-JM-3mT"/>
                     </connections>
                 </viewController>
@@ -622,7 +655,7 @@
                                         </connections>
                                     </view>
                                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pEl-sb-gcM" userLabel="Setting View">
-                                        <rect key="frame" x="8" y="427.66666666666663" width="359" height="191.33333333333331"/>
+                                        <rect key="frame" x="8" y="427.66666666666657" width="359" height="191.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7la-iB-ue7" userLabel="Labels Stack View">
                                                 <rect key="frame" x="32" y="33.333333333333371" width="52" height="125"/>

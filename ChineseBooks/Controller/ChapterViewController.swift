@@ -35,9 +35,15 @@ class ChapterViewController: UIViewController {
         }
     }
     
+    var downloadedCount = 0
+    var willDownloadCount = 0
+    var percentage = 0
+    
     
     @IBOutlet weak var chapterTableView: UITableView!
     @IBOutlet weak var downloadButton: UIBarButtonItem!
+    @IBOutlet weak var percentageView: UIView!
+    @IBOutlet weak var percentageLabel: UILabel!
     
     
     
@@ -54,6 +60,7 @@ class ChapterViewController: UIViewController {
         self.navigationItem.title = bookTitle
         downloadButton.isEnabled = downloadButtonState
         chapterTableView.separatorStyle = .none
+        percentageView.layer.cornerRadius = 10
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -62,7 +69,9 @@ class ChapterViewController: UIViewController {
         selectedBook = temp
         chapterTableView.reloadData()
         let chapterBookMarkIndexPath = IndexPath(row: chapterBookMark, section: 0)
-        chapterTableView.scrollToRow(at: chapterBookMarkIndexPath, at: UITableViewScrollPosition.top, animated: true)
+        if chapterBookMark != 0 {
+            chapterTableView.scrollToRow(at: chapterBookMarkIndexPath, at: UITableViewScrollPosition.top, animated: true)
+        }
     }
     
     
@@ -138,7 +147,9 @@ class ChapterViewController: UIViewController {
     
     func createCDChapterArray(with json: JSON) -> [CDChapter] {
         guard !json.isEmpty else {fatalError("json unavailible!")}
-        for chapter in json["mixToc"]["chapters"].arrayValue {
+        loadChapters()
+        downloadedCount = CDChapterArray.count
+        for chapter in json["mixToc"]["chapters"].arrayValue[CDChapterArray.count...] {
             let newChapter = CDChapter(context: context)
             newChapter.chapterTitle = chapter["title"].stringValue
             newChapter.chapterLink = chapter["link"].stringValue
@@ -171,16 +182,23 @@ class ChapterViewController: UIViewController {
     
     func mergeArray(with array: [CDChapter]) {
         for element in array {
-            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-            getBodyData(from: bodyURL, completionHandler: {
-                data in
-                //element.setValue(data, forKey: "chapterBody")
-                element.chapterBody = data
-                element.downloaded = true
-                self.saveChapters()
-                self.chapterTableView.reloadData()
-            })
-
+            if element.chapterBody == "" {
+                let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink!.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
+                getBodyData(from: bodyURL, completionHandler: {
+                    data in
+                    //element.setValue(data, forKey: "chapterBody")
+                    element.chapterBody = data
+                    element.downloaded = true
+                    self.saveChapters()
+                    self.chapterTableView.reloadData()
+                })
+                willDownloadCount += 1
+            }
+            percentage = Int(Float((downloadedCount + willDownloadCount) / CDChapterArray.count) * 100)
+            percentageLabel.text = "\(percentage)%"
+        }
+        if percentage == 100 {
+            percentageView.isHidden = true
         }
 
     }
@@ -220,38 +238,6 @@ class ChapterViewController: UIViewController {
         }
     }
     
-    func deleteChapters() {
-//        let request : NSFetchRequest<CDChapter> = CDChapter.fetchRequest()
-//        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
-//        //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", bookID!)
-//        request.predicate = predicate
-//        do {
-//            let willDelete = try context.fetch(request)
-//            if willDelete.count > 0 {
-//                for index in 0..<willDelete.count {
-//                    context.delete(willDelete[index])
-//                }
-//                saveChapters()
-//            }
-//        } catch {
-//            print("Error fetching data from context: \(error)")
-//        }
-        
-//        if downloadedChapterArray.count > 0 {
-//            for index in 0..<downloadedChapterArray.count {
-//                context.delete(downloadedChapterArray[index])
-//            }
-//            saveChapters()
-//        }
-        
-//        if CDChapterArray.count > 0 {
-//            for index in 0..<CDChapterArray.count {
-//                context.delete(CDChapterArray[index])
-//            }
-//            saveChapters()
-//        }
-
-    }
     
     
     // MARK: - Save and Load Chapter Book Mark
@@ -279,14 +265,11 @@ class ChapterViewController: UIViewController {
 
 
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
-        
+        percentageView.isHidden = false
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        //deleteChapters()
         downloadChapterData(from: url) { (data) in
             self.mergeArray(with: data)
         }
-        //loadChapters()
-        //chapterTableView.reloadData()
     }
    
     
