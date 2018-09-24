@@ -9,10 +9,20 @@
 import UIKit
 import Kingfisher
 import CoreData
+import ProgressHUD
+import ChameleonFramework
 
 class MyBooksViewController: UIViewController {
 
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+//    let gradientColorsStrings = [["80d0c7", "13547a"],
+//                                ["b7f8db", "50a7c2"],
+//                                ["da4453", "89216b"],
+//                                ["ad5389", "3c1053"],
+//                                ["a8c0ff", "3f2b96"],
+//                                ["8f94fb", "4e54c8"],
+//                                ["c94b4b", "4b134f"]]
+    let themeColors = [FlatSkyBlue(), FlatPurple(), FlatBlue(), FlatLime(), FlatGreen(), FlatOrange(), FlatYellow(), FlatRed(), FlatMint(), FlatPink(), FlatPlum(), FlatSand(), FlatTeal(), FlatBrown(), FlatCoffee(), FlatMaroon(), FlatMagenta()]
     
     var myBookList = [CDBook]()
     var editMode = false
@@ -41,6 +51,14 @@ class MyBooksViewController: UIViewController {
         containerView.frame.size.width = UIScreen.main.bounds.width
         myBooksCollectionView.collectionViewLayout = cellStyle()
         
+//        let themeColorStrings = gradientColorsStrings[Int(arc4random_uniform(UInt32(gradientColorsStrings.count)))]
+//        navigationController?.navigationBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: (navigationController?.navigationBar.bounds)!, colors: [HexColor(themeColorStrings[0])!, HexColor(themeColorStrings[1])!])
+//        navigationController?.navigationBar.tintColor = HexColor(themeColorStrings[1])!
+
+        guard let navBar = navigationController?.navigationBar else {
+        let themeColor = themeColors[Int(arc4random_uniform(UInt32(themeColors.count)))]
+        navigationController?.navigationBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: (navigationController?.navigationBar.bounds)!, colors: [ComplementaryFlatColorOf(themeColor), themeColor])
+        navigationController?.navigationBar.tintColor = themeColor
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -53,6 +71,7 @@ class MyBooksViewController: UIViewController {
         do {
             try context.save()
         } catch {
+            ProgressHUD.showError("储存错误！")
             print("Error Saving Context: \(error)")
         }
         myBooksCollectionView.reloadData()
@@ -65,6 +84,7 @@ class MyBooksViewController: UIViewController {
         do {
             myBookList = try context.fetch(request)
         } catch {
+            ProgressHUD.showError("加载错误！")
             print("Error fetching data from context: \(error)")
         }
         if myBookList.count == 0 {

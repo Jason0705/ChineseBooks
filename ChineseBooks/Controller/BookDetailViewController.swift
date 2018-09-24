@@ -9,6 +9,8 @@
 import UIKit
 import Kingfisher
 import CoreData
+import ProgressHUD
+import ChameleonFramework
 
 class BookDetailViewController: UIViewController {
 
@@ -50,6 +52,21 @@ class BookDetailViewController: UIViewController {
         
         loadButton()
         //createCDBook()
+        
+        // Style
+        addButton.layer.cornerRadius = 10
+        addButton.layer.borderWidth = 1
+        addButton.layer.borderColor = navigationController?.navigationBar.backgroundColor?.cgColor
+        addButton.setTitleColor(navigationController?.navigationBar.backgroundColor, for: .normal)
+        
+        readButton.layer.cornerRadius = 10
+        readButton.backgroundColor = navigationController?.navigationBar.backgroundColor
+        readButton.setTitleColor(ContrastColorOf((navigationController?.navigationBar.backgroundColor)!, returnFlat: true), for: .normal)
+        
+//        let themeColor = AverageColorFromImage(bookCoverImage.image!)
+//        navigationController?.navigationBar.backgroundColor = themeColor
+//        addButton.setTitleColor(GradientColor(UIGradientStyle.leftToRight, frame: addButton.bounds, colors: [UIColor(complementaryFlatColorOf: themeColor), themeColor]), for: .normal)
+//        readButton.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: readButton.bounds, colors: [UIColor(complementaryFlatColorOf: themeColor), themeColor])
 
     }
     
@@ -67,7 +84,9 @@ class BookDetailViewController: UIViewController {
     func saveBooks() {
         do {
             try context.save()
+            ProgressHUD.showSuccess("添加成功！")
         } catch {
+            ProgressHUD.showError("添加错误！")
             print("Error Saving Context: \(error)")
         }
     }

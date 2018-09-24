@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import CoreData
+import ProgressHUD
 
 class BookPagesViewController: UIViewController {
 
@@ -96,6 +97,7 @@ class BookPagesViewController: UIViewController {
                 let bodyData = self.createBodyData(with: bodyJSON)
                 completionHandler(bodyData)
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -179,7 +181,6 @@ class BookPagesViewController: UIViewController {
             pagesArray.append(newPageText)
             newPageText = ""
         }
-        
         return pagesArray
     }
     

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import ProgressHUD
 
 class SearchViewController: UIViewController {
 
@@ -43,7 +44,9 @@ class SearchViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createResultList(with: bookListJSON)
+                ProgressHUD.showSuccess()
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -95,6 +98,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        ProgressHUD.show()
         resultBookList = [Book]()
         if searchBar.text?.count != 0 {
             searchInput = searchBar.text!
@@ -103,7 +107,7 @@ extension SearchViewController: UISearchBarDelegate {
             getResultData(from: url)
         }
         
-        
+        ProgressHUD.dismiss()
         self.view.endEditing(true)
     }
     

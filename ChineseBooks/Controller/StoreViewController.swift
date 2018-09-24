@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import ProgressHUD
 
 class StoreViewController: UIViewController {
     
@@ -38,6 +39,7 @@ class StoreViewController: UIViewController {
         getCategoryData(from: categoryURL)
         getRankData(from: rankURL)
         
+        
         // Register CustomCategoryCell.xib
         maleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
         femaleCategoryCollectionView.register(UINib(nibName: "CustomCategoryCell", bundle: nil), forCellWithReuseIdentifier: "customCategoryCell")
@@ -61,8 +63,10 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createCategoryArray(with: categoryJSON)
+                ProgressHUD.showSuccess()
             } else {
                 print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
             }
         }
     }
@@ -73,8 +77,10 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let rankJSON : JSON = JSON(response.result.value!)
                 self.createRankArray(with: rankJSON)
+                ProgressHUD.showSuccess()
             } else {
                 print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
             }
         }
     }
@@ -191,16 +197,20 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
     
     // Number of cells
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var count = 0
         if collectionView == maleCategoryCollectionView {
-            return maleCategoryArray.count
+            count = maleCategoryArray.count
         }
         else if collectionView == femaleCategoryCollectionView {
-            return femaleCategoryArray.count
+            count = femaleCategoryArray.count
         }
         else if collectionView == rankCollectionView {
-            return rankArray.count
+            count = rankArray.count
         }
-        return 0
+        if count == 0 {
+            ProgressHUD.show()
+        }
+        return count
     }
     
     // Populate cells

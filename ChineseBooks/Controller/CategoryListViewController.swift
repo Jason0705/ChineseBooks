@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import Kingfisher
+import ProgressHUD
 
 class CategoryListViewController: UIViewController {
 
@@ -77,7 +78,9 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createHotList(with: bookListJSON)
+                ProgressHUD.showSuccess()
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -89,7 +92,9 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createNewList(with: bookListJSON)
+                ProgressHUD.showSuccess()
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -101,7 +106,9 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createReputationList(with: bookListJSON)
+                ProgressHUD.showSuccess()
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -113,7 +120,9 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createOverList(with: bookListJSON)
+                ProgressHUD.showSuccess()
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
             }
         }
@@ -276,19 +285,23 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
     
     // Number of Cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var count = 0
         if collectionView == hotCollectionView {
-            return hotBookList.count
+            count = hotBookList.count
         }
         else if collectionView == newCollectionView {
-            return newBookList.count
+            count = newBookList.count
         }
         else if collectionView == reputationCollectionView {
-            return reputationBookList.count
+            count = reputationBookList.count
         }
         else if collectionView == overCollectionView {
-            return overBookList.count
+            count = overBookList.count
         }
-        return 0
+        if count == 0 {
+            ProgressHUD.show()
+        }
+        return count
     }
     
     // Populate Cell

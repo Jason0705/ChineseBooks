@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import CoreData
+import ProgressHUD
 
 class ChapterViewController: UIViewController {
     
@@ -98,6 +99,7 @@ class ChapterViewController: UIViewController {
                 let CDChapterData = self.createCDChapterArray(with: chapterJSON)
                 completionHandler(CDChapterData)
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process 1 JSON response, Error: \(response.result.error)")
             }
         }
@@ -111,6 +113,7 @@ class ChapterViewController: UIViewController {
                 let bodyData = self.createBodyData(with: bodyJSON)
                 completionHandler(bodyData)
             } else {
+                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process 2 JSON response, Error: \(response.result.error)")
             }
         }
@@ -198,7 +201,8 @@ class ChapterViewController: UIViewController {
             percentageLabel.text = "\(percentage)%"
         }
         if percentage == 100 {
-            percentageView.isHidden = true
+            ProgressHUD.dismiss()
+            //percentageView.isHidden = true
         }
 
     }
@@ -265,7 +269,8 @@ class ChapterViewController: UIViewController {
 
 
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
-        percentageView.isHidden = false
+        //percentageView.isHidden = false
+        ProgressHUD.show()
         let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
         downloadChapterData(from: url) { (data) in
             self.mergeArray(with: data)

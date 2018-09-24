@@ -452,14 +452,6 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXQ-b6-huW">
-                                                <rect key="frame" x="103" y="231" width="153" height="41"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                                <state key="normal" title="在线阅读"/>
-                                                <connections>
-                                                    <action selector="readButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="XcD-ja-GQe"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAO-jI-nSO">
                                                 <rect key="frame" x="120" y="8" width="118" height="36"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
@@ -468,18 +460,26 @@
                                                     <action selector="addButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="Sxc-SP-ZL4"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXQ-b6-huW">
+                                                <rect key="frame" x="34" y="231" width="291" height="41"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <state key="normal" title="在线阅读"/>
+                                                <connections>
+                                                    <action selector="readButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="XcD-ja-GQe"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="top" secondItem="b6D-qh-fat" secondAttribute="bottom" constant="8" id="2rL-j3-ORh"/>
+                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="top" secondItem="b6D-qh-fat" secondAttribute="bottom" constant="8" id="FcW-uj-4Yj"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="120" id="Hgt-5n-OiW"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="8" id="Kee-R6-uli"/>
-                                            <constraint firstAttribute="trailing" secondItem="FXQ-b6-huW" secondAttribute="trailing" constant="103" id="LE8-RS-ExP"/>
+                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="34" id="Ra1-PB-psb"/>
                                             <constraint firstAttribute="trailing" secondItem="b6D-qh-fat" secondAttribute="trailing" constant="8" id="W6T-Id-N74"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="top" secondItem="wCf-4p-nPE" secondAttribute="top" constant="8" id="Xnq-Wz-X7e"/>
                                             <constraint firstAttribute="trailing" secondItem="kAO-jI-nSO" secondAttribute="trailing" constant="121" id="aMM-FH-2Dd"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="top" secondItem="kAO-jI-nSO" secondAttribute="bottom" constant="8" id="aYu-eA-kVI"/>
-                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="103" id="ueo-gw-e8A"/>
+                                            <constraint firstAttribute="trailing" secondItem="FXQ-b6-huW" secondAttribute="trailing" constant="34" id="oqx-jF-FWB"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -519,7 +519,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fB4-J6-fIF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3588" y="134"/>
+            <point key="canvasLocation" x="3588" y="133.74384236453201"/>
         </scene>
         <!--小说章节-->
         <scene sceneID="Upv-dT-ctU">
@@ -571,7 +571,7 @@
                                                 </subviews>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.80000000000000004" green="0.90980392160000001" blue="0.81176470590000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="Ey6-Q5-hCt" firstAttribute="centerX" secondItem="bpD-TO-Y1z" secondAttribute="centerX" id="7T5-29-5yw"/>
                                             <constraint firstItem="Ey6-Q5-hCt" firstAttribute="centerY" secondItem="bpD-TO-Y1z" secondAttribute="centerY" id="JOH-11-3LB"/>
@@ -634,7 +634,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="690"/>
                                         <subviews>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="characterWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xNK-xr-kMs">
-                                                <rect key="frame" x="8" y="8" width="359" height="561"/>
+                                                <rect key="frame" x="8" y="8" width="359" height="555"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -643,7 +643,7 @@
                                         <constraints>
                                             <constraint firstItem="xNK-xr-kMs" firstAttribute="top" secondItem="n9a-jD-BXc" secondAttribute="top" constant="8" id="8oD-QR-wOB"/>
                                             <constraint firstItem="xNK-xr-kMs" firstAttribute="leading" secondItem="n9a-jD-BXc" secondAttribute="leading" constant="8" id="Anc-wr-Ahc"/>
-                                            <constraint firstAttribute="bottom" secondItem="xNK-xr-kMs" secondAttribute="bottom" constant="121" id="XLo-WP-0fj"/>
+                                            <constraint firstAttribute="bottom" secondItem="xNK-xr-kMs" secondAttribute="bottom" constant="127" id="XLo-WP-0fj"/>
                                             <constraint firstAttribute="trailing" secondItem="xNK-xr-kMs" secondAttribute="trailing" constant="8" id="nDJ-Fb-qsK"/>
                                         </constraints>
                                     </view>
@@ -767,7 +767,7 @@
                                                 </constraints>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.77816888750000002" green="0.7843137255" blue="0.5859983151" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="ghI-SR-jRi" secondAttribute="trailing" constant="59" id="1NR-Kr-p2T"/>
                                             <constraint firstItem="7la-iB-ue7" firstAttribute="leading" secondItem="pEl-sb-gcM" secondAttribute="leading" constant="32" id="1nV-5x-N7Q"/>
@@ -1286,9 +1286,34 @@
             </objects>
             <point key="canvasLocation" x="-863.20000000000005" y="133.5832083958021"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="cI6-b5-XJB">
+            <objects>
+                <viewController id="CU5-uF-6nh" customClass="ViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2rB-m3-5L9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZj-dK-fW2">
+                                <rect key="frame" x="67" y="342" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="HdM-jO-Rni"/>
+                    </view>
+                    <connections>
+                        <outlet property="view1" destination="qZj-dK-fW2" id="ew2-31-YJO"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIk-nv-biF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-871" y="946"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="62f-25-pyy"/>
+        <segue reference="4qI-54-deD"/>
         <segue reference="osF-wW-Ufi"/>
         <segue reference="GVq-nl-wR7"/>
     </inferredMetricsTieBreakers>
