@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 import ProgressHUD
+import ChameleonFramework
 
 class BookPagesViewController: UIViewController {
 
@@ -46,9 +47,19 @@ class BookPagesViewController: UIViewController {
     @IBOutlet weak var settingView: UIView!
     
     
+    @IBOutlet weak var settingLabel1: UILabel!
+    @IBOutlet weak var settingLabel2: UILabel!
+    @IBOutlet weak var settingLabel3: UILabel!
+    
+    
     @IBOutlet weak var currentPageLabel: UILabel!
     @IBOutlet weak var maxPageLabel: UILabel!
     @IBOutlet weak var pageSlider: UISlider!
+    
+    
+    
+    @IBOutlet weak var fontSizeDownButton: UIButton!
+    @IBOutlet weak var fontSizeUpButton: UIButton!
     
     
     @IBOutlet weak var bgColor1Button: UIButton!
@@ -60,24 +71,48 @@ class BookPagesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Load Data
         
         // Load pageBookMarks
         pageBookMark = savePageMark.loadPageMarks(inChapter: Int16(chapterIndex), ofBook: selectedBook.id!)
         // Load preference
         loadPreference()
+        view.backgroundColor = pageBackgroundColor
         // Load page
         loadPages(at: pageBookMark)
         
         // Style
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
         
         // set font
         contentLabel.font = UIFont(name: contentLabel.font.fontName, size: fontSize)
-        // setting view rounded corners
+        // setting view
         settingView.layer.cornerRadius = 10
-        // nav bar hidden
+        
+        settingLabel1.textColor = navBar.tintColor
+        settingLabel2.textColor = navBar.tintColor
+        settingLabel3.textColor = navBar.tintColor
+        currentPageLabel.textColor = navBar.tintColor
+        maxPageLabel.textColor = navBar.tintColor
+        
+        //pageSlider.tintColor = GradientColor(UIGradientStyle.leftToRight, frame: pageSlider.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor])
+        pageSlider.minimumTrackTintColor = ComplementaryFlatColorOf(navBar.tintColor)
+        pageSlider.maximumTrackTintColor = navBar.tintColor
+        
+        fontSizeDownButton.layer.cornerRadius = 0.5 * fontSizeDownButton.bounds.size.width
+        fontSizeDownButton.layer.borderWidth = 1
+        fontSizeDownButton.layer.borderColor = GradientColor(UIGradientStyle.leftToRight, frame: fontSizeDownButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]).cgColor
+        fontSizeDownButton.setTitleColor(GradientColor(UIGradientStyle.leftToRight, frame: fontSizeDownButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]), for: .normal)
+        
+        fontSizeUpButton.layer.cornerRadius = 0.5 * fontSizeUpButton.bounds.size.width
+        fontSizeUpButton.layer.borderWidth = 1
+        fontSizeUpButton.layer.borderColor = GradientColor(UIGradientStyle.leftToRight, frame: fontSizeUpButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]).cgColor
+        fontSizeUpButton.setTitleColor(GradientColor(UIGradientStyle.leftToRight, frame: fontSizeUpButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]), for: .normal)
+        
+        // navBar
         self.navigationController?.isNavigationBarHidden = true
+        self.navigationItem.title = selectedBook.title
+        
         // bgColorButtons rounded
         bgColor1Button.layer.cornerRadius = 0.5 * bgColor1Button.bounds.size.width
         bgColor2Button.layer.cornerRadius = 0.5 * bgColor2Button.bounds.size.width
@@ -295,6 +330,20 @@ class BookPagesViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = !settingMode
     }
     
+    // Day/Night mode
+    @IBAction func NightBarButtonPressed(_ sender: UIBarButtonItem) {
+        pageBackgroundColor = FlatBlack()
+        view.backgroundColor = pageBackgroundColor
+        loadPages(at: pageBookMark)
+        let newPrefernece = CDPreference(context: context)
+        newPrefernece.backgroundColor = pageBackgroundColor
+        newPrefernece.fontSize = Float(fontSize)
+        savePreference()
+        clearPreference()
+    }
+    
+    
+    
     // Page slider to change page
     @IBAction func pageSliderMoved(_ sender: UISlider) {
         let value = Int(sender.value)
@@ -331,6 +380,7 @@ class BookPagesViewController: UIViewController {
         else if sender.tag == 2 {
             pageBackgroundColor = bgColor3Button.backgroundColor!
         }
+        view.backgroundColor = pageBackgroundColor
         loadPages(at: pageBookMark)
         let newPrefernece = CDPreference(context: context)
         newPrefernece.backgroundColor = pageBackgroundColor

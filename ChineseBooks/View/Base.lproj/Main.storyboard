@@ -619,7 +619,7 @@
             </objects>
             <point key="canvasLocation" x="4493.6000000000004" y="133.5832083958021"/>
         </scene>
-        <!--Book Pages View Controller-->
+        <!--小说内容-->
         <scene sceneID="YqF-Es-ef0">
             <objects>
                 <viewController id="WKo-Mg-cwa" customClass="BookPagesViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
@@ -706,20 +706,24 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="FrR-kQ-8RI" userLabel="Font Size Stack View">
-                                                <rect key="frame" x="124" y="78" width="104" height="36"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="ww9-oV-Hn8" userLabel="Font Size Buttons Stack View">
+                                                <rect key="frame" x="124" y="78" width="106" height="36"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7r-bY-tCz">
                                                         <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="36" id="0dU-Ho-qrt"/>
+                                                            <constraint firstAttribute="height" constant="36" id="uUc-8p-I1J"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <state key="normal" title="Aa-"/>
                                                         <connections>
                                                             <action selector="fontSizeButtonPressed:" destination="WKo-Mg-cwa" eventType="touchUpInside" id="O5W-yK-0nv"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ld-i3-8Cm">
-                                                        <rect key="frame" x="68" y="0.0" width="36" height="36"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                        <rect key="frame" x="70" y="0.0" width="36" height="36"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <state key="normal" title="Aa+"/>
                                                         <connections>
                                                             <action selector="fontSizeButtonPressed:" destination="WKo-Mg-cwa" eventType="touchUpInside" id="cBN-kx-DYt"/>
@@ -727,7 +731,8 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="U7r-bY-tCz" firstAttribute="width" secondItem="1ld-i3-8Cm" secondAttribute="width" id="Qdj-sA-uMf"/>
+                                                    <constraint firstItem="1ld-i3-8Cm" firstAttribute="height" secondItem="U7r-bY-tCz" secondAttribute="height" id="LEe-nk-BOU"/>
+                                                    <constraint firstItem="1ld-i3-8Cm" firstAttribute="width" secondItem="U7r-bY-tCz" secondAttribute="width" id="VlI-em-dEE"/>
                                                 </constraints>
                                             </stackView>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="ghI-SR-jRi" userLabel="Background Color Stack View">
@@ -777,12 +782,12 @@
                                             <constraint firstAttribute="width" secondItem="pEl-sb-gcM" secondAttribute="height" multiplier="15:8" id="2iK-ar-xNC"/>
                                             <constraint firstItem="R6M-h5-jF4" firstAttribute="centerY" secondItem="a5Y-hv-nOm" secondAttribute="centerY" id="8bp-kq-2t0"/>
                                             <constraint firstItem="DX7-Cr-wyg" firstAttribute="centerY" secondItem="R6M-h5-jF4" secondAttribute="centerY" id="E21-jx-Gq1"/>
+                                            <constraint firstItem="ww9-oV-Hn8" firstAttribute="centerY" secondItem="8Qt-jF-d0f" secondAttribute="centerY" id="JZ8-6e-eri"/>
                                             <constraint firstItem="ghI-SR-jRi" firstAttribute="centerY" secondItem="WcK-7e-D5V" secondAttribute="centerY" id="Pe5-N5-8Rg"/>
                                             <constraint firstItem="7la-iB-ue7" firstAttribute="centerY" secondItem="pEl-sb-gcM" secondAttribute="centerY" id="QM0-Rm-DfP"/>
-                                            <constraint firstAttribute="trailing" secondItem="FrR-kQ-8RI" secondAttribute="trailing" constant="131" id="b9V-Br-XWK"/>
+                                            <constraint firstAttribute="trailing" secondItem="ww9-oV-Hn8" secondAttribute="trailing" constant="129" id="TVc-JE-Pmv"/>
                                             <constraint firstAttribute="trailing" secondItem="R6M-h5-jF4" secondAttribute="trailing" constant="60" id="baL-wC-XW9"/>
-                                            <constraint firstItem="U7r-bY-tCz" firstAttribute="centerY" secondItem="8Qt-jF-d0f" secondAttribute="centerY" id="dA2-GD-KOe"/>
-                                            <constraint firstItem="FrR-kQ-8RI" firstAttribute="leading" secondItem="7la-iB-ue7" secondAttribute="trailing" constant="40" id="gd6-KA-nLT"/>
+                                            <constraint firstItem="ww9-oV-Hn8" firstAttribute="leading" secondItem="7la-iB-ue7" secondAttribute="trailing" constant="40" id="jy9-iA-6ux"/>
                                             <constraint firstItem="R6M-h5-jF4" firstAttribute="leading" secondItem="DX7-Cr-wyg" secondAttribute="trailing" constant="8" id="tP2-qp-emf"/>
                                             <constraint firstItem="jJz-Zs-wgw" firstAttribute="leading" secondItem="R6M-h5-jF4" secondAttribute="trailing" constant="8" id="zUn-lP-y0R"/>
                                         </constraints>
@@ -813,6 +818,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fMW-iw-HJ5"/>
                     </view>
+                    <navigationItem key="navigationItem" title="小说内容" largeTitleDisplayMode="never" id="3DJ-pD-0Wi">
+                        <barButtonItem key="rightBarButtonItem" title="夜晚模式" id="qBY-Cv-1XS">
+                            <connections>
+                                <action selector="NightBarButtonPressed:" destination="WKo-Mg-cwa" id="Tvy-Ub-OlR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bgColor1Button" destination="2BA-7v-PrS" id="G1M-1N-RTS"/>
                         <outlet property="bgColor2Button" destination="OvA-fL-il2" id="zWC-up-bdt"/>
@@ -820,8 +832,13 @@
                         <outlet property="contentLabel" destination="xNK-xr-kMs" id="RrM-pg-0uR"/>
                         <outlet property="contentView" destination="n9a-jD-BXc" id="FiD-Ww-8EY"/>
                         <outlet property="currentPageLabel" destination="DX7-Cr-wyg" id="yAi-13-kRA"/>
+                        <outlet property="fontSizeDownButton" destination="U7r-bY-tCz" id="cwo-70-naP"/>
+                        <outlet property="fontSizeUpButton" destination="1ld-i3-8Cm" id="FQW-Yf-KtX"/>
                         <outlet property="maxPageLabel" destination="jJz-Zs-wgw" id="oP2-X5-xPG"/>
                         <outlet property="pageSlider" destination="R6M-h5-jF4" id="hGm-9L-O2R"/>
+                        <outlet property="settingLabel1" destination="a5Y-hv-nOm" id="wWF-7T-HQi"/>
+                        <outlet property="settingLabel2" destination="8Qt-jF-d0f" id="N0b-EY-3ub"/>
+                        <outlet property="settingLabel3" destination="WcK-7e-D5V" id="KT5-VO-78E"/>
                         <outlet property="settingView" destination="pEl-sb-gcM" id="SyO-qA-cnq"/>
                     </connections>
                 </viewController>
@@ -1315,6 +1332,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="4qI-54-deD"/>
         <segue reference="osF-wW-Ufi"/>
-        <segue reference="GVq-nl-wR7"/>
+        <segue reference="svF-8a-mU1"/>
     </inferredMetricsTieBreakers>
 </document>

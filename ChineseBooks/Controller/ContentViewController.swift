@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ChameleonFramework
 
 class ContentViewController: UIViewController {
 
@@ -37,6 +38,9 @@ class ContentViewController: UIViewController {
         contentLabel.numberOfLines = Int(contentLabel.bounds.height / contentLabel.font.lineHeight)
         pageCounterLabel.text = pageCounte
         containerView.backgroundColor = backgroundColor
+        titleLabel.textColor = ContrastColorOf(containerView.backgroundColor!, returnFlat: true)
+        contentLabel.textColor = ContrastColorOf(containerView.backgroundColor!, returnFlat: true)
+        pageCounterLabel.textColor = ContrastColorOf(containerView.backgroundColor!, returnFlat: true)
     }
 
 }

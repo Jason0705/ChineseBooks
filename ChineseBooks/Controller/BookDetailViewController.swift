@@ -54,19 +54,16 @@ class BookDetailViewController: UIViewController {
         //createCDBook()
         
         // Style
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
         addButton.layer.cornerRadius = 10
         addButton.layer.borderWidth = 1
-        addButton.layer.borderColor = navigationController?.navigationBar.backgroundColor?.cgColor
-        addButton.setTitleColor(navigationController?.navigationBar.backgroundColor, for: .normal)
+        addButton.layer.borderColor = GradientColor(UIGradientStyle.leftToRight, frame: addButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]).cgColor
+        addButton.setTitleColor(GradientColor(UIGradientStyle.leftToRight, frame: addButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor]), for: .normal)
         
         readButton.layer.cornerRadius = 10
-        readButton.backgroundColor = navigationController?.navigationBar.backgroundColor
-        readButton.setTitleColor(ContrastColorOf((navigationController?.navigationBar.backgroundColor)!, returnFlat: true), for: .normal)
+        readButton.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: readButton.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor])
+        readButton.setTitleColor(ContrastColorOf((navBar.backgroundColor)!, returnFlat: true), for: .normal)
         
-//        let themeColor = AverageColorFromImage(bookCoverImage.image!)
-//        navigationController?.navigationBar.backgroundColor = themeColor
-//        addButton.setTitleColor(GradientColor(UIGradientStyle.leftToRight, frame: addButton.bounds, colors: [UIColor(complementaryFlatColorOf: themeColor), themeColor]), for: .normal)
-//        readButton.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: readButton.bounds, colors: [UIColor(complementaryFlatColorOf: themeColor), themeColor])
 
     }
     

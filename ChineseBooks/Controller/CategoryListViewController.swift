@@ -66,6 +66,10 @@ class CategoryListViewController: UIViewController {
         reputationViewWidth.constant = 0
         overViewWidth.constant = 0
         hotCollectionView.collectionViewLayout = cellStyle()
+        
+        // navBar
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
+        listSegmentedControl.tintColor = navBar.tintColor
     }
     
     

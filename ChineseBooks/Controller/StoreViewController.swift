@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import ProgressHUD
+import ChameleonFramework
 
 class StoreViewController: UIViewController {
     
@@ -51,6 +52,10 @@ class StoreViewController: UIViewController {
         femaleViewWidth.constant = 0
         rankViewWidth.constant = 0
         maleCategoryCollectionView.collectionViewLayout = cellStyle()
+        
+        // navBar
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
+        switchViewSegmentedControl.tintColor = navBar.tintColor
     }
 
 

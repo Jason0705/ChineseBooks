@@ -22,7 +22,7 @@ class MyBooksViewController: UIViewController {
 //                                ["a8c0ff", "3f2b96"],
 //                                ["8f94fb", "4e54c8"],
 //                                ["c94b4b", "4b134f"]]
-    let themeColors = [FlatSkyBlue(), FlatPurple(), FlatBlue(), FlatLime(), FlatGreen(), FlatOrange(), FlatYellow(), FlatRed(), FlatMint(), FlatPink(), FlatPlum(), FlatSand(), FlatTeal(), FlatBrown(), FlatCoffee(), FlatMaroon(), FlatMagenta()]
+    let themeColors = [FlatSkyBlue(), FlatPurple(), FlatBlue(), FlatGreen(), FlatGray(), FlatOrange(), FlatRed(), FlatMint(), FlatPlum(), FlatTeal(), FlatBrown(), FlatCoffee(), FlatMaroon(), FlatMagenta()]
     
     var myBookList = [CDBook]()
     var editMode = false
@@ -51,14 +51,18 @@ class MyBooksViewController: UIViewController {
         containerView.frame.size.width = UIScreen.main.bounds.width
         myBooksCollectionView.collectionViewLayout = cellStyle()
         
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
 //        let themeColorStrings = gradientColorsStrings[Int(arc4random_uniform(UInt32(gradientColorsStrings.count)))]
-//        navigationController?.navigationBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: (navigationController?.navigationBar.bounds)!, colors: [HexColor(themeColorStrings[0])!, HexColor(themeColorStrings[1])!])
-//        navigationController?.navigationBar.tintColor = HexColor(themeColorStrings[1])!
+//        navBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: (navigationController?.navigationBar.bounds)!, colors: [HexColor(themeColorStrings[0])!, HexColor(themeColorStrings[1])!])
+//        navBar.tintColor = HexColor(themeColorStrings[1])!
+//        navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : HexColor(themeColorStrings[1])!]
+//        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : HexColor(themeColorStrings[1])!]
 
-        guard let navBar = navigationController?.navigationBar else {
         let themeColor = themeColors[Int(arc4random_uniform(UInt32(themeColors.count)))]
-        navigationController?.navigationBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: (navigationController?.navigationBar.bounds)!, colors: [ComplementaryFlatColorOf(themeColor), themeColor])
-        navigationController?.navigationBar.tintColor = themeColor
+        navBar.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: navBar.bounds, colors: [ComplementaryFlatColorOf(themeColor), themeColor])
+        navBar.tintColor = themeColor
+        navBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor : themeColor]
+        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : themeColor]
     }
     
     override func viewDidAppear(_ animated: Bool) {

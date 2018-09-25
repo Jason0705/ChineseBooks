@@ -302,6 +302,8 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //let cell = chapterTableView.dequeueReusableCell(withIdentifier: "chapterCell", for: indexPath)
         let cell = chapterTableView.dequeueReusableCell(withIdentifier: "customChapterCell", for: indexPath) as! CustomChapterCell
+        cell.bookMarkImage.backgroundColor = navigationController?.navigationBar.tintColor
+        cell.bookMarkImage.layer.cornerRadius = 5
         
         
         if indexPath.row >= 0 && indexPath.row < CDChapterArray.count {
