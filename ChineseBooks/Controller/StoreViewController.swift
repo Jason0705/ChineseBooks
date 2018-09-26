@@ -68,7 +68,7 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let categoryJSON : JSON = JSON(response.result.value!)
                 self.createCategoryArray(with: categoryJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
@@ -82,7 +82,7 @@ class StoreViewController: UIViewController {
             if response.result.isSuccess{
                 let rankJSON : JSON = JSON(response.result.value!)
                 self.createRankArray(with: rankJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 print("Couldnt process JSON response, Error: \(String(describing: response.result.error))")
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
@@ -214,6 +214,9 @@ extension StoreViewController: UICollectionViewDataSource, UICollectionViewDeleg
         }
         if count == 0 {
             ProgressHUD.show()
+        }
+        else {
+            ProgressHUD.dismiss()
         }
         return count
     }

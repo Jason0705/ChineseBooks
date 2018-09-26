@@ -82,7 +82,7 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createHotList(with: bookListJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
@@ -96,7 +96,7 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createNewList(with: bookListJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
@@ -110,7 +110,7 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createReputationList(with: bookListJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
@@ -124,7 +124,7 @@ class CategoryListViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createOverList(with: bookListJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")
@@ -304,6 +304,9 @@ extension CategoryListViewController: UICollectionViewDataSource, UICollectionVi
         }
         if count == 0 {
             ProgressHUD.show()
+        }
+        else {
+            ProgressHUD.dismiss()
         }
         return count
     }

@@ -44,7 +44,7 @@ class SearchViewController: UIViewController {
             if response.result.isSuccess{
                 let bookListJSON : JSON = JSON(response.result.value!)
                 self.createResultList(with: bookListJSON)
-                ProgressHUD.showSuccess()
+                //ProgressHUD.showSuccess()
             } else {
                 ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process JSON response, Error: \(response.result.error)")

@@ -120,7 +120,7 @@
                                 <rect key="frame" x="0.0" y="140" width="375" height="638"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="hjo-93-2hQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                                         <segments>
                                             <segment title="男生分类"/>
                                             <segment title="女生分类"/>
@@ -131,13 +131,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qZi-og-lqT">
-                                        <rect key="frame" x="0.0" y="282" width="375" height="356"/>
+                                        <rect key="frame" x="0.0" y="324" width="375" height="314"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hi-fK-tqM" userLabel="Male View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="356"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6en-l9-3QP">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gYr-ws-ZTL">
                                                             <size key="itemSize" width="100" height="106"/>
@@ -171,10 +171,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xdn-X8-OqC" userLabel="Female View">
-                                                <rect key="frame" x="375" y="0.0" width="0.0" height="356"/>
+                                                <rect key="frame" x="375" y="0.0" width="0.0" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oLG-nb-rC1" userLabel="Female Category Collection View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lX1-lR-cYw">
                                                             <size key="itemSize" width="100" height="100"/>
@@ -206,10 +206,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7f-Ub-0Es" userLabel="Ranking View">
-                                                <rect key="frame" x="375" y="0.0" width="0.0" height="356"/>
+                                                <rect key="frame" x="375" y="0.0" width="0.0" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="GqT-Op-Xzy">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AhT-Ke-jAV">
                                                             <size key="itemSize" width="120" height="120"/>
@@ -392,25 +392,25 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HWA-QI-AxE">
-                                                <rect key="frame" x="172" y="46" width="179" height="50"/>
+                                                <rect key="frame" x="171.66666666666663" y="46" width="179" height="50"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Author:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ECq-Ir-HxX">
-                                                <rect key="frame" x="172" y="104" width="179" height="21.666666666666671"/>
+                                                <rect key="frame" x="171.66666666666663" y="104" width="179" height="21.666666666666671"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i10-39-5Pb">
-                                                <rect key="frame" x="172" y="133.66666666666669" width="179" height="22.666666666666657"/>
+                                                <rect key="frame" x="171.66666666666663" y="133.66666666666669" width="179" height="22.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="749" text="Last Chapter:" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VxO-K5-gxN">
-                                                <rect key="frame" x="172" y="164.33333333333331" width="179" height="21.666666666666657"/>
+                                                <rect key="frame" x="171.66666666666663" y="164.33333333333331" width="179" height="21.666666666666657"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -554,7 +554,7 @@
                                         <rect key="frame" x="67" y="281" width="240" height="128"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ey6-Q5-hCt" userLabel="Label Stack View">
-                                                <rect key="frame" x="71" y="32" width="98" height="64"/>
+                                                <rect key="frame" x="71.333333333333343" y="32" width="98" height="64"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqg-EE-Ce3">
                                                         <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
@@ -1065,7 +1065,7 @@
                                 <rect key="frame" x="0.0" y="140" width="375" height="638"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="6Mv-Dj-x8w">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="275"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="317"/>
                                         <segments>
                                             <segment title="热门"/>
                                             <segment title="新书"/>
@@ -1077,13 +1077,13 @@
                                         </connections>
                                     </segmentedControl>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iy8-94-Fsz" userLabel="List Stack View">
-                                        <rect key="frame" x="0.0" y="282" width="375" height="356"/>
+                                        <rect key="frame" x="0.0" y="324" width="375" height="314"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aPv-Dc-kPq" userLabel="Hot View">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="zNq-Ke-XSM" userLabel="Hot Collection View">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Em0-ww-vhn">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -1115,10 +1115,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kv6-UO-uHL" userLabel="New View">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="1" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L42-kw-3JB">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fhd-nw-ajz">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -1150,10 +1150,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOp-HJ-9PQ" userLabel="Reputation View">
-                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="C2r-zc-ene">
-                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KUY-89-Wia">
                                                             <size key="itemSize" width="50" height="50"/>
@@ -1185,10 +1185,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4a0-Sm-TzH" userLabel="Over View">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="356"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="314"/>
                                                 <subviews>
                                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" tag="3" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="v4R-11-TYj">
-                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="356"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="314"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="NUU-lO-DdZ">
                                                             <size key="itemSize" width="50" height="50"/>

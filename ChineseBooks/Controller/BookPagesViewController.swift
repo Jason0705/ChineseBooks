@@ -174,6 +174,12 @@ class BookPagesViewController: UIViewController {
             initializeView(at: index)
             updateSlider(with: index)
         }
+        if splitedContentArray.count == 0 {
+            ProgressHUD.show()
+        }
+        else {
+            ProgressHUD.dismiss()
+        }
         
     }
     
@@ -406,7 +412,13 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         let storyBoard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let dataVC = storyBoard.instantiateViewController(withIdentifier: "contentView") as! ContentViewController
         
-        dataVC.chapterTitle = chapterArray[chapterIndex].chapterTitle
+        if chapterArray.count != 0 {
+            dataVC.chapterTitle = chapterArray[chapterIndex].chapterTitle
+        }
+        else {
+            dataVC.chapterTitle = CDChapterArray[chapterIndex].chapterTitle!
+        }
+        
         dataVC.pageCounte = "\(index + 1)/\(splitedContentArray.count)"
         if index >= 0 {
             dataVC.body = splitedContentArray[index]

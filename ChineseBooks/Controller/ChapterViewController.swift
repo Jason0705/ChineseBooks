@@ -87,6 +87,9 @@ class ChapterViewController: UIViewController {
                 let chapterJSON : JSON = JSON(response.result.value!)
                 self.createChapterArray(with: chapterJSON)
             } else {
+                if self.CDChapterArray.count == 0 {
+                    ProgressHUD.showError("网络连接有问题！\n请检查网络！")
+                }
                 print("Couldnt process 1 JSON response, Error: \(response.result.error)")
             }
         }
@@ -104,7 +107,7 @@ class ChapterViewController: UIViewController {
             }
         }
     }
-//
+
     func getBodyData(from url: String, completionHandler: @escaping (String) -> Void) {
         Alamofire.request(url).responseJSON {
             response in
@@ -118,18 +121,6 @@ class ChapterViewController: UIViewController {
             }
         }
     }
-    
-//    func getBodyData(from url: String) {
-//        Alamofire.request(url).responseJSON {
-//            response in
-//            if response.result.isSuccess{
-//                let bodyJSON : JSON = JSON(response.result.value!)
-//                self.createBodyData(with: bodyJSON)
-//            } else {
-//                print("Couldnt 2 process JSON response, Error: \(response.result.error)")
-//            }
-//        }
-//    }
     
     
     // MARK: - JSON Parsing
@@ -160,12 +151,9 @@ class ChapterViewController: UIViewController {
             newChapter.downloaded = false
             newChapter.parentBook = selectedBook
 
-            //downloadedChapterArray.append(newChapter)
             CDChapterArray.append(newChapter)
             saveChapters()
         }
-        //chapterTableView.reloadData()
-        //return downloadedChapterArray
         return CDChapterArray
     }
     
@@ -176,12 +164,6 @@ class ChapterViewController: UIViewController {
         return bodyData
     }
     
-//    func createBodyData(with json: JSON) {
-//        guard !json.isEmpty else {fatalError("json unavailible!")}
-//
-//        let body = json["chapter"]["body"].stringValue
-//        bodyArray.append(body)
-//    }
     
     func mergeArray(with array: [CDChapter]) {
         for element in array {
@@ -207,16 +189,6 @@ class ChapterViewController: UIViewController {
 
     }
     
-//    func createBodyArray(with array: [Chapter]) {
-//        for element in array {
-//            let bodyURL = "http://chapter2.zhuishushenqi.com/chapter/\(element.chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
-//            getBodyData(from: bodyURL)
-//        }
-//    }
-    
-    
-    
-    
     
     
     // Mark: - Save and Load Chapter
@@ -226,7 +198,6 @@ class ChapterViewController: UIViewController {
         } catch {
             print("Error Saving Context: \(error)")
         }
-        //chapterTableView.reloadData()
     }
 
     func loadChapters() {
@@ -235,36 +206,12 @@ class ChapterViewController: UIViewController {
         //let predicate = NSPredicate(format: "parentBook.id MATCHES %@", bookID!)
         request.predicate = predicate
         do {
-            //downloadedChapterArray = try context.fetch(request)
             CDChapterArray = try context.fetch(request)
         } catch {
+            ProgressHUD.showError("数据提取错误！")
             print("Error fetching data from context: \(error)")
         }
     }
-    
-    
-    
-    // MARK: - Save and Load Chapter Book Mark
-    
-//    func saveChapterMarks() {
-//        do {
-//            try context.save()
-//        } catch {
-//            print("Error Saving Context: \(error)")
-//        }
-//        chapterTableView.reloadData()
-//    }
-//
-//    func loadChapterMarks() {
-//        let request : NSFetchRequest<CDChapterMark> = CDChapterMark.fetchRequest()
-//        let predicate = NSPredicate(format: "parentBook.id MATCHES %@", selectedBook!.id!)
-//        request.predicate = predicate
-//        do {
-//            chapterMarkArray = try context.fetch(request)
-//        } catch {
-//            print("Error fetching data from context: \(error)")
-//        }
-//    }
 
 
 
@@ -294,6 +241,12 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         }
         else {
             numberOfRow = chapterArray.count
+        }
+        if numberOfRow == 0 {
+            ProgressHUD.show()
+        }
+        else {
+            ProgressHUD.dismiss()
         }
         return numberOfRow
     }
