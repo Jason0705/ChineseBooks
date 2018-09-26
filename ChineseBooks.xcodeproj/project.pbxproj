@@ -31,6 +31,7 @@
 		D191319B212D1D9200B8BA0B /* BookDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */; };
 		D1C084852157660E003040F6 /* CustomChapterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C084832157660E003040F6 /* CustomChapterCell.swift */; };
 		D1C084862157660E003040F6 /* CustomChapterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D1C084842157660E003040F6 /* CustomChapterCell.xib */; };
+		D1C0848C215B420D003040F6 /* Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C0848B215B420D003040F6 /* Style.swift */; };
 		D1F211132130628700DBC373 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211122130628700DBC373 /* SearchViewController.swift */; };
 		D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211142133686D00DBC373 /* ChapterViewController.swift */; };
 		D1F2111721336C2500DBC373 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F2111621336C2500DBC373 /* Chapter.swift */; };
@@ -64,6 +65,7 @@
 		D191319A212D1D9200B8BA0B /* BookDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailViewController.swift; sourceTree = "<group>"; };
 		D1C084832157660E003040F6 /* CustomChapterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomChapterCell.swift; sourceTree = "<group>"; };
 		D1C084842157660E003040F6 /* CustomChapterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomChapterCell.xib; sourceTree = "<group>"; };
+		D1C0848B215B420D003040F6 /* Style.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Style.swift; sourceTree = "<group>"; };
 		D1F211122130628700DBC373 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D1F211142133686D00DBC373 /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		D1F2111621336C2500DBC373 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			children = (
 				D17BF0FF214F06DA00C2BD46 /* SaveChapterMark.swift */,
 				D1337B1C2151F76B00EC746C /* SavePageMark.swift */,
+				D1C0848B215B420D003040F6 /* Style.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -333,6 +336,7 @@
 				D182F5E221239463000D9384 /* Rank.swift in Sources */,
 				D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */,
 				D12421A5212BA2FA009AC580 /* RankListViewController.swift in Sources */,
+				D1C0848C215B420D003040F6 /* Style.swift in Sources */,
 				D182F5BA211BF993000D9384 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

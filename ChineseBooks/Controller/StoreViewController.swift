@@ -51,7 +51,7 @@ class StoreViewController: UIViewController {
         maleViewWidth.constant = storeStackView.frame.size.width
         femaleViewWidth.constant = 0
         rankViewWidth.constant = 0
-        maleCategoryCollectionView.collectionViewLayout = cellStyle()
+        maleCategoryCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
         
         // navBar
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
@@ -128,31 +128,13 @@ class StoreViewController: UIViewController {
         }
         rankCollectionView.reloadData()
     }
-
-    
-    
-    // MARK: - Styling
-    
-    // CollectionView Cell Style
-    func cellStyle() -> UICollectionViewFlowLayout {
-        //let itemSize = UIScreen.main.bounds.width/3 - 12
-        let cellSize = storeStackView.frame.size.width/3 - 12
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(8, 8, 8, 8)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize)
-        layout.minimumInteritemSpacing = 8
-        layout.minimumLineSpacing = 8
-        
-        return layout
-    }
-    
     
     
     // MARK: - Action
     
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            maleCategoryCollectionView.collectionViewLayout = cellStyle()
+            maleCategoryCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
             UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = self.storeStackView.frame.size.width
                 self.femaleViewWidth.constant = 0
@@ -162,7 +144,7 @@ class StoreViewController: UIViewController {
             
         }
         else if sender.selectedSegmentIndex == 1 {
-            femaleCategoryCollectionView.collectionViewLayout = cellStyle()
+            femaleCategoryCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
             UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = 0
                 self.femaleViewWidth.constant = self.storeStackView.frame.size.width
@@ -171,7 +153,7 @@ class StoreViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 2 {
-            rankCollectionView.collectionViewLayout = cellStyle()
+            rankCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
             UIView.animate(withDuration: 0.3) {
                 self.maleViewWidth.constant = 0
                 self.femaleViewWidth.constant = 0

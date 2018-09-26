@@ -31,7 +31,7 @@ class SearchViewController: UIViewController {
         resultCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
         
         // Style
-        resultCollectionView.collectionViewLayout = cellStyle()
+        resultCollectionView.collectionViewLayout = Style().cellStyle(view: resultView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
     }
 
     
@@ -73,23 +73,6 @@ class SearchViewController: UIViewController {
         }
         resultCollectionView.reloadData()
     }
-    
-    
-    // MARK: - Styling
-    
-    // CollectionView Cell Style
-    func cellStyle() -> UICollectionViewFlowLayout {
-        let cellSize = resultView.frame.size.width/3 - 24
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        return layout
-    }
-    
-    
     
 
 }

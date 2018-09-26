@@ -36,7 +36,7 @@ class RankListViewController: UIViewController {
         
         // Style
         rankView.frame.size.width = UIScreen.main.bounds.width
-        rankCollectionView.collectionViewLayout = cellStyle()
+        rankCollectionView.collectionViewLayout = Style().cellStyle(view: rankView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
     }
 
     // MARK: - Networking
@@ -78,20 +78,6 @@ class RankListViewController: UIViewController {
         rankCollectionView.reloadData()
     }
     
-    
-    // MARK: - Styling
-    
-    // CollectionView Cell Style
-    func cellStyle() -> UICollectionViewFlowLayout {
-        let cellSize = rankView.frame.size.width/3 - 24
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        return layout
-    }
     
 }
 

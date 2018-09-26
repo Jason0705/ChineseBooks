@@ -49,7 +49,8 @@ class MyBooksViewController: UIViewController {
         
         // Style
         containerView.frame.size.width = UIScreen.main.bounds.width
-        myBooksCollectionView.collectionViewLayout = cellStyle()
+        myBooksCollectionView.collectionViewLayout = Style().cellStyle(view: containerView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
+     
         
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
 //        let themeColorStrings = gradientColorsStrings[Int(arc4random_uniform(UInt32(gradientColorsStrings.count)))]
@@ -136,20 +137,6 @@ class MyBooksViewController: UIViewController {
         }
     }
     
-    
-    // MARK: - Styling
-    
-    // CollectionView Cell Style
-    func cellStyle() -> UICollectionViewFlowLayout {
-        let cellSize = containerView.frame.size.width/3 - 24
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        return layout
-    }
     
     
     // MARK: - Edit Mode

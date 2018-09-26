@@ -174,12 +174,6 @@ class BookPagesViewController: UIViewController {
             initializeView(at: index)
             updateSlider(with: index)
         }
-        if splitedContentArray.count == 0 {
-            ProgressHUD.show()
-        }
-        else {
-            ProgressHUD.dismiss()
-        }
         
     }
     

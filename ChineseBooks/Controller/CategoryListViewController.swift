@@ -65,7 +65,7 @@ class CategoryListViewController: UIViewController {
         newViewWidth.constant = 0
         reputationViewWidth.constant = 0
         overViewWidth.constant = 0
-        hotCollectionView.collectionViewLayout = cellStyle()
+        hotCollectionView.collectionViewLayout = Style().cellStyle(view: listStackView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
         
         // navBar
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
@@ -209,30 +209,13 @@ class CategoryListViewController: UIViewController {
         }
         overCollectionView.reloadData()
     }
-
-    
-    
-    // MARK: - Styling
-    
-    // CollectionView Cell Style
-    func cellStyle() -> UICollectionViewFlowLayout {
-        let cellSize = listStackView.frame.size.width/3 - 24
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsetsMake(8, 16, 8, 16)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize * 2)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        return layout
-    }
-    
     
     
     // MARK: - Action
     
     @IBAction func listSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
-            hotCollectionView.collectionViewLayout = cellStyle()
+            hotCollectionView.collectionViewLayout = Style().cellStyle(view: listStackView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
             UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = self.listStackView.frame.size.width
                 self.newViewWidth.constant = 0
@@ -242,7 +225,7 @@ class CategoryListViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 1 {
-            newCollectionView.collectionViewLayout = cellStyle()
+            newCollectionView.collectionViewLayout = Style().cellStyle(view: listStackView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
             UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = self.listStackView.frame.size.width
@@ -252,7 +235,7 @@ class CategoryListViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 2 {
-            reputationCollectionView.collectionViewLayout = cellStyle()
+            reputationCollectionView.collectionViewLayout = Style().cellStyle(view: listStackView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
             UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0
@@ -262,7 +245,7 @@ class CategoryListViewController: UIViewController {
             }
         }
         else if sender.selectedSegmentIndex == 3 {
-            overCollectionView.collectionViewLayout = cellStyle()
+            overCollectionView.collectionViewLayout = Style().cellStyle(view: listStackView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
             UIView.animate(withDuration: 0.3) {
                 self.hotViewWidth.constant = 0
                 self.newViewWidth.constant = 0

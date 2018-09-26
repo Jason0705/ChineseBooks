@@ -17,9 +17,6 @@ class BookDetailViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     var addedBookArray = [CDBook]()
-    //var addedBook = [CDBook]()
-    
-    //let thisBook = CDBook()
     
     var bookTitle = ""
     var author = ""
