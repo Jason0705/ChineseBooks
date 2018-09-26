@@ -129,37 +129,34 @@ class StoreViewController: UIViewController {
         rankCollectionView.reloadData()
     }
     
+    func segmentAnimation(maleW: CGFloat, femaleW: CGFloat, rankW: CGFloat) {
+        UIView.animate(withDuration: 0.3) {
+            self.maleViewWidth.constant = maleW
+            self.femaleViewWidth.constant = femaleW
+            self.rankViewWidth.constant = rankW
+            self.view.layoutIfNeeded()
+        }
+    }
+    
     
     // MARK: - Action
     
     @IBAction func switchViewSegmentedControlPressed(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             maleCategoryCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
-            UIView.animate(withDuration: 0.3) {
-                self.maleViewWidth.constant = self.storeStackView.frame.size.width
-                self.femaleViewWidth.constant = 0
-                self.rankViewWidth.constant = 0
-                self.view.layoutIfNeeded()
-            }
+            
+            segmentAnimation(maleW: self.storeStackView.frame.size.width, femaleW: 0, rankW: 0)
             
         }
         else if sender.selectedSegmentIndex == 1 {
             femaleCategoryCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
-            UIView.animate(withDuration: 0.3) {
-                self.maleViewWidth.constant = 0
-                self.femaleViewWidth.constant = self.storeStackView.frame.size.width
-                self.rankViewWidth.constant = 0
-                self.view.layoutIfNeeded()
-            }
+            
+            segmentAnimation(maleW: 0, femaleW: self.storeStackView.frame.size.width, rankW: 0)
         }
         else if sender.selectedSegmentIndex == 2 {
             rankCollectionView.collectionViewLayout = Style().cellStyle(view: storeStackView, widthDecrease: 12, spacing: 8, inset: UIEdgeInsetsMake(8, 8, 8, 8), heightMultiplier: 1)
-            UIView.animate(withDuration: 0.3) {
-                self.maleViewWidth.constant = 0
-                self.femaleViewWidth.constant = 0
-                self.rankViewWidth.constant = self.storeStackView.frame.size.width
-                self.view.layoutIfNeeded()
-            }
+            
+            segmentAnimation(maleW: 0, femaleW: 0, rankW: self.storeStackView.frame.size.width)
         }
         
     }
