@@ -1051,7 +1051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I8u-fv-Arp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2809" y="134"/>
+            <point key="canvasLocation" x="2808.8000000000002" y="133.74384236453201"/>
         </scene>
         <!--小说列表-->
         <scene sceneID="59n-g9-Pgc">
@@ -1303,35 +1303,10 @@
             </objects>
             <point key="canvasLocation" x="-863.20000000000005" y="133.5832083958021"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="cI6-b5-XJB">
-            <objects>
-                <viewController id="CU5-uF-6nh" customClass="ViewController" customModule="ChineseBooks" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="2rB-m3-5L9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qZj-dK-fW2">
-                                <rect key="frame" x="67" y="342" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="HdM-jO-Rni"/>
-                    </view>
-                    <connections>
-                        <outlet property="view1" destination="qZj-dK-fW2" id="ew2-31-YJO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lIk-nv-biF" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-871" y="946"/>
-        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4qI-54-deD"/>
         <segue reference="osF-wW-Ufi"/>
-        <segue reference="svF-8a-mU1"/>
+        <segue reference="rsf-Ke-1cJ"/>
     </inferredMetricsTieBreakers>
 </document>

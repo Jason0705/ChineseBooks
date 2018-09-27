@@ -11,12 +11,14 @@ import Alamofire
 import SwiftyJSON
 import Kingfisher
 import ProgressHUD
+import ChameleonFramework
 
 class SearchViewController: UIViewController {
 
     let baseURL = "http://api.zhuishushenqi.com/book/fuzzy-search?query="
     var searchInput = ""
     var resultBookList = [Book]()
+    var searched = false
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultView: UIView!
@@ -32,6 +34,10 @@ class SearchViewController: UIViewController {
         
         // Style
         resultCollectionView.collectionViewLayout = Style().cellStyle(view: resultView, widthDecrease: 24, spacing: 0, inset: UIEdgeInsetsMake(8, 16, 8, 16), heightMultiplier: 2)
+        
+        guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
+        searchBar.tintColor = navBar.tintColor
+        
     }
 
     
@@ -81,6 +87,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searched = true
         ProgressHUD.show()
         resultBookList = [Book]()
         if searchBar.text?.count != 0 {
@@ -89,14 +96,15 @@ extension SearchViewController: UISearchBarDelegate {
             
             getResultData(from: url)
         }
-        
         ProgressHUD.dismiss()
         self.view.endEditing(true)
+        //searched = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         resultBookList = [Book]()
         resultCollectionView.reloadData()
+        searched = false
         self.view.endEditing(true)
     }
     
@@ -104,6 +112,7 @@ extension SearchViewController: UISearchBarDelegate {
         if searchBar.text?.count == 0 {
             resultBookList = [Book]()
             resultCollectionView.reloadData()
+            searched = false
         }
     }
     
@@ -115,6 +124,9 @@ extension SearchViewController: UICollectionViewDataSource, UICollectionViewDele
     
     // Number of Cell
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if searched == true && resultBookList.count == 0 {
+            ProgressHUD.showError("对不起...\n没有找到您所搜索的小说...")
+        }
         return resultBookList.count
     }
     
