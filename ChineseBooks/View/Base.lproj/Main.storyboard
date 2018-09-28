@@ -915,7 +915,7 @@
                                             <constraint firstItem="WwV-yX-i9A" firstAttribute="centerX" secondItem="ujl-7Q-Pjc" secondAttribute="centerX" id="zCS-jc-7Gt"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q83-s0-ekr" userLabel="ADs View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q83-s0-ekr" userLabel="Banner ADs View">
                                         <rect key="frame" x="0.0" y="684" width="375" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="l91-iI-EVC"/>
@@ -950,6 +950,7 @@
                         <viewLayoutGuide key="safeArea" id="Mn7-ht-LZC"/>
                     </view>
                     <connections>
+                        <outlet property="bannerAdsView" destination="q83-s0-ekr" id="W2g-tS-TAa"/>
                         <outlet property="containerView" destination="YDZ-p8-lqR" id="tO8-fY-yHe"/>
                         <outlet property="contentLabel" destination="fOi-bC-1gg" id="PjU-VT-2Ny"/>
                         <outlet property="pageCounterLabel" destination="WwV-yX-i9A" id="jUe-UA-MND"/>

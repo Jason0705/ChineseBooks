@@ -35,6 +35,8 @@
 		D1F211132130628700DBC373 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211122130628700DBC373 /* SearchViewController.swift */; };
 		D1F211152133686D00DBC373 /* ChapterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F211142133686D00DBC373 /* ChapterViewController.swift */; };
 		D1F2111721336C2500DBC373 /* Chapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1F2111621336C2500DBC373 /* Chapter.swift */; };
+		D1F8B755215DE572003AAA3C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D1F8B754215DE571003AAA3C /* GoogleService-Info.plist */; };
+		D1F8B75D215DEDB1003AAA3C /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1F8B75C215DEDB1003AAA3C /* GoogleMobileAds.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +71,10 @@
 		D1F211122130628700DBC373 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		D1F211142133686D00DBC373 /* ChapterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterViewController.swift; sourceTree = "<group>"; };
 		D1F2111621336C2500DBC373 /* Chapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chapter.swift; sourceTree = "<group>"; };
+		D1F8B754215DE571003AAA3C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D1F8B756215DEBD0003AAA3C /* Google-Mobile-Ads-SDK */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "Google-Mobile-Ads-SDK"; path = "Pods/Google-Mobile-Ads-SDK"; sourceTree = "<group>"; };
+		D1F8B758215DEBE4003AAA3C /* frameworks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = frameworks; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks"; sourceTree = "<group>"; };
+		D1F8B75C215DEDB1003AAA3C /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = "Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks/GoogleMobileAds.framework"; sourceTree = "<group>"; };
 		F82CB08AA72C6D741E38A8ED /* Pods-ChineseBooks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChineseBooks.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D1F8B75D215DEDB1003AAA3C /* GoogleMobileAds.framework in Frameworks */,
 				BD686139485F68B95151C0C5 /* Pods_ChineseBooks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +94,9 @@
 		237FD2767A42E18F5CBCE835 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D1F8B75C215DEDB1003AAA3C /* GoogleMobileAds.framework */,
+				D1F8B758215DEBE4003AAA3C /* frameworks */,
+				D1F8B756215DEBD0003AAA3C /* Google-Mobile-Ads-SDK */,
 				32C3B33EFBB4BEDC9F703EA5 /* Pods_ChineseBooks.framework */,
 			);
 			name = Frameworks;
@@ -105,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				D13146DA211BB36400B7B465 /* ChineseBooks */,
+				D1F8B754215DE571003AAA3C /* GoogleService-Info.plist */,
 				D13146D9211BB36400B7B465 /* Products */,
 				48A13067FAFAEE7F1467D728 /* Pods */,
 				237FD2767A42E18F5CBCE835 /* Frameworks */,
@@ -122,12 +133,12 @@
 		D13146DA211BB36400B7B465 /* ChineseBooks */ = {
 			isa = PBXGroup;
 			children = (
-				D17BF0FE214F06A000C2BD46 /* Support Files */,
 				D13146DB211BB36400B7B465 /* AppDelegate.swift */,
 				D13146F2211BC76D00B7B465 /* Model */,
 				D13146F1211BC76600B7B465 /* View */,
 				D13146F0211BC75C00B7B465 /* Controller */,
 				D182F5BB211CBBF0000D9384 /* Cell */,
+				D17BF0FE214F06A000C2BD46 /* Support Files */,
 				D13146E5211BB36500B7B465 /* Assets.xcassets */,
 				D13146EA211BB36500B7B465 /* Info.plist */,
 			);
@@ -260,6 +271,7 @@
 				D13146E9211BB36500B7B465 /* LaunchScreen.storyboard in Resources */,
 				D13146E6211BB36500B7B465 /* Assets.xcassets in Resources */,
 				D13146E1211BB36400B7B465 /* Main.storyboard in Resources */,
+				D1F8B755215DE572003AAA3C /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -293,17 +305,21 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ChineseBooks/Pods-ChineseBooks-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ProgressHUD/ProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -484,6 +500,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84S4NYY4L7;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
+				);
 				INFOPLIST_FILE = ChineseBooks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -503,6 +524,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 84S4NYY4L7;
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Google-Mobile-Ads-SDK/Frameworks/frameworks",
+				);
 				INFOPLIST_FILE = ChineseBooks/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
