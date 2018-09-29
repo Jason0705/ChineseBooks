@@ -12,6 +12,7 @@ import SwiftyJSON
 import CoreData
 import ProgressHUD
 import ChameleonFramework
+import GoogleMobileAds
 
 class BookPagesViewController: UIViewController {
 
@@ -40,6 +41,9 @@ class BookPagesViewController: UIViewController {
     // setting variables
     var pageBackgroundColor = UIColor.white
     var fontSize : CGFloat = 22
+    
+    // interstitial ads
+    var interstitial: GADInterstitial!
     
     
     
@@ -84,8 +88,19 @@ class BookPagesViewController: UIViewController {
         // Load page
         loadPages(at: pageBookMark)
         
+        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+            self.showInterstital()
+        }
+        
+        // Notification for going into background/resume
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        // interstitial ads
+//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        let request = GADRequest()
+//        interstitial.load(request)
+        interstitial = createAndLoadInterstitial()
         
         // Style
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
@@ -296,6 +311,25 @@ class BookPagesViewController: UIViewController {
     }
     
     
+    // Show interstitial ads
+    func showInterstital() {
+        if interstitial.isReady {
+            interstitial.present(fromRootViewController: self)
+        }
+    }
+    
+    func createAndLoadInterstitial() -> GADInterstitial {
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial.delegate = self
+        interstitial.load(GADRequest())
+        return interstitial
+    }
+    
+    func interstitialDidDismissScreen(_ ad: GADInterstitial) {
+        interstitial = createAndLoadInterstitial()
+    }
+    
+    
     // Invalidate timer when app moving to background.
     @objc func appMovedToBackground() {
         timer.invalidate()
@@ -303,7 +337,7 @@ class BookPagesViewController: UIViewController {
     
     @objc func appMovedToForeground() {
         timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
-            print("fired")
+            self.showInterstital()
         }
     }
     
@@ -511,6 +545,10 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             chapterIndex += 1
             
+            if chapterIndex % 15 == 0 {
+                showInterstital()
+            }
+            
             let newChapterMark = CDChapterMark(context: context)
             newChapterMark.chapterMark = Int16(chapterIndex)
             newChapterMark.parentBook = selectedBook
@@ -523,6 +561,22 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
         return viewControllerAtIndex(index: index)
     }
     
+    
+}
+
+
+extension BookPagesViewController: GADInterstitialDelegate {
+    // Tells the delegate that an interstitial will be presented.
+    func interstitialWillPresentScreen(_ ad: GADInterstitial) {
+        timer.invalidate()
+    }
+    
+    // Tells the delegate the interstitial is to be animated off the screen.
+    func interstitialWillDismissScreen(_ ad: GADInterstitial) {
+        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+            self.showInterstital()
+        }
+    }
     
 }
 
