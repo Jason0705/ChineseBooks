@@ -11,6 +11,7 @@ import Alamofire
 import SwiftyJSON
 import CoreData
 import ProgressHUD
+import GoogleMobileAds
 
 class ChapterViewController: UIViewController {
     
@@ -56,6 +57,10 @@ class ChapterViewController: UIViewController {
         
         // Register CustomCategoryCell.xib
         chapterTableView.register(UINib(nibName: "CustomChapterCell", bundle: nil), forCellReuseIdentifier: "customChapterCell")
+        
+        // Load Reward Ads
+        GADRewardBasedVideoAd.sharedInstance().delegate = self
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-3940256099942544/1712485313")
         
         // Style
         self.navigationItem.title = bookTitle
@@ -216,12 +221,39 @@ class ChapterViewController: UIViewController {
 
 
     @IBAction func downloadButtonPressed(_ sender: UIBarButtonItem) {
-        //percentageView.isHidden = false
-        ProgressHUD.show()
-        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        downloadChapterData(from: url) { (data) in
-            self.mergeArray(with: data)
+//        //percentageView.isHidden = false
+//        ProgressHUD.show()
+//        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+//        downloadChapterData(from: url) { (data) in
+//            self.mergeArray(with: data)
+//        }
+        let alert = UIAlertController(title: "请注意", message: "请点击“确定”完整观看一段广告以便下载小说。", preferredStyle: .alert)
+        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (AlertAction) in
+            alert.dismiss(animated: true, completion: nil)
         }
+        let startWatchingAction = UIAlertAction(title: "确定", style: .default) { (AlertAction) in
+            if GADRewardBasedVideoAd.sharedInstance().isReady == true {
+                GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
+            }
+            else {
+                let noAdAlert = UIAlertController(title: "对不起", message: "广告系统错误。\n请点击”确认“立即下载。", preferredStyle: .alert)
+                let downloadWOAdsAction = UIAlertAction(title: "确定", style: .default, handler: { (AlertAction) in
+                    //percentageView.isHidden = false
+                    ProgressHUD.show()
+                    let url = "http://api.zhuishushenqi.com/mix-atoc/\(self.bookID)?view=chapters"
+                    self.downloadChapterData(from: url) { (data) in
+                        self.mergeArray(with: data)
+                    }
+                })
+                noAdAlert.addAction(downloadWOAdsAction)
+                self.present(noAdAlert, animated: true, completion: nil)
+            }
+        }
+        
+        alert.addAction(cancleAction)
+        alert.addAction(startWatchingAction)
+        
+        present(alert, animated: true, completion: nil)
     }
    
     
@@ -317,4 +349,21 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
+}
+
+
+extension ChapterViewController: GADRewardBasedVideoAdDelegate {
+    func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
+        //percentageView.isHidden = false
+        ProgressHUD.show()
+        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+        downloadChapterData(from: url) { (data) in
+            self.mergeArray(with: data)
+        }
+    }
+    
+    func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
+        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-3940256099942544/1712485313")
+    }
+    
 }
