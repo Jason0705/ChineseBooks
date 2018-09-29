@@ -15,6 +15,9 @@ import ChameleonFramework
 
 class BookPagesViewController: UIViewController {
 
+    var timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+        print("fired")
+    }
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let saveChapterMark = SaveChapterMark()
     let savePageMark = SavePageMark()
@@ -81,6 +84,9 @@ class BookPagesViewController: UIViewController {
         // Load page
         loadPages(at: pageBookMark)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: Notification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
         // Style
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
         
@@ -119,6 +125,22 @@ class BookPagesViewController: UIViewController {
         bgColor3Button.layer.cornerRadius = 0.5 * bgColor3Button.bounds.size.width
         
     }
+    
+    
+    
+    // Invalidate timer when back to chapters.
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        
+        if self.isMovingFromParentViewController {
+            timer.invalidate()
+        }
+    }
+    
+    
     
     
     // MARK: - Networking
@@ -271,6 +293,18 @@ class BookPagesViewController: UIViewController {
         savePageMark.savePageMarks()
         savePageMark.clearPageMarks(inBook: selectedBook.id!)
         pageBookMark = savePageMark.loadPageMarks(inChapter: Int16(chapterIndex), ofBook: selectedBook.id!)
+    }
+    
+    
+    // Invalidate timer when app moving to background.
+    @objc func appMovedToBackground() {
+        timer.invalidate()
+    }
+    
+    @objc func appMovedToForeground() {
+        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+            print("fired")
+        }
     }
     
     
