@@ -23,6 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Initialize the Google Mobile Ads SDK.
         GADMobileAds.configure(withApplicationID: "ca-app-pub-4666558367962888~6576846714")
+        
+        StoreReviewHelper.incrementAppOpenedCount()
+        
         return true
     }
 

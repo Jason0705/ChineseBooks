@@ -16,9 +16,6 @@ import GoogleMobileAds
 
 class BookPagesViewController: UIViewController {
 
-    var timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
-        print("fired")
-    }
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let saveChapterMark = SaveChapterMark()
     let savePageMark = SavePageMark()
@@ -45,6 +42,10 @@ class BookPagesViewController: UIViewController {
     // interstitial ads
     var interstitial: GADInterstitial!
     
+    // timers
+    var adTimer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+        print("fired")
+    }
     
     
     //@IBOutlet weak var contentTextView: UITextView!
@@ -88,7 +89,8 @@ class BookPagesViewController: UIViewController {
         // Load page
         loadPages(at: pageBookMark)
         
-        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+        // fire timer
+        adTimer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
             self.showInterstital()
         }
         
@@ -151,7 +153,8 @@ class BookPagesViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         if self.isMovingFromParentViewController {
-            timer.invalidate()
+            adTimer.invalidate()
+            StoreReviewHelper.checkAndAskForReview()
         }
     }
     
@@ -332,11 +335,11 @@ class BookPagesViewController: UIViewController {
     
     // Invalidate timer when app moving to background.
     @objc func appMovedToBackground() {
-        timer.invalidate()
+        adTimer.invalidate()
     }
     
     @objc func appMovedToForeground() {
-        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+        adTimer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
             self.showInterstital()
         }
     }
@@ -545,7 +548,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             chapterIndex += 1
             
-            if chapterIndex % 15 == 0 {
+            if chapterIndex % 2 == 0 {
                 showInterstital()
             }
             
@@ -568,12 +571,12 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
 extension BookPagesViewController: GADInterstitialDelegate {
     // Tells the delegate that an interstitial will be presented.
     func interstitialWillPresentScreen(_ ad: GADInterstitial) {
-        timer.invalidate()
+        adTimer.invalidate()
     }
     
     // Tells the delegate the interstitial is to be animated off the screen.
     func interstitialWillDismissScreen(_ ad: GADInterstitial) {
-        timer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
+        adTimer = Timer.scheduledTimer(withTimeInterval: 1800, repeats: true) { (timer) in
             self.showInterstital()
         }
     }
