@@ -8,7 +8,7 @@
 
 import UIKit
 import ChameleonFramework
-import GoogleMobileAds
+import Firebase
 
 class ContentViewController: UIViewController {
 
@@ -36,7 +36,8 @@ class ContentViewController: UIViewController {
         
         //addBannerViewToView(bannerView)
         
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        //bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = "ca-app-pub-4666558367962888/8835978859"
         bannerView.rootViewController = self
         bannerView.load(GADRequest())
         

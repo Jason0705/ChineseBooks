@@ -99,9 +99,6 @@ class BookPagesViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         
         // interstitial ads
-//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
-//        let request = GADRequest()
-//        interstitial.load(request)
         interstitial = createAndLoadInterstitial()
         
         // Style
@@ -271,15 +268,21 @@ class BookPagesViewController: UIViewController {
         pageController?.delegate = self
         pageController?.dataSource = self
         
-        let startingViewController: ContentViewController =
-            viewControllerAtIndex(index: index)!
+        if let startingViewController: ContentViewController = viewControllerAtIndex(index: index)! {
+            let viewControllers: NSArray = [startingViewController]
+            pageController!.setViewControllers(viewControllers
+                as? [UIViewController],
+                                               direction: .forward,
+                                               animated: false,
+                                               completion: nil)
+        }
         
-        let viewControllers: NSArray = [startingViewController]
-        pageController!.setViewControllers(viewControllers
-            as? [UIViewController],
-                                           direction: .forward,
-                                           animated: false,
-                                           completion: nil)
+//        let viewControllers: NSArray = [startingViewController]
+//        pageController!.setViewControllers(viewControllers
+//            as? [UIViewController],
+//                                           direction: .forward,
+//                                           animated: false,
+//                                           completion: nil)
         
         self.addChildViewController(pageController!)
         self.contentView.addSubview(self.pageController!.view)
@@ -322,7 +325,8 @@ class BookPagesViewController: UIViewController {
     }
     
     func createAndLoadInterstitial() -> GADInterstitial {
-        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+        interstitial = GADInterstitial(adUnitID: "ca-app-pub-4666558367962888/4521329326")
         interstitial.delegate = self
         interstitial.load(GADRequest())
         return interstitial
@@ -548,7 +552,7 @@ extension BookPagesViewController: UIPageViewControllerDataSource, UIPageViewCon
             }
             chapterIndex += 1
             
-            if chapterIndex % 2 == 0 {
+            if chapterIndex % 15 == 0 {
                 showInterstital()
             }
             
