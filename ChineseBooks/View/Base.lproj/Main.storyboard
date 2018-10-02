@@ -462,6 +462,10 @@
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXQ-b6-huW">
                                                 <rect key="frame" x="34" y="231" width="291" height="41"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="41" id="6tB-VR-V0v"/>
+                                                    <constraint firstAttribute="width" constant="291" id="kgT-fj-aZI"/>
+                                                </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="在线阅读"/>
                                                 <connections>
@@ -474,12 +478,11 @@
                                             <constraint firstItem="FXQ-b6-huW" firstAttribute="top" secondItem="b6D-qh-fat" secondAttribute="bottom" constant="8" id="FcW-uj-4Yj"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="120" id="Hgt-5n-OiW"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="8" id="Kee-R6-uli"/>
-                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="34" id="Ra1-PB-psb"/>
                                             <constraint firstAttribute="trailing" secondItem="b6D-qh-fat" secondAttribute="trailing" constant="8" id="W6T-Id-N74"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="top" secondItem="wCf-4p-nPE" secondAttribute="top" constant="8" id="Xnq-Wz-X7e"/>
                                             <constraint firstAttribute="trailing" secondItem="kAO-jI-nSO" secondAttribute="trailing" constant="121" id="aMM-FH-2Dd"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="top" secondItem="kAO-jI-nSO" secondAttribute="bottom" constant="8" id="aYu-eA-kVI"/>
-                                            <constraint firstAttribute="trailing" secondItem="FXQ-b6-huW" secondAttribute="trailing" constant="34" id="oqx-jF-FWB"/>
+                                            <constraint firstItem="FXQ-b6-huW" firstAttribute="centerX" secondItem="wCf-4p-nPE" secondAttribute="centerX" id="aaZ-yS-0ON"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1307,7 +1310,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="4qI-54-deD"/>
-        <segue reference="osF-wW-Ufi"/>
+        <segue reference="Kd6-Mr-PCv"/>
         <segue reference="rsf-Ke-1cJ"/>
     </inferredMetricsTieBreakers>
 </document>
