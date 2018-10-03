@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -443,7 +442,7 @@
                                         <rect key="frame" x="8" y="246" width="359" height="384"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-qh-fat">
-                                                <rect key="frame" x="8" y="52" width="343" height="171"/>
+                                                <rect key="frame" x="8" y="139" width="343" height="171"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="b6D-qh-fat" secondAttribute="height" multiplier="343:171" id="Fy6-e1-UmL"/>
@@ -453,7 +452,7 @@
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAO-jI-nSO">
-                                                <rect key="frame" x="120" y="8" width="118" height="36"/>
+                                                <rect key="frame" x="120" y="8" width="118" height="123"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                 <state key="normal" title="+ 添加书架"/>
                                                 <connections>
@@ -461,7 +460,7 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXQ-b6-huW">
-                                                <rect key="frame" x="34" y="231" width="291" height="41"/>
+                                                <rect key="frame" x="34" y="318" width="291" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="6tB-VR-V0v"/>
                                                     <constraint firstAttribute="width" constant="291" id="kgT-fj-aZI"/>
@@ -478,6 +477,7 @@
                                             <constraint firstItem="FXQ-b6-huW" firstAttribute="top" secondItem="b6D-qh-fat" secondAttribute="bottom" constant="8" id="FcW-uj-4Yj"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="120" id="Hgt-5n-OiW"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="8" id="Kee-R6-uli"/>
+                                            <constraint firstAttribute="bottom" secondItem="FXQ-b6-huW" secondAttribute="bottom" constant="25" id="VbP-y0-iz9"/>
                                             <constraint firstAttribute="trailing" secondItem="b6D-qh-fat" secondAttribute="trailing" constant="8" id="W6T-Id-N74"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="top" secondItem="wCf-4p-nPE" secondAttribute="top" constant="8" id="Xnq-Wz-X7e"/>
                                             <constraint firstAttribute="trailing" secondItem="kAO-jI-nSO" secondAttribute="trailing" constant="121" id="aMM-FH-2Dd"/>
@@ -557,7 +557,7 @@
                                         <rect key="frame" x="67" y="281" width="240" height="128"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="Ey6-Q5-hCt" userLabel="Label Stack View">
-                                                <rect key="frame" x="71.333333333333343" y="32" width="98" height="64"/>
+                                                <rect key="frame" x="71.666666666666657" y="32" width="98" height="64"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="正在加载..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqg-EE-Ce3">
                                                         <rect key="frame" x="0.0" y="0.0" width="98" height="24"/>
@@ -661,7 +661,7 @@
                                         <rect key="frame" x="8" y="427.66666666666657" width="359" height="191.33333333333331"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="7la-iB-ue7" userLabel="Labels Stack View">
-                                                <rect key="frame" x="32" y="33.333333333333371" width="52" height="125"/>
+                                                <rect key="frame" x="32" y="33.666666666666742" width="52" height="125"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="页数：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5Y-hv-nOm">
                                                         <rect key="frame" x="0.0" y="0.0" width="52" height="20.333333333333332"/>
@@ -670,7 +670,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="字号：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Qt-jF-d0f">
-                                                        <rect key="frame" x="0.0" y="52.333333333333371" width="52" height="20.333333333333329"/>
+                                                        <rect key="frame" x="0.0" y="52.333333333333258" width="52" height="20.333333333333329"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>

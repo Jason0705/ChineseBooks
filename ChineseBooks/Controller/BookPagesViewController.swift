@@ -325,7 +325,7 @@ class BookPagesViewController: UIViewController {
     }
     
     func createAndLoadInterstitial() -> GADInterstitial {
-        //interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
+//        interstitial = GADInterstitial(adUnitID: "ca-app-pub-3940256099942544/4411468910")
         interstitial = GADInterstitial(adUnitID: "ca-app-pub-4666558367962888/4521329326")
         interstitial.delegate = self
         interstitial.load(GADRequest())

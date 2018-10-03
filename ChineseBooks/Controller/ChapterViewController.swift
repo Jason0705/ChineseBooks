@@ -28,7 +28,6 @@ class ChapterViewController: UIViewController {
     var downloadedChapterArray = [CDChapter]()
     var chapterMarkArray = [CDChapterMark]()
     var downloadButtonState = true
-   
     
     var selectedBook : CDBook? {
         didSet {
@@ -40,6 +39,8 @@ class ChapterViewController: UIViewController {
     var downloadedCount = 0
     var willDownloadCount = 0
     var percentage = 0
+    
+    var rewarded = false
     
     
     @IBOutlet weak var chapterTableView: UITableView!
@@ -356,16 +357,25 @@ extension ChapterViewController: UITableViewDataSource, UITableViewDelegate {
 extension ChapterViewController: GADRewardBasedVideoAdDelegate {
     func rewardBasedVideoAd(_ rewardBasedVideoAd: GADRewardBasedVideoAd, didRewardUserWith reward: GADAdReward) {
         //percentageView.isHidden = false
-        ProgressHUD.show()
-        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
-        downloadChapterData(from: url) { (data) in
-            self.mergeArray(with: data)
-        }
+//        ProgressHUD.show()
+//        let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+//        downloadChapterData(from: url) { (data) in
+//            self.mergeArray(with: data)
+//        }
+        rewarded = true
     }
     
     func rewardBasedVideoAdDidClose(_ rewardBasedVideoAd: GADRewardBasedVideoAd) {
 //        GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-3940256099942544/1712485313")
         GADRewardBasedVideoAd.sharedInstance().load(GADRequest(), withAdUnitID: "ca-app-pub-4666558367962888/5719980482")
+        if rewarded == true {
+            ProgressHUD.show()
+            let url = "http://api.zhuishushenqi.com/mix-atoc/\(bookID)?view=chapters"
+            downloadChapterData(from: url) { (data) in
+                self.mergeArray(with: data)
+            }
+        }
+        rewarded = false
     }
     
 }
