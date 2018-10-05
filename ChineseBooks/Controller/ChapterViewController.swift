@@ -109,7 +109,6 @@ class ChapterViewController: UIViewController {
                 let CDChapterData = self.createCDChapterArray(with: chapterJSON)
                 completionHandler(CDChapterData)
             } else {
-                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process 1 JSON response, Error: \(response.result.error)")
             }
         }
@@ -123,7 +122,6 @@ class ChapterViewController: UIViewController {
                 let bodyData = self.createBodyData(with: bodyJSON)
                 completionHandler(bodyData)
             } else {
-                ProgressHUD.showError("网络连接有问题！\n请检查网络！")
                 print("Couldnt process 2 JSON response, Error: \(response.result.error)")
             }
         }

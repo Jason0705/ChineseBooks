@@ -191,7 +191,7 @@ class BookPagesViewController: UIViewController {
     
     // Load page
     func loadPages(at index: Int) {
-        if chapterIndex >= CDChapterArray.count {
+        if chapterIndex >= CDChapterArray.count || CDChapterArray[chapterIndex].downloaded == false {
             let url = "http://chapter2.zhuishushenqi.com/chapter/\(chapterArray[chapterIndex].chapterLink.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
             
             getBodyData(from: url, completionHandler: {
