@@ -442,7 +442,7 @@
                                         <rect key="frame" x="8" y="246" width="359" height="384"/>
                                         <subviews>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b6D-qh-fat">
-                                                <rect key="frame" x="8" y="139" width="343" height="171"/>
+                                                <rect key="frame" x="8" y="52" width="343" height="171"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="b6D-qh-fat" secondAttribute="height" multiplier="343:171" id="Fy6-e1-UmL"/>
@@ -451,19 +451,11 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAO-jI-nSO">
-                                                <rect key="frame" x="120" y="8" width="118" height="123"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                <state key="normal" title="+ 添加书架"/>
-                                                <connections>
-                                                    <action selector="addButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="Sxc-SP-ZL4"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXQ-b6-huW">
-                                                <rect key="frame" x="34" y="318" width="291" height="41"/>
+                                                <rect key="frame" x="130.66666666666666" y="231" width="98" height="41"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="41" id="6tB-VR-V0v"/>
-                                                    <constraint firstAttribute="width" constant="291" id="kgT-fj-aZI"/>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="44" id="kgT-fj-aZI"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                 <state key="normal" title="在线阅读"/>
@@ -471,18 +463,24 @@
                                                     <action selector="readButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="XcD-ja-GQe"/>
                                                 </connections>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kAO-jI-nSO">
+                                                <rect key="frame" x="130" y="8" width="99" height="36"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                <state key="normal" title="+ 添加书架"/>
+                                                <connections>
+                                                    <action selector="addButtonPressed:" destination="SvK-bT-gVK" eventType="touchUpInside" id="Sxc-SP-ZL4"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="FXQ-b6-huW" firstAttribute="top" secondItem="b6D-qh-fat" secondAttribute="bottom" constant="8" id="FcW-uj-4Yj"/>
-                                            <constraint firstItem="kAO-jI-nSO" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="120" id="Hgt-5n-OiW"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="leading" secondItem="wCf-4p-nPE" secondAttribute="leading" constant="8" id="Kee-R6-uli"/>
-                                            <constraint firstAttribute="bottom" secondItem="FXQ-b6-huW" secondAttribute="bottom" constant="25" id="VbP-y0-iz9"/>
                                             <constraint firstAttribute="trailing" secondItem="b6D-qh-fat" secondAttribute="trailing" constant="8" id="W6T-Id-N74"/>
                                             <constraint firstItem="kAO-jI-nSO" firstAttribute="top" secondItem="wCf-4p-nPE" secondAttribute="top" constant="8" id="Xnq-Wz-X7e"/>
-                                            <constraint firstAttribute="trailing" secondItem="kAO-jI-nSO" secondAttribute="trailing" constant="121" id="aMM-FH-2Dd"/>
                                             <constraint firstItem="b6D-qh-fat" firstAttribute="top" secondItem="kAO-jI-nSO" secondAttribute="bottom" constant="8" id="aYu-eA-kVI"/>
                                             <constraint firstItem="FXQ-b6-huW" firstAttribute="centerX" secondItem="wCf-4p-nPE" secondAttribute="centerX" id="aaZ-yS-0ON"/>
+                                            <constraint firstItem="kAO-jI-nSO" firstAttribute="centerX" secondItem="wCf-4p-nPE" secondAttribute="centerX" id="fH7-W0-oza"/>
                                         </constraints>
                                     </view>
                                 </subviews>
