@@ -227,33 +227,10 @@ class ChapterViewController: UIViewController {
 //        downloadChapterData(from: url) { (data) in
 //            self.mergeArray(with: data)
 //        }
-        let alert = UIAlertController(title: "请注意", message: "请点击“确定”完整观看一段广告以便下载小说。", preferredStyle: .alert)
-        let cancleAction = UIAlertAction(title: "取消", style: .cancel) { (AlertAction) in
-            alert.dismiss(animated: true, completion: nil)
-        }
-        let startWatchingAction = UIAlertAction(title: "确定", style: .default) { (AlertAction) in
-            if GADRewardBasedVideoAd.sharedInstance().isReady == true {
-                GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
-            }
-            else {
-                let noAdAlert = UIAlertController(title: "对不起", message: "广告系统错误。\n请点击”确认“立即下载。", preferredStyle: .alert)
-                let downloadWOAdsAction = UIAlertAction(title: "确定", style: .default, handler: { (AlertAction) in
-                    //percentageView.isHidden = false
-                    ProgressHUD.show()
-                    let url = "http://api.zhuishushenqi.com/mix-atoc/\(self.bookID)?view=chapters"
-                    self.downloadChapterData(from: url) { (data) in
-                        self.mergeArray(with: data)
-                    }
-                })
-                noAdAlert.addAction(downloadWOAdsAction)
-                self.present(noAdAlert, animated: true, completion: nil)
-            }
+        if GADRewardBasedVideoAd.sharedInstance().isReady == true {
+            GADRewardBasedVideoAd.sharedInstance().present(fromRootViewController: self)
         }
         
-        alert.addAction(cancleAction)
-        alert.addAction(startWatchingAction)
-        
-        present(alert, animated: true, completion: nil)
     }
    
     
@@ -372,6 +349,16 @@ extension ChapterViewController: GADRewardBasedVideoAdDelegate {
             downloadChapterData(from: url) { (data) in
                 self.mergeArray(with: data)
             }
+        }
+        else {
+            let alert = UIAlertController(title: "请注意", message: "观看完整广告才可以开始下载哦！", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "确定", style: .default) { (AlertAction) in
+                alert.dismiss(animated: true, completion: nil)
+            }
+            
+            alert.addAction(okAction)
+            
+            present(alert, animated: true, completion: nil)
         }
         rewarded = false
     }
