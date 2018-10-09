@@ -12,22 +12,32 @@ import SwiftyJSON
 import Kingfisher
 import ProgressHUD
 import ChameleonFramework
+import CoreData
 
 class SearchViewController: UIViewController {
 
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     let baseURL = "http://api.zhuishushenqi.com/book/fuzzy-search?query="
     var searchInput = ""
     var resultBookList = [Book]()
+    var searchHistoryList = [CDSearchHistory]()
     var searched = false
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var resultView: UIView!
     @IBOutlet weak var resultCollectionView: UICollectionView!
+    @IBOutlet weak var historyView: UIView!
+    @IBOutlet weak var historyTableView: UITableView!
+    @IBOutlet weak var clearHistoryButton: UIButton!
+    
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Load search history
+        loadHistory()
         
         // Register CustomBookCell.xib
         resultCollectionView.register(UINib(nibName: "CustomBookCell", bundle: nil), forCellWithReuseIdentifier: "customBookCell")
@@ -37,6 +47,12 @@ class SearchViewController: UIViewController {
         
         guard let navBar = navigationController?.navigationBar else {fatalError("Navigation Controller does not exist!")}
         searchBar.tintColor = navBar.tintColor
+        
+        historyTableView.separatorStyle = .none
+        
+        clearHistoryButton.layer.cornerRadius = 10
+        clearHistoryButton.backgroundColor = GradientColor(UIGradientStyle.leftToRight, frame: navBar.bounds, colors: [ComplementaryFlatColorOf(navBar.tintColor), navBar.tintColor])
+        clearHistoryButton.setTitleColor(ContrastColorOf((navBar.backgroundColor)!, returnFlat: true), for: .normal)
         
     }
 
@@ -80,6 +96,39 @@ class SearchViewController: UIViewController {
         resultCollectionView.reloadData()
     }
     
+    func saveHistory() {
+        do {
+            try context.save()
+        } catch {
+            print("Error Saving Context: \(error)")
+        }
+        historyTableView.reloadData()
+    }
+    
+    func loadHistory() {
+        let request : NSFetchRequest <CDSearchHistory> = CDSearchHistory.fetchRequest()
+        
+        do {
+            searchHistoryList = try context.fetch(request)
+        } catch {
+            print("Error fetching data from context: \(error)")
+        }
+        historyTableView.reloadData()
+    }
+    
+    func clearHistory() {
+        for searchWord in searchHistoryList {
+            context.delete(searchWord)
+        }
+        saveHistory()
+    }
+    
+    
+    
+    @IBAction func clearHistoryBottonPressed(_ sender: UIButton) {
+        clearHistory()
+    }
+    
 
 }
 
@@ -88,6 +137,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searched = true
+        historyView.isHidden = true
         ProgressHUD.show()
         resultBookList = [Book]()
         if searchBar.text?.count != 0 {
@@ -95,6 +145,12 @@ extension SearchViewController: UISearchBarDelegate {
             let url = "\(baseURL)\(searchInput.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed)!)"
             
             getResultData(from: url)
+            
+            let newSearch = CDSearchHistory(context: context)
+            newSearch.searchWord = searchBar.text!
+            
+            searchHistoryList.append(newSearch)
+            saveHistory()
         }
         ProgressHUD.dismiss()
         self.view.endEditing(true)
@@ -105,6 +161,7 @@ extension SearchViewController: UISearchBarDelegate {
         resultBookList = [Book]()
         resultCollectionView.reloadData()
         searched = false
+        historyView.isHidden = false
         self.view.endEditing(true)
     }
     
@@ -112,6 +169,7 @@ extension SearchViewController: UISearchBarDelegate {
         if searchBar.text?.count == 0 {
             resultBookList = [Book]()
             resultCollectionView.reloadData()
+            historyView.isHidden = false
             searched = false
         }
     }
@@ -119,6 +177,39 @@ extension SearchViewController: UISearchBarDelegate {
 }
 
 
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    // Number of Cell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if searchHistoryList.count == 0 {
+            clearHistoryButton.isHidden = true
+        }
+        else {
+            clearHistoryButton.isHidden = false
+        }
+        return searchHistoryList.count
+    }
+    
+    // Populate Cell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "historyCell", for: indexPath)
+        let cellData = searchHistoryList[searchHistoryList.endIndex - 1 - indexPath.row]
+        cell.textLabel?.textAlignment = .center
+        cell.textLabel?.text = cellData.searchWord
+        cell.textLabel?.textColor = navigationController?.navigationBar.tintColor
+        
+        return cell
+    }
+    
+    // Select Cell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        searchBar.text = searchHistoryList[searchHistoryList.endIndex - 1 - indexPath.row].searchWord
+        self.searchBarSearchButtonClicked(searchBar)
+        historyTableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    
+}
 
 extension SearchViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     

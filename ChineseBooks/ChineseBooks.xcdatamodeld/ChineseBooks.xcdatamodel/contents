@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17G65" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CDBook" representedClassName="CDBook" syncable="YES" codeGenerationType="class">
         <attribute name="added" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
@@ -35,11 +35,15 @@
         <attribute name="backgroundColor" attributeType="Transformable" syncable="YES"/>
         <attribute name="fontSize" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
+    <entity name="CDSearchHistory" representedClassName="CDSearchHistory" syncable="YES" codeGenerationType="class">
+        <attribute name="searchWord" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <elements>
         <element name="CDBook" positionX="-4041" positionY="159" width="128" height="208"/>
         <element name="CDChapter" positionX="-3827" positionY="306" width="128" height="118"/>
         <element name="CDChapterMark" positionX="-3827" positionY="153" width="128" height="88"/>
         <element name="CDPageMark" positionX="-3636" positionY="162" width="128" height="103"/>
         <element name="CDPreference" positionX="-4041" positionY="450" width="128" height="73"/>
+        <element name="CDSearchHistory" positionX="-3852.0390625" positionY="452.04296875" width="128" height="58"/>
     </elements>
 </model>
